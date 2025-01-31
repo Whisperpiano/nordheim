@@ -1,0 +1,1 @@
+// Obtener productos de Supabase
