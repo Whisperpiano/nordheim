@@ -2,17 +2,28 @@ import { Link } from "react-router";
 import HomeButton from "./components/HomeButton.component";
 import Logo from "../../components/Logo/Logo.component";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
-import { getProducts } from "../../api/products/products";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import {
+  getCityProducts,
+  getMountainProducts,
+} from "../../api/products/products";
 
 // TODO: refactor
 
 export default function Home() {
-  useEffect(() => {
-    getProducts().then((products) => {
-      console.log(products);
-    });
-  }, []);
+  const { data: cityProducts } = useSuspenseQuery({
+    queryKey: ["products", "city"],
+    queryFn: () => getCityProducts(),
+  });
+
+  const { data: mountainProducts } = useSuspenseQuery({
+    queryKey: ["products", "mountain"],
+    queryFn: () => getMountainProducts(),
+  });
+
+  console.log(cityProducts);
+  console.log(mountainProducts);
+
   return (
     <section className="flex flex-row h-screen relative">
       <h1 className="sr-only">Nordheim - Premium backpacks</h1>
