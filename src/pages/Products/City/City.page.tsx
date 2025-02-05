@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useCityProducts } from "../../../hooks/data/useCityProducts";
 
 export default function City() {
+  const { data: products } = useCityProducts();
+  console.log(products);
   return (
     <>
       <motion.div>

@@ -3,26 +3,24 @@ import HomeButton from "./components/HomeButton.component";
 import Logo from "../../components/Logo/Logo.component";
 import { motion } from "framer-motion";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import {
-  getCityProducts,
-  getMountainProducts,
-} from "../../api/products/products";
+import { getProductsByCategory } from "../../api/products/products";
 
 // TODO: refactor
 
 export default function Home() {
-  const { data: cityProducts } = useSuspenseQuery({
+  const { isError: isCityError } = useSuspenseQuery({
     queryKey: ["products", "city"],
-    queryFn: () => getCityProducts(),
+    queryFn: () => getProductsByCategory("city"),
   });
 
-  const { data: mountainProducts } = useSuspenseQuery({
+  const { isError: isMountainError } = useSuspenseQuery({
     queryKey: ["products", "mountain"],
-    queryFn: () => getMountainProducts(),
+    queryFn: () => getProductsByCategory("mountain"),
   });
 
-  console.log(cityProducts);
-  console.log(mountainProducts);
+  if (isCityError || isMountainError) {
+    return <div>Error</div>;
+  }
 
   return (
     <section className="flex flex-row h-screen relative">

@@ -1,36 +1,33 @@
 import { toast } from "sonner";
 import { supabase } from "../../lib/supabase/client";
+import { z } from "zod";
 
-export async function getCityProducts() {
+const categorySchema = z.enum(["city", "mountain"]);
+
+type Category = z.infer<typeof categorySchema>;
+
+export async function getProductsByCategory(category: Category) {
+  const validation = categorySchema.safeParse(category);
+
+  if (!validation.success) {
+    toast.error(`Invalid category: ${category}`);
+    return null;
+  }
+
   const { data: products, error } = await supabase
     .from("products")
     .select("*")
-    .eq("category", "city");
+    .eq("category", category);
 
   if (error) {
-    toast.error("Error getting city products.");
-    console.error("Error getting city products.", error);
+    toast.error(`Error getting ${category} products.`);
+    return null;
   }
 
-  if (products) {
-    toast.success("City products loaded.");
-    return products;
-  }
-}
-
-export async function getMountainProducts() {
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("category", "mountain");
-
-  if (error) {
-    toast.error("Error getting mountain products.");
-    console.error("Error getting mountain products.", error);
+  if (!products || products.length === 0) {
+    toast.error(`No ${category} products found.`);
+    return [];
   }
 
-  if (products) {
-    toast.success("Mountain products loaded.");
-    return products;
-  }
+  return products;
 }
