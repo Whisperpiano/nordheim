@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
 import Layout from "../layout/Layout";
 
@@ -11,20 +11,20 @@ const Home = lazy(() => import("../pages/Home/Home.page"));
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Suspense fallback={<div>Loader for home...</div>}>
-        <Home />
-      </Suspense>
-    ),
+    element: <Home />,
   },
   {
-    path: "/",
+    path: "products",
     element: <Layout />,
     children: [
       { path: "city", element: <City /> },
       { path: "mountain", element: <Mountain /> },
-      { path: "contact", element: <Contact /> },
     ],
+  },
+  {
+    path: "contact",
+    element: <Layout />,
+    children: [{ index: true, element: <Contact /> }],
   },
   {
     path: "*",

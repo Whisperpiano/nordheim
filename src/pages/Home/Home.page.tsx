@@ -23,7 +23,7 @@ export default function Home() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Link to="/city" aria-label="Explore city backpacks">
+        <Link to="/products/city" aria-label="Explore city backpacks">
           <div
             className="absolute inset-0 bg-black/20 z-10"
             aria-hidden="true"
@@ -58,7 +58,7 @@ export default function Home() {
         transition={{ duration: 0.5 }}
         exit={{ scale: 0.5 }}
       >
-        <Link to="/mountain" aria-label="Explore mountain backpacks">
+        <Link to="/products/mountain" aria-label="Explore mountain backpacks">
           <div
             className="absolute inset-0 bg-black/20 z-10"
             aria-hidden="true"
