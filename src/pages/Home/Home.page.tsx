@@ -27,12 +27,12 @@ export default function Home() {
       <h1 className="sr-only">Nordheim - Premium backpacks</h1>
 
       <motion.div
-        className="absolute inset-0 z-20 flex justify-center mt-10"
+        className="absolute z-20 flex justify-center mt-10 w-full"
         initial={{ y: "-100vh", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Logo />
+        <Logo width={300} />
       </motion.div>
 
       <motion.div
