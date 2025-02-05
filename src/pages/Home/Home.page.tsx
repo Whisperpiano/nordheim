@@ -2,10 +2,17 @@ import { Link } from "react-router";
 import HomeButton from "./components/HomeButton.component";
 import Logo from "../../components/Logo/Logo.component";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { getProducts } from "../../api/products/products";
 
 // TODO: refactor
 
 export default function Home() {
+  useEffect(() => {
+    getProducts().then((products) => {
+      console.log(products);
+    });
+  }, []);
   return (
     <section className="flex flex-row h-screen relative">
       <h1 className="sr-only">Nordheim - Premium backpacks</h1>
