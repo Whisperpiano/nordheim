@@ -6,7 +6,9 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <AnimatedOutlet />
+      <main>
+        <AnimatedOutlet />
+      </main>
       <Footer />
     </>
   );
