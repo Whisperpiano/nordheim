@@ -1,1 +1,16 @@
+/* Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+/* Roboto Condensed */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
+
+body {
+  @apply bg-neutral-100 text-neutral-900;
+}
+
+@theme {
+  --font-sans: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  --font-condensed: "Roboto Condensed", "Arial Narrow", "helvetica Neue",
+    sans-serif;
+}
