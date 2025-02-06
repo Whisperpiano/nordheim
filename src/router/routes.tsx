@@ -11,6 +11,7 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct.page.tsx";
 import Login from "../pages/Auth/Login/Login.page.tsx";
 import Register from "../pages/Auth/Register/Register.page.tsx";
 import Search from "../pages/Search/Search.page.tsx";
+import ErrorPage from "../pages/Error/ErrorPage.component.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <div>404</div>,
+    element: <ErrorPage />,
   },
 ]);
