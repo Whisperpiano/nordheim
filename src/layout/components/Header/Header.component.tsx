@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import Logo from "../../../components/Logo/Logo.component";
 import {
@@ -26,6 +26,13 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSearchOpen(false);
+    navigate(`/search?q=${query}`);
+  };
 
   return (
     <>
@@ -256,7 +263,10 @@ export default function Header() {
           {(onClose) => (
             <>
               <DrawerHeader className="uppercase font-sans font-medium text-xl gap-3">
-                <form className="w-full flex items-center gap-3">
+                <form
+                  className="w-full flex items-center gap-3"
+                  onSubmit={(e) => handleSubmit(e)}
+                >
                   <RiSearchLine size={24} className="text-neutral-500" />
                   <input
                     type="text"
@@ -401,7 +411,10 @@ export default function Header() {
                       </div>
                       <div className="my-10 w-[180px] mx-auto">
                         <button
-                          onClick={onClose}
+                          onClick={() => {
+                            onClose();
+                            navigate(`/search?q=${query}`);
+                          }}
                           className="flex justify-center items-center w-full bg-neutral-950 text-neutral-50 font-condensed tracking-widest uppercase text-sm font-lighter py-3 cursor-pointer "
                         >
                           View all results
