@@ -6,6 +6,8 @@ import {
   RiCircleFill,
   RiHandbagLine,
   RiSearchLine,
+  RiStarFill,
+  RiStarHalfFill,
   RiSubtractLine,
   RiUserLine,
 } from "react-icons/ri";
@@ -21,12 +23,14 @@ import { useState } from "react";
 // TODO: Probar en sticky y borrar los margins top de las secciones
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
 
   return (
     <>
       <motion.header
-        className="px-4 py-4 bg-neutral-500 text-neutral-50 flex items-center justify-between fixed top-0 left-0 right-0 z-10"
+        className="px-4 py-4 bg-neutral-500 text-neutral-50 flex items-center justify-between fixed top-0 left-0 right-0 z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -59,23 +63,25 @@ export default function Header() {
 
         <aside className="flex items-center gap-8">
           <button className="cursor-pointer">
-            <RiSearchLine size={24} />
+            <RiSearchLine size={24} onClick={() => setIsSearchOpen(true)} />
           </button>
-          <button className="cursor-pointer">
+          <Link to="/account/login">
             <RiUserLine size={24} />
-          </button>
-          <button className="cursor-pointer" onClick={() => setIsOpen(true)}>
+          </Link>
+          <button
+            className="cursor-pointer"
+            onClick={() => setIsCartOpen(true)}
+          >
             <RiHandbagLine size={24} />
           </button>
         </aside>
       </motion.header>
 
       <Drawer
-        isOpen={isOpen}
-        onOpenChange={() => setIsOpen(!isOpen)}
+        isOpen={isCartOpen}
+        onOpenChange={() => setIsCartOpen(!isCartOpen)}
         size="lg"
         placement="right"
-        className="z-[500]"
         classNames={{
           backdrop: "bg-black/50",
           base: "bg-neutral-50",
@@ -228,6 +234,183 @@ export default function Header() {
                   2595 kr
                 </button>
               </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+
+      <Drawer
+        isOpen={isSearchOpen}
+        onOpenChange={() => setIsSearchOpen(!isSearchOpen)}
+        placement="top"
+        classNames={{
+          backdrop: "bg-black/50  translate-y-[56px] z-30",
+          base: "bg-neutral-50 max-h-none",
+          closeButton:
+            "translate-y-1.5 cursor-pointer text-2xl text-neutral-500",
+          body: "px-0",
+          wrapper: "translate-y-[56px] z-40 ",
+        }}
+      >
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader className="uppercase font-sans font-medium text-xl gap-3">
+                <form className="w-full flex items-center gap-3">
+                  <RiSearchLine size={24} className="text-neutral-500" />
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search for..."
+                    className="flex w-full placeholder:text-neutral-500 placeholder:font-condensed placeholder:uppercase placeholder:font-normal placeholder:text-xl outline-none me-10"
+                  />
+                </form>
+              </DrawerHeader>
+
+              {query.length > 0 && (
+                <DrawerBody className="px-7 mt-6">
+                  <section className="grid grid-cols-4 gap-10">
+                    <div className="col-span-1">
+                      <span className="font-condensed font-medium uppercase text-sm mb-3 tracking-widest transition-colors data-[open=true]:text-neutral-950 text-neutral-500">
+                        Top searches
+                      </span>
+                      <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
+                      <div className="flex flex-col gap-1">
+                        <Link
+                          to="/search?q=huger"
+                          className="font-sans font-medium lowercase text-sm text-neutral-800"
+                        >
+                          huger
+                        </Link>
+                        <Link
+                          to="/search?q=huger"
+                          className="font-sans font-medium lowercase text-sm text-neutral-800"
+                        >
+                          huger
+                        </Link>
+                        <Link
+                          to="/search?q=huger"
+                          className="font-sans font-medium lowercase text-sm text-neutral-800"
+                        >
+                          huger
+                        </Link>
+                        <Link
+                          to="/search?q=huger"
+                          className="font-sans font-medium lowercase text-sm text-neutral-800"
+                        >
+                          huger
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="col-span-3 ">
+                      <span className="font-condensed font-medium uppercase text-sm mb-3 tracking-widest transition-colors data-[open=true]:text-neutral-950 text-neutral-500">
+                        Products
+                      </span>
+                      <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
+                      <div className="grid grid-cols-3 gap-1">
+                        <Link to="/products/city/hugger-backpack">
+                          <article>
+                            <img
+                              src="/city.jpg"
+                              alt="City"
+                              className="object-cover aspect-[4/5] w-full"
+                            />
+                            <div className="p-4">
+                              <h2 className="text-neutral-950 text-base font-semibold font-condensed">
+                                Huger Backpack
+                              </h2>
+                              <span className="text-neutral-500 font-sans text-sm font-normal">
+                                2995 kr
+                              </span>
+                              <div className="flex gap-2 items-center mt-1">
+                                <div className="flex gap-0.5 items-center">
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarHalfFill size={12} />
+                                </div>
+                                <span className="text-neutral-500 font-sans text-xs font-normal">
+                                  5 reviews
+                                </span>
+                              </div>
+                            </div>
+                          </article>
+                        </Link>
+
+                        <Link to="/products/city/hugger-backpack">
+                          <article>
+                            <img
+                              src="/city.jpg"
+                              alt="City"
+                              className="object-cover aspect-[4/5] w-full"
+                            />
+                            <div className="p-4">
+                              <h2 className="text-neutral-950 text-base font-semibold font-condensed">
+                                Huger Backpack
+                              </h2>
+                              <span className="text-neutral-500 font-sans text-sm font-normal">
+                                2995 kr
+                              </span>
+                              <div className="flex gap-2 items-center mt-1">
+                                <div className="flex gap-0.5 items-center">
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarHalfFill size={12} />
+                                </div>
+                                <span className="text-neutral-500 font-sans text-xs font-normal">
+                                  5 reviews
+                                </span>
+                              </div>
+                            </div>
+                          </article>
+                        </Link>
+
+                        <Link to="/products/city/hugger-backpack">
+                          <article>
+                            <img
+                              src="/city.jpg"
+                              alt="City"
+                              className="object-cover aspect-[4/5] w-full"
+                            />
+                            <div className="p-4">
+                              <h2 className="text-neutral-950 text-base font-semibold font-condensed">
+                                Huger Backpack
+                              </h2>
+                              <span className="text-neutral-500 font-sans text-sm font-normal">
+                                2995 kr
+                              </span>
+                              <div className="flex gap-2 items-center mt-1">
+                                <div className="flex gap-0.5 items-center">
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarFill size={12} />
+                                  <RiStarHalfFill size={12} />
+                                </div>
+                                <span className="text-neutral-500 font-sans text-xs font-normal">
+                                  5 reviews
+                                </span>
+                              </div>
+                            </div>
+                          </article>
+                        </Link>
+                      </div>
+                      <div className="my-10 w-[180px] mx-auto">
+                        <button
+                          onClick={onClose}
+                          className="flex justify-center items-center w-full bg-neutral-950 text-neutral-50 font-condensed tracking-widest uppercase text-sm font-lighter py-3 cursor-pointer "
+                        >
+                          View all results
+                        </button>
+                      </div>
+                    </div>
+                  </section>
+                </DrawerBody>
+              )}
             </>
           )}
         </DrawerContent>
