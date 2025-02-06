@@ -7,6 +7,7 @@ import City from "../pages/Products/City/City.page";
 import Mountain from "../pages/Products/Mountain/Mountain.page";
 import FadingFallback from "./components/FadingFallback/FadingFallback.component.tsx";
 import Home from "../pages/Home/Home.page";
+import SingleProduct from "../pages/SingleProduct/SingleProduct.page.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,9 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "city", element: <City /> },
+      { path: "city/:slug", element: <SingleProduct /> },
       { path: "mountain", element: <Mountain /> },
+      { path: "mountain/:slug", element: <SingleProduct /> },
     ],
   },
   {
