@@ -252,7 +252,7 @@ export default function Header() {
         placement="top"
         classNames={{
           backdrop: "bg-black/50  translate-y-[56px] z-30",
-          base: "bg-neutral-50 max-h-none",
+          base: "bg-neutral-50 max-h-none translate-y-[56px] z-40",
           closeButton:
             "translate-y-1.5 cursor-pointer text-2xl text-neutral-500",
           body: "px-0",
@@ -262,7 +262,7 @@ export default function Header() {
         <DrawerContent>
           {(onClose) => (
             <>
-              <DrawerHeader className="uppercase font-sans font-medium text-xl gap-3">
+              <DrawerHeader className="uppercase font-sans font-medium text-xl gap-3 ">
                 <form
                   className="w-full flex items-center gap-3"
                   onSubmit={(e) => handleSubmit(e)}
