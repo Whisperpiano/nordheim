@@ -15,6 +15,10 @@ const Login = lazy(() => import("../pages/Auth/Login/Login.page.tsx"));
 const Register = lazy(() => import("../pages/Auth/Register/Register.page.tsx"));
 const Search = lazy(() => import("../pages/Search/Search.page.tsx"));
 const ErrorPage = lazy(() => import("../pages/Error/ErrorPage.component.tsx"));
+const Checkout = lazy(() => import("../pages/Checkout/Checkout.page.tsx"));
+const CheckoutSuccess = lazy(
+  () => import("../pages/Checkout/Success/Success.page.tsx")
+);
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +56,14 @@ export const router = createBrowserRouter([
     path: "search",
     element: <Layout />,
     children: [{ index: true, element: <Search /> }],
+  },
+  {
+    path: "checkout",
+    element: <Checkout />,
+  },
+  {
+    path: "checkout/success",
+    element: <CheckoutSuccess />,
   },
   {
     path: "*",

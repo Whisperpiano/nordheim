@@ -36,6 +36,9 @@ export default function Contact() {
             radius="none"
             labelPlacement="outside"
             placeholder="Enter your email address"
+            className={
+              "[&_[data-slot='input-wrapper']]:py-5 [&_[data-slot='input-wrapper']]:bg-neutral-50"
+            }
             isInvalid={false}
             isRequired
           />
@@ -47,7 +50,7 @@ export default function Contact() {
               radius="none"
               labelPlacement="outside"
               placeholder="Enter the subject of your message"
-              className="[&_[data-slot='input-wrapper']]:py-5 col-span-2"
+              className="[&_[data-slot='input-wrapper']]:py-5 [&_[data-slot='input-wrapper']]:bg-neutral-50 col-span-2"
               isInvalid={false}
               isRequired
             />
@@ -63,7 +66,7 @@ export default function Contact() {
               isInvalid={false}
               classNames={{
                 popoverContent: "rounded-none bg-neutral-50",
-                trigger: "py-5",
+                trigger: "py-5 bg-neutral-50",
               }}
             >
               <SelectItem
@@ -101,6 +104,7 @@ export default function Contact() {
             classNames={{
               innerWrapper: "min-h-[500px]",
               input: "min-h-[500px]",
+              inputWrapper: "bg-neutral-50",
             }}
           />
 
