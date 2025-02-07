@@ -12,7 +12,9 @@
   "dependencies": {
     "@heroui/accordion": "^2.2.8",
     "@heroui/drawer": "^2.2.8",
+    "@heroui/dropdown": "^2.3.10",
     "@heroui/input": "^2.4.10",
+    "@heroui/select": "^2.4.10",
     "@heroui/system": "^2.4.7",
     "@heroui/theme": "^2.4.6",
     "@supabase/supabase-js": "^2.48.1",
