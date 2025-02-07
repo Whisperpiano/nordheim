@@ -1,14 +1,24 @@
-// tailwind.config.js
-const {heroui} = require("@heroui/theme");
-
+const { heroui } = require("@heroui/theme");
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+export default {
   content: [
-    "./node_modules/@heroui/theme/dist/components/(accordion|drawer|divider|modal).js"
-],
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/components/(accordion|drawer|input|divider|modal|form).js",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Roboto", "Arial", "Helvetica Neue", "sans-serif"],
+        condensed: [
+          "Roboto Condensed",
+          "Arial Narrow",
+          "Helvetica Neue",
+          "sans-serif",
+        ],
+      },
+    },
   },
-  darkMode: "class",
   plugins: [heroui()],
 };
