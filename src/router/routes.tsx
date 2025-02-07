@@ -1,17 +1,20 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
-import Layout from "../layout/Layout";
 
-import Contact from "../pages/Contact/Contact.page";
-import City from "../pages/Products/City/City.page";
-import Mountain from "../pages/Products/Mountain/Mountain.page";
+import Layout from "../layout/Layout";
 import FadingFallback from "./components/FadingFallback/FadingFallback.component.tsx";
-import Home from "../pages/Home/Home.page";
-import SingleProduct from "../pages/SingleProduct/SingleProduct.page.tsx";
-import Login from "../pages/Auth/Login/Login.page.tsx";
-import Register from "../pages/Auth/Register/Register.page.tsx";
-import Search from "../pages/Search/Search.page.tsx";
-import ErrorPage from "../pages/Error/ErrorPage.component.tsx";
+
+const Home = lazy(() => import("../pages/Home/Home.page"));
+const Contact = lazy(() => import("../pages/Contact/Contact.page"));
+const City = lazy(() => import("../pages/Products/City/City.page"));
+const Mountain = lazy(() => import("../pages/Products/Mountain/Mountain.page"));
+const SingleProduct = lazy(
+  () => import("../pages/SingleProduct/SingleProduct.page.tsx")
+);
+const Login = lazy(() => import("../pages/Auth/Login/Login.page.tsx"));
+const Register = lazy(() => import("../pages/Auth/Register/Register.page.tsx"));
+const Search = lazy(() => import("../pages/Search/Search.page.tsx"));
+const ErrorPage = lazy(() => import("../pages/Error/ErrorPage.component.tsx"));
 
 export const router = createBrowserRouter([
   {
