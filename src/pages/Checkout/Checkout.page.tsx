@@ -7,6 +7,7 @@ import { cn } from "../../utils/cn";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { useState } from "react";
 import Logo from "../../components/Logo/Logo.component";
+import { Link } from "react-router";
 
 export default function Checkout() {
   const [selectedPayment, setSelectedPayment] = useState("1");
@@ -453,12 +454,12 @@ export default function Checkout() {
                 Return to cart
               </p>
               <div className="px-2">
-                <button
-                  type="submit"
+                <Link
+                  to="/checkout/success"
                   className="flex justify-center items-center w-full bg-neutral-950 text-neutral-50 font-condensed tracking-widest uppercase text-sm font-lighter py-3 cursor-pointer  mb-6"
                 >
                   Pay now
-                </button>
+                </Link>
               </div>
             </form>
             <footer className="text-xs text-neutral-500 font-condensed font-normal mt-10 border-t-2 border-neutral-200 pt-6">
