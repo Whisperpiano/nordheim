@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { fallbackVariants } from "./FadingFallback.variants";
+import Logo from "../../../components/Logo/Logo.component";
+import { Spinner } from "@heroui/spinner";
 
 export default function FadingFallback() {
   return (
@@ -10,9 +12,10 @@ export default function FadingFallback() {
         initial="visible"
         animate="visible"
         exit="exit"
-        className="absolute inset-0 flex items-center justify-center bg-white"
+        className="absolute inset-0 flex flex-col gap-6 items-center justify-center bg-neutral-50"
       >
-        Loading...
+        <Logo theme="dark" width={300} />
+        <Spinner size="lg" color="default" />
       </motion.div>
     </AnimatePresence>
   );
