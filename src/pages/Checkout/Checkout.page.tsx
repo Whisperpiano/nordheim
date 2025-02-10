@@ -1,6 +1,6 @@
 import { Input } from "@heroui/input";
 import { Select, SelectItem } from "@heroui/select";
-import { RiQuestionLine } from "react-icons/ri";
+import { RiArrowLeftLine, RiLockLine, RiQuestionLine } from "react-icons/ri";
 import { Tooltip } from "@heroui/tooltip";
 import { RadioGroup, Radio, RadioProps } from "@heroui/radio";
 import { cn } from "../../utils/cn";
@@ -185,6 +185,30 @@ export default function Checkout() {
                     key="1"
                     aria-label="Credit card"
                     title="Credit card"
+                    indicator={
+                      <div className="flex gap-2 items-center">
+                        <span className="flex items-center">
+                          <img src="/Visa.svg" alt="Credit card" />
+                        </span>
+                        <span className="flex items-center">
+                          <img src="/Mastercard.svg" alt="Mastercard" />
+                        </span>
+                        <span className="flex items-center">
+                          <img src="/PayPal.svg" alt="PayPal" />
+                        </span>
+                      </div>
+                    }
+                    classNames={{
+                      base: " bg-neutral-50 rounded-none shadow-none border-2 border-gray-200 px-0",
+                      title: cn(
+                        "text-neutral-950 font-sans text-sm font-medium"
+                      ),
+                      heading: cn("px-4"),
+                      content: cn("px-4 bg-gray-200/75"),
+                      indicator: cn(
+                        "transition-transform rotate-0 data-[open=true]:-rotate-0 rtl:rotate-0 rtl:data-[open=true]:-rotate-0"
+                      ),
+                    }}
                     startContent={
                       <Radio
                         value="1"
@@ -193,18 +217,85 @@ export default function Checkout() {
                           wrapper: cn(
                             "group-data-[selected=true]:border-neutral-700"
                           ),
+                          base: cn("shadow-none"),
                         }}
                       />
                     }
-                    classNames={{
-                      base: " bg-neutral-50 rounded-none",
-                    }}
                   >
-                    text
+                    <Input
+                      label="Card number"
+                      type="text"
+                      variant="faded"
+                      radius="none"
+                      className={
+                        " [&_[data-slot='input-wrapper']]:bg-neutral-50"
+                      }
+                      isInvalid={false}
+                      endContent={
+                        <RiLockLine
+                          size={20}
+                          className="-translate-y-2 text-neutral-400 cursor-pointer"
+                        />
+                      }
+                    />
+                    <div className="grid grid-cols-2 gap-3">
+                      <Input
+                        label="Expiration date (MM / YY)"
+                        type="text"
+                        variant="faded"
+                        radius="none"
+                        className={
+                          " [&_[data-slot='input-wrapper']]:bg-neutral-50"
+                        }
+                        isInvalid={false}
+                      />
+                      <Input
+                        label="Security code"
+                        type="text"
+                        variant="faded"
+                        radius="none"
+                        className=" [&_[data-slot='input-wrapper']]:bg-neutral-50"
+                        isInvalid={false}
+                        endContent={
+                          <Tooltip
+                            content="3-digit security code usually found on the back of your card."
+                            showArrow={true}
+                            color="foreground"
+                            offset={12}
+                            classNames={{
+                              content:
+                                "rounded-none p-4 text-xs max-w-[200px] text-center",
+                            }}
+                          >
+                            <span>
+                              <RiQuestionLine
+                                size={20}
+                                className="-translate-y-2 text-neutral-400 cursor-pointer"
+                              />
+                            </span>
+                          </Tooltip>
+                        }
+                      />
+                    </div>
+                    <Input
+                      label="Name on card"
+                      type="text"
+                      variant="faded"
+                      radius="none"
+                      className={
+                        " [&_[data-slot='input-wrapper']]:bg-neutral-50"
+                      }
+                      isInvalid={false}
+                    />
                   </AccordionItem>
                   <AccordionItem
                     key="2"
                     aria-label="Klarna - Flexible payments"
+                    indicator={
+                      <span>
+                        <img src="/Klarna.svg" alt="Klarna" />
+                      </span>
+                    }
                     startContent={
                       <Radio
                         value="2"
@@ -218,15 +309,47 @@ export default function Checkout() {
                     }
                     title="Klarna - Flexible payments"
                     classNames={{
-                      base: " bg-neutral-50 rounded-none mt-3",
+                      base: " bg-neutral-50 rounded-none shadow-none border-2 border-gray-200 px-0",
+                      title: cn(
+                        "text-neutral-950 font-sans text-sm font-medium"
+                      ),
+                      heading: cn("px-4"),
+                      content: cn("px-4 bg-gray-200/75"),
+                      indicator: cn(
+                        "transition-transform rotate-0 data-[open=true]:-rotate-0 rtl:rotate-0 rtl:data-[open=true]:-rotate-0"
+                      ),
                     }}
                   >
-                    text
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="50"
+                      height="50"
+                      viewBox="0 0 16 16"
+                      className="mx-auto"
+                    >
+                      <path
+                        fill="#707070"
+                        d="M11 10L8.1 6.8L4.8 10H7v1.8c0 1.7-.9 4.2-4 4.2c4.8 0 6-1.4 6-4.3V10z"
+                      />
+                      <path
+                        fill="#707070"
+                        d="M0 0v13h6v-1H1V3h14v9h-5v1h6V0zm2 2H1V1h1zm11 0H3V1h10z"
+                      />
+                    </svg>
+                    <p className=" text-neutral-900 font-sans text-sm font-light max-w-[350px] text-center mx-auto">
+                      After clicking “Pay now”, you will be redirected to Klarna
+                      - Flexible payments to complete your purchase securely.
+                    </p>
                   </AccordionItem>
                   <AccordionItem
                     key="3"
                     aria-label="GooglePay/ApplePay"
                     title="GooglePay"
+                    indicator={
+                      <span>
+                        <img src="/GooglePay.svg" alt="GooglePay" />
+                      </span>
+                    }
                     startContent={
                       <Radio
                         value="3"
@@ -239,15 +362,45 @@ export default function Checkout() {
                       />
                     }
                     classNames={{
-                      base: " bg-neutral-50 rounded-none mt-3",
+                      base: " bg-neutral-50 rounded-none shadow-none border-2 border-gray-200 px-0",
+                      title: cn(
+                        "text-neutral-950 font-sans text-sm font-medium"
+                      ),
+                      heading: cn("px-4"),
+                      content: cn("px-4 bg-gray-200/75"),
+                      indicator: cn(
+                        "transition-transform rotate-0 data-[open=true]:-rotate-0 rtl:rotate-0 rtl:data-[open=true]:-rotate-0"
+                      ),
                     }}
                   >
-                    text
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="50"
+                      height="50"
+                      viewBox="0 0 16 16"
+                      className="mx-auto"
+                    >
+                      <path
+                        fill="#707070"
+                        d="M11 10L8.1 6.8L4.8 10H7v1.8c0 1.7-.9 4.2-4 4.2c4.8 0 6-1.4 6-4.3V10z"
+                      />
+                      <path
+                        fill="#707070"
+                        d="M0 0v13h6v-1H1V3h14v9h-5v1h6V0zm2 2H1V1h1zm11 0H3V1h10z"
+                      />
+                    </svg>
+                    <p className=" text-neutral-900 font-sans text-sm font-light max-w-[350px] text-center mx-auto">
+                      After clicking “Pay now”, you will be redirected to
+                      GooglePay payments to complete your purchase securely.
+                    </p>
                   </AccordionItem>
                 </Accordion>
               </RadioGroup>
             </div>
-            <p className=" mt-6 text-xs font-sans font-normal text-neutral-600 underline underline-offset-4 cursor-pointer">
+            <p className=" mt-6 text-xs font-sans font-normal text-neutral-600 underline underline-offset-4 cursor-pointer flex items-center gap-2">
+              <span>
+                <RiArrowLeftLine />
+              </span>
               Return to cart
             </p>
             <button
@@ -257,11 +410,129 @@ export default function Checkout() {
               Pay now
             </button>
           </form>
+          <footer className="text-xs text-neutral-500 font-condensed font-normal mt-10 border-t-2 border-neutral-200 pt-6">
+            2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
+          </footer>
         </div>
-        <div className="bg-gray-200 p-6 lg:order-2 order-1">
-          <h2 className="text-xl font-semibold mb-4">Columna 2</h2>
 
-          <p>Contenido de la segunda columna...</p>
+        <div className="bg-gray-200 p-6 lg:order-2 order-1 flex flex-col gap-5 max-h-screen sticky top-0 z-50">
+          <article className="flex gap-4 items-center">
+            <div className="relative inline-flex">
+              <img
+                src="/city.jpg"
+                alt="City"
+                className="aspect-square w-[64px] object-cover"
+              />
+              <span className="absolute -top-3 -right-3 bg-gray-500 text-neutral-50  rounded-full text-xs font-medium font-condensed uppercase aspect-square w-6 grid place-content-center z-20">
+                1
+              </span>
+            </div>
+            <section className="flex-1">
+              <div className="flex justify-between items-center">
+                <span className="text-neutral-950 text-sm font-medium font-condensed">
+                  Huger Backpack
+                </span>
+                <span className="text-neutral-500 text-sm font-medium font-condensed">
+                  2995 kr
+                </span>
+              </div>
+              <span className="text-neutral-500 text-xs font-normal font-condensed uppercase">
+                S / Grey
+              </span>
+            </section>
+          </article>
+
+          <article className="flex gap-4 items-center">
+            <div className="relative inline-flex">
+              <img
+                src="/city.jpg"
+                alt="City"
+                className="aspect-square w-[64px] object-cover"
+              />
+              <span className="absolute -top-3 -right-3 bg-gray-500 text-neutral-50  rounded-full text-xs font-medium font-condensed uppercase aspect-square w-6 grid place-content-center z-20">
+                1
+              </span>
+            </div>
+            <section className="flex-1">
+              <div className="flex justify-between items-center">
+                <span className="text-neutral-950 text-sm font-medium font-condensed">
+                  Huger Backpack
+                </span>
+                <span className="text-neutral-500 text-sm font-medium font-condensed">
+                  2995 kr
+                </span>
+              </div>
+              <span className="text-neutral-500 text-xs font-normal font-condensed uppercase">
+                S / Grey
+              </span>
+            </section>
+          </article>
+
+          <article className="flex gap-4 items-center">
+            <div className="relative inline-flex">
+              <img
+                src="/city.jpg"
+                alt="City"
+                className="aspect-square w-[64px] object-cover"
+              />
+              <span className="absolute -top-3 -right-3 bg-gray-500 text-neutral-50  rounded-full text-xs font-medium font-condensed uppercase aspect-square w-6 grid place-content-center z-20">
+                1
+              </span>
+            </div>
+            <section className="flex-1">
+              <div className="flex justify-between items-center">
+                <span className="text-neutral-950 text-sm font-medium font-condensed">
+                  Huger Backpack
+                </span>
+                <span className="text-neutral-500 text-sm font-medium font-condensed">
+                  2995 kr
+                </span>
+              </div>
+              <span className="text-neutral-500 text-xs font-normal font-condensed uppercase">
+                S / Grey
+              </span>
+            </section>
+          </article>
+
+          <div className="flex gap-3 items-center py-6 border-y border-neutral-300">
+            <Input
+              type="text"
+              variant="faded"
+              placeholder="Discount code or gift card "
+              radius="none"
+              className={
+                " [&_[data-slot='input-wrapper']]:bg-neutral-50 [&_[data-slot='input-wrapper']]:border-gray-300 "
+              }
+              isInvalid={false}
+            />
+            <button
+              type="button"
+              className="text-xs font-condensed font-normal text-neutral-600 cursor-pointer border-2 border-gray-300 uppercase px-6 h-full hover:bg-neutral-950 hover:text-neutral-50 transition-colors"
+            >
+              Apply
+            </button>
+          </div>
+
+          <div className="font-sans">
+            <div className="text-sm flex flex-col gap-2 pb-5">
+              <div className="flex justify-between items-center">
+                <span className="text-neutral-950 font-medium">Subtotal</span>
+                <span className="text-neutral-600 font-medium">
+                  kr 14,396.00
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-neutral-950 font-medium">Shipping</span>
+                <span className="text-neutral-600 font-normal">
+                  Enter shipping address
+                </span>
+              </div>
+            </div>
+            <div className="text-base font-medium flex justify-between items-center border-t border-neutral-300 pt-4">
+              <span>Total</span>
+              <span className="font-semibold"> kr 15,500.00</span>
+            </div>
+          </div>
         </div>
       </section>
     </>
