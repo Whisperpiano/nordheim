@@ -34,7 +34,7 @@ export default function Home() {
         </motion.div>
       </header>
 
-      <main className="flex flex-col md:flex-row h-screen ">
+      <main className="flex flex-col md:flex-row h-[100dvh] ">
         <CategoryCard category="city" />
         <CategoryCard category="mountain" />
       </main>
