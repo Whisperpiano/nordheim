@@ -19,8 +19,7 @@ import {
   DrawerFooter,
 } from "@heroui/drawer";
 import { useState } from "react";
-
-// TODO: Probar en sticky y borrar los margins top de las secciones
+import AnnouncementBar from "./AnnouncementBar/AnnouncementBar.component";
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -36,53 +35,66 @@ export default function Header() {
 
   return (
     <>
-      <motion.header
-        className="px-4 py-4 bg-neutral-500 text-neutral-50 flex items-center justify-between fixed top-0 left-0 right-0 z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <div className="flex items-center">
-          <motion.div initial={{ x: "-10vw" }} animate={{ x: 0 }}>
-            <Link to="/">
-              <Logo />
-            </Link>
-          </motion.div>
-          <nav>
-            <ul className="flex uppercase font-condensed gap-4 ml-8">
-              <li>
-                <Link to="/products/city" className="px-2 py-2">
-                  City
-                </Link>
-              </li>
-              <li>
-                <Link to="/products/mountain" className="px-2 py-2">
-                  Mountain
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="px-2 py-2">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
+      <header className="flex flex-col fixed top-0 w-full z-50">
+        <AnnouncementBar text="Free shipping on orders 900 NOK +" />
 
-        <aside className="flex items-center gap-8">
-          <button className="cursor-pointer">
-            <RiSearchLine size={24} onClick={() => setIsSearchOpen(true)} />
-          </button>
-          <Link to="/account/login">
-            <RiUserLine size={24} />
-          </Link>
-          <button
-            className="cursor-pointer"
-            onClick={() => setIsCartOpen(true)}
-          >
-            <RiHandbagLine size={24} />
-          </button>
-        </aside>
-      </motion.header>
+        <motion.section className="bg-neutral-50 text-neutral-900 px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <motion.div initial={{ x: "-10vw" }} animate={{ x: 0 }}>
+              <Link to="/">
+                <Logo theme="dark" />
+              </Link>
+            </motion.div>
+
+            <nav>
+              <ul className="flex text-sm uppercase font-condensed font-medium gap-2 pl-3 ml-4 border-l border-neutral-300 text-neutral-500">
+                <li className="group">
+                  <Link
+                    to="/products/city"
+                    className="px-2 py-2 group-hover:text-neutral-900 transition-colors duration-300"
+                  >
+                    City
+                  </Link>
+                </li>
+                <li className="group">
+                  <Link
+                    to="/products/mountain"
+                    className="px-2 py-2 group-hover:text-neutral-900 transition-colors duration-300"
+                  >
+                    Mountain
+                  </Link>
+                </li>
+                <li className="group">
+                  <Link
+                    to="/contact"
+                    className="px-2 py-2 group-hover:text-neutral-900 transition-colors duration-300"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <aside className="flex items-center gap-3 text-neutral-500">
+            <button className="p-2 cursor-pointer transition-colors duration-300 rounded-full hover:text-neutral-700 hover:bg-neutral-200/50">
+              <RiSearchLine size={20} onClick={() => setIsSearchOpen(true)} />
+            </button>
+            <Link
+              to="/account/login"
+              className="p-2 transition-colors duration-300 rounded-full hover:text-neutral-700 hover:bg-neutral-200/50"
+            >
+              <RiUserLine size={20} />
+            </Link>
+            <button
+              className="p-2 cursor-pointer transition-colors duration-300 rounded-full hover:text-neutral-700 hover:bg-neutral-200/50"
+              onClick={() => setIsCartOpen(true)}
+            >
+              <RiHandbagLine size={20} />
+            </button>
+          </aside>
+        </motion.section>
+      </header>
 
       <Drawer
         isOpen={isCartOpen}
@@ -91,7 +103,7 @@ export default function Header() {
         placement="right"
         classNames={{
           backdrop: "bg-black/50",
-          base: "bg-neutral-50",
+          base: "bg-neutral-50 rounded-none",
           closeButton: "translate-y-2.5 cursor-pointer",
           body: "px-0",
         }}
@@ -252,7 +264,7 @@ export default function Header() {
         placement="top"
         classNames={{
           backdrop: "bg-black/50  translate-y-[56px] z-30",
-          base: "bg-neutral-50 max-h-none translate-y-[56px] z-40",
+          base: "bg-neutral-50 max-h-none translate-y-[101px] z-40 rounded-none",
           closeButton:
             "translate-y-1.5 cursor-pointer text-2xl text-neutral-500",
           body: "px-0",
@@ -273,7 +285,7 @@ export default function Header() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search for..."
-                    className="flex w-full placeholder:text-neutral-500 placeholder:font-condensed placeholder:uppercase placeholder:font-normal placeholder:text-xl outline-none me-10"
+                    className="flex w-full placeholder:text-neutral-500 placeholder:font-condensed placeholder:uppercase placeholder:font-normal placeholder:text-xl outline-none me-10 bg-neutral-50"
                   />
                 </form>
               </DrawerHeader>
