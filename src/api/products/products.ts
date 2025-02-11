@@ -16,7 +16,7 @@ export async function getProductsByCategory(category: Category) {
 
   const { data: products, error } = await supabase
     .from("products")
-    .select("*")
+    .select("*, reviews(*)")
     .eq("category", category);
 
   if (error) {
