@@ -1,11 +1,10 @@
-import { Link } from "react-router";
-import HomeButton from "./components/HomeButton.component";
-import Logo from "../../components/Logo/Logo.component";
 import { motion } from "framer-motion";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProductsByCategory } from "../../api/products/products";
 
-// TODO: refactor
+import Logo from "../../components/Logo/Logo.component";
+import CategoryCard from "./components/CategoryCard/CategoryCard.component";
+import { homeVariants } from "./Home.variants";
 
 export default function Home() {
   const { isError: isCityError } = useSuspenseQuery({
@@ -23,95 +22,29 @@ export default function Home() {
   }
 
   return (
-    <section className="flex flex-row h-screen relative">
-      <h1 className="sr-only">Nordheim - Premium backpacks</h1>
+    <>
+      <header>
+        <h1 className="sr-only">Nordheim - Premium backpacks</h1>
 
-      <motion.div
-        className="absolute z-20 flex justify-center mt-10 w-full"
-        initial={{ y: "-100vh", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Logo width={300} />
-      </motion.div>
+        <motion.div
+          className="absolute w-full h-full md:h-auto flex z-20 justify-center mt-0 md:mt-10"
+          {...homeVariants.header}
+        >
+          <Logo width={300} />
+        </motion.div>
+      </header>
 
-      <motion.div
-        className="flex-1 relative group cursor-pointer"
-        initial={{ x: "-100vh", opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Link to="/products/city" aria-label="Explore city backpacks">
-          <div
-            className="absolute inset-0 bg-black/20 z-10"
-            aria-hidden="true"
-          ></div>
+      <main className="flex flex-col md:flex-row h-screen ">
+        <CategoryCard category="city" />
+        <CategoryCard category="mountain" />
+      </main>
 
-          <motion.div
-            className="absolute inset-0 flex justify-center items-center z-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <HomeButton>City</HomeButton>
-          </motion.div>
-
-          <div className="h-full">
-            <picture>
-              <source srcSet="/city.jpg" type="image/jpg" />
-              <img
-                src="/city.jpg"
-                alt="City"
-                className="h-full w-full object-cover brightness-75 saturate-75 contrast-120 group-hover:saturate-110 group-hover:brightness-80 transition-all duration-300 ease-in"
-              />
-            </picture>
-          </div>
-        </Link>
-      </motion.div>
-
-      <motion.div
-        className="flex-1 relative group"
-        initial={{ x: "100vh", opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        exit={{ scale: 0.5 }}
-      >
-        <Link to="/products/mountain" aria-label="Explore mountain backpacks">
-          <div
-            className="absolute inset-0 bg-black/20 z-10"
-            aria-hidden="true"
-          ></div>
-
-          <motion.div
-            className="absolute inset-0 flex justify-center items-center z-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <HomeButton>Mountain</HomeButton>
-          </motion.div>
-
-          <div className="h-full">
-            <picture>
-              <source srcSet="/mountain.jpg" type="image/jpg" />
-              <img
-                src="/mountain.jpg"
-                alt="Mountain"
-                className="h-full w-full object-cover brightness-75 saturate-75 contrast-120 group-hover:saturate-110 group-hover:brightness-80 transition-all duration-300 ease-in"
-              />
-            </picture>
-          </div>
-        </Link>
-      </motion.div>
-
-      <motion.p
+      <motion.footer
         className="absolute inset-0 z-10 flex justify-center items-end m-5 text-neutral-50/50 text-sm uppercase font-condensed"
-        initial={{ y: "100vh", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        {...homeVariants.footer}
       >
         © 2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
-      </motion.p>
-    </section>
+      </motion.footer>
+    </>
   );
 }

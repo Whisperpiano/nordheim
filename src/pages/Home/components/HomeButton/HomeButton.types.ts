@@ -1,5 +1,6 @@
 interface HomeButtonProps {
-  children: string;
+  string: "city" | "mountain";
+  children?: never;
 }
 
 export type { HomeButtonProps };
