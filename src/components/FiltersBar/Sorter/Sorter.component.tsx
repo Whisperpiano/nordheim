@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useSearchParams } from "react-router";
+import { SharedSelection } from "@heroui/system";
 import {
   Dropdown,
   DropdownItem,
@@ -7,32 +9,29 @@ import {
 } from "@heroui/dropdown";
 
 import { RiArrowDownSLine } from "react-icons/ri";
-import { useSearchParams } from "react-router";
 import { sortOptions } from "../../../constants";
 
 export default function Sorter() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedSort, setSelectedSort] = useState(new Set(["featured"]));
+  const [selectedSort, setSelectedSort] = useState<Set<string>>(
+    new Set(["featured"])
+  );
+  const [, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    if (
-      ["/products", "/search"].some((path) => location.pathname.includes(path))
-    ) {
-      const sortValue = Array.from(selectedSort)[0];
+  const handleSelectionChange = (keys: SharedSelection) => {
+    const stringKeys = new Set<string>(
+      Array.from(keys).map((key) => String(key))
+    );
 
-      if (searchParams.get("sort") !== sortValue) {
-        setSearchParams((prev) => {
-          const newParams = new URLSearchParams(prev);
-          newParams.set("sort", sortValue);
-          return newParams;
-        });
-      }
-    } else {
-      const params = new URLSearchParams(searchParams);
-      params.delete("sort");
-      setSearchParams(params);
-    }
-  }, [selectedSort, setSearchParams, searchParams]);
+    setSelectedSort(stringKeys);
+
+    const [selectedKey] = stringKeys;
+
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("sort", selectedKey);
+      return newParams;
+    });
+  };
 
   return (
     <Dropdown
@@ -50,9 +49,7 @@ export default function Sorter() {
         aria-label="Sort Options"
         selectionMode="single"
         selectedKeys={selectedSort}
-        onSelectionChange={(keys) =>
-          setSelectedSort(new Set(keys as Iterable<string>))
-        }
+        onSelectionChange={handleSelectionChange}
         disallowEmptySelection
       >
         {sortOptions.map((option) => (
