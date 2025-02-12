@@ -7,7 +7,7 @@ import {
   DrawerHeader,
 } from "@heroui/drawer";
 import { Slider } from "@heroui/slider";
-import { useModalStore } from "../../store/modalStore";
+import { useModalStore } from "../../../store/modalStore";
 
 export default function Filter() {
   const isFiltersOpen = useModalStore((state) => state.isFiltersOpen);
