@@ -1,5 +1,5 @@
 import Cart from "../../../components/Cart/Cart.component";
-import Filter from "../../../components/Filter/Filter.component";
+import Filter from "../../../components/FiltersBar/FiltersBar.component";
 import MobileMenu from "../../../components/MobileMenu/MobileMenu.component";
 import SearchBar from "../../../components/SearchBar/SearchBar.component";
 

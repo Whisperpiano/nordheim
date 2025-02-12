@@ -1,5 +1,5 @@
-import { useModalStore } from "../../../../store/modalStore";
-import Sorter from "../../../../components/Sorter/Sorter.component";
+import { useModalStore } from "../../store/modalStore";
+import Sorter from "./Sorter/Sorter.component";
 
 export default function FiltersBar() {
   const setFiltersOpen = useModalStore((state) => state.setFiltersOpen);

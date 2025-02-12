@@ -8,7 +8,7 @@ import {
 
 import { RiArrowDownSLine } from "react-icons/ri";
 import { useSearchParams } from "react-router";
-import { sortOptions } from "../../constants";
+import { sortOptions } from "../../../constants";
 
 export default function Sorter() {
   const [searchParams, setSearchParams] = useSearchParams();
