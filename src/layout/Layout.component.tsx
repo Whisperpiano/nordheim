@@ -1,4 +1,4 @@
-import { HeroUIWrapper } from "./components/HeroUIWrapper/HeroUIWrapper";
+import { HeroUIWrapper } from "./components/HeroUIWrapper/HeroUIWrapper.component";
 import Header from "./components/Header/Header.component";
 import Footer from "./components/Footer/Footer.component";
 import AnimatedOutlet from "../router/components/AnimatedOutlet.tsx/AnimatedOutlet.component";
