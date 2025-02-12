@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export default function MainNav() {
   return (
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" className="lg:block hidden">
       <ul className="flex text-sm uppercase font-condensed font-medium gap-2 pl-3 ml-4 border-l border-neutral-300 text-neutral-500">
         <li className="group">
           <Link
