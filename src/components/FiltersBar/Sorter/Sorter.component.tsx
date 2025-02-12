@@ -12,18 +12,25 @@ import { sortOptions } from "../../../constants";
 
 export default function Sorter() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialSort = searchParams.get("sort") || "featured";
-  const [selectedSort, setSelectedSort] = useState(new Set([initialSort]));
+  const [selectedSort, setSelectedSort] = useState(new Set(["featured"]));
 
   useEffect(() => {
-    const sortValue = Array.from(selectedSort)[0];
+    if (
+      ["/products", "/search"].some((path) => location.pathname.includes(path))
+    ) {
+      const sortValue = Array.from(selectedSort)[0];
 
-    if (searchParams.get("sort") !== sortValue) {
-      setSearchParams((prev) => {
-        const newParams = new URLSearchParams(prev);
-        newParams.set("sort", sortValue);
-        return newParams;
-      });
+      if (searchParams.get("sort") !== sortValue) {
+        setSearchParams((prev) => {
+          const newParams = new URLSearchParams(prev);
+          newParams.set("sort", sortValue);
+          return newParams;
+        });
+      }
+    } else {
+      const params = new URLSearchParams(searchParams);
+      params.delete("sort");
+      setSearchParams(params);
     }
   }, [selectedSort, setSearchParams, searchParams]);
 

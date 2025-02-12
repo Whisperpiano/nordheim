@@ -37,6 +37,7 @@ export default function SecondaryNav() {
               shape: "rounded",
             })}
           >
+            <span className="sr-only">Account</span>
             <RiUserLine size={20} />
           </Link>
         </li>
