@@ -4,15 +4,14 @@ import {
   RiCheckLine,
   RiFileTextLine,
   RiLoopLeftLine,
-  RiStarFill,
-  RiStarHalfFill,
   RiSubtractLine,
   RiTruckLine,
 } from "react-icons/ri";
+import Rating from "../../../components/Rating/Rating.component";
 
 export default function ProductDetails() {
   return (
-    <section className="col-span-5 px-4">
+    <section className="col-span-12 lg:col-span-5 px-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-neutral-950 text-2xl font-semibold font-condensed uppercase">
           Huger Backpack
@@ -21,16 +20,7 @@ export default function ProductDetails() {
           2995 kr
         </span>
         <div className="flex gap-2 items-center mt-1">
-          <div className="flex  items-center">
-            <RiStarFill size={16} />
-            <RiStarFill size={16} />
-            <RiStarFill size={16} />
-            <RiStarFill size={16} />
-            <RiStarHalfFill size={16} />
-          </div>
-          <span className="text-neutral-500 font-sans text-sm font-normal">
-            5 reviews
-          </span>
+          <Rating size={16} />
         </div>
       </div>
 
