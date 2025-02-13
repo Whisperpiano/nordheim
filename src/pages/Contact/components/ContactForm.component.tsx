@@ -2,7 +2,7 @@ import { Input, Textarea } from "@heroui/input";
 import { Select, SelectItem } from "@heroui/select";
 import Button from "../../../components/Button/Button.component";
 import React, { useState } from "react";
-import { contactCategories } from "../../../constants/contact";
+import { contactCategories } from "../../../constants";
 
 export default function ContactForm() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
