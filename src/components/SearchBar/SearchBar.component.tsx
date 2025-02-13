@@ -4,10 +4,13 @@ import {
   DrawerContent,
   DrawerHeader,
 } from "@heroui/drawer";
-import { RiSearchLine, RiStarFill, RiStarHalfFill } from "react-icons/ri";
+import { RiSearchLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router";
 import { useModalStore } from "../../store/modalStore";
 import { useState } from "react";
+import { topSearch } from "../../constants/topSearch";
+import ProductCard from "../ProductCard/ProductCard.component";
+import Button from "../Button/Button.component";
 
 export default function SearchBar() {
   const isSearchOpen = useModalStore((state) => state.isSearchOpen);
@@ -61,31 +64,16 @@ export default function SearchBar() {
                       Top searches
                     </span>
                     <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
-                    <div className="flex flex-col gap-1">
-                      <Link
-                        to="/search?q=huger"
-                        className="font-sans font-medium lowercase text-sm text-neutral-800"
-                      >
-                        huger
-                      </Link>
-                      <Link
-                        to="/search?q=huger"
-                        className="font-sans font-medium lowercase text-sm text-neutral-800"
-                      >
-                        huger
-                      </Link>
-                      <Link
-                        to="/search?q=huger"
-                        className="font-sans font-medium lowercase text-sm text-neutral-800"
-                      >
-                        huger
-                      </Link>
-                      <Link
-                        to="/search?q=huger"
-                        className="font-sans font-medium lowercase text-sm text-neutral-800"
-                      >
-                        huger
-                      </Link>
+                    <div className="flex flex-col gap-2">
+                      {topSearch.map((search) => (
+                        <Link
+                          key={search.key}
+                          to={`/search?q=${search.label}`}
+                          className="font-sans font-medium lowercase text-sm text-neutral-500 hover:text-neutral-800 transition-colors duration-300"
+                        >
+                          {search.label}
+                        </Link>
+                      ))}
                     </div>
                   </div>
                   <div className="col-span-3 ">
@@ -94,98 +82,17 @@ export default function SearchBar() {
                     </span>
                     <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
                     <div className="grid grid-cols-3 gap-1">
-                      <Link to="/products/city/hugger-backpack">
-                        <article>
-                          <img
-                            src="/city.jpg"
-                            alt="City"
-                            className="object-cover aspect-[4/5] w-full"
-                          />
-                          <div className="p-4">
-                            <h2 className="text-neutral-950 text-base font-semibold font-condensed">
-                              Huger Backpack
-                            </h2>
-                            <span className="text-neutral-500 font-sans text-sm font-normal">
-                              2995 kr
-                            </span>
-                            <div className="flex gap-2 items-center mt-1">
-                              <div className="flex gap-0.5 items-center">
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarHalfFill size={12} />
-                              </div>
-                              <span className="text-neutral-500 font-sans text-xs font-normal">
-                                5 reviews
-                              </span>
-                            </div>
-                          </div>
-                        </article>
-                      </Link>
-
-                      <Link to="/products/city/hugger-backpack">
-                        <article>
-                          <img
-                            src="/city.jpg"
-                            alt="City"
-                            className="object-cover aspect-[4/5] w-full"
-                          />
-                          <div className="p-4">
-                            <h2 className="text-neutral-950 text-base font-semibold font-condensed">
-                              Huger Backpack
-                            </h2>
-                            <span className="text-neutral-500 font-sans text-sm font-normal">
-                              2995 kr
-                            </span>
-                            <div className="flex gap-2 items-center mt-1">
-                              <div className="flex gap-0.5 items-center">
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarHalfFill size={12} />
-                              </div>
-                              <span className="text-neutral-500 font-sans text-xs font-normal">
-                                5 reviews
-                              </span>
-                            </div>
-                          </div>
-                        </article>
-                      </Link>
-
-                      <Link to="/products/city/hugger-backpack">
-                        <article>
-                          <img
-                            src="/city.jpg"
-                            alt="City"
-                            className="object-cover aspect-[4/5] w-full"
-                          />
-                          <div className="p-4">
-                            <h2 className="text-neutral-950 text-base font-semibold font-condensed">
-                              Huger Backpack
-                            </h2>
-                            <span className="text-neutral-500 font-sans text-sm font-normal">
-                              2995 kr
-                            </span>
-                            <div className="flex gap-2 items-center mt-1">
-                              <div className="flex gap-0.5 items-center">
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarFill size={12} />
-                                <RiStarHalfFill size={12} />
-                              </div>
-                              <span className="text-neutral-500 font-sans text-xs font-normal">
-                                5 reviews
-                              </span>
-                            </div>
-                          </div>
-                        </article>
-                      </Link>
+                      {Array.from({ length: 3 }).map((_, i) => (
+                        <ProductCard key={i} />
+                      ))}
                     </div>
                     <div className="my-10 w-[180px] mx-auto">
-                      <button
+                      <Button
+                        variant="primary"
+                        size="md"
+                        font="primary"
+                        shape="square"
+                        fontSize="sm"
                         onClick={() => {
                           onClose();
                           navigate(`/search?q=${query}`);
@@ -193,7 +100,7 @@ export default function SearchBar() {
                         className="flex justify-center items-center w-full bg-neutral-950 text-neutral-50 font-condensed tracking-widest uppercase text-sm font-lighter py-3 cursor-pointer "
                       >
                         View all results
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </section>
