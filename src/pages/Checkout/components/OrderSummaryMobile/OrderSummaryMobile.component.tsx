@@ -1,26 +1,24 @@
 import { Accordion, AccordionItem } from "@heroui/accordion";
-import { SharedSelection } from "@heroui/system";
-import { useState } from "react";
+
 import { RiArrowDownSLine } from "react-icons/ri";
 import ProductSummary from "../OrderSummary/ProductSummary/ProductSummary.component";
 import SummaryDetails from "../OrderSummary/SummaryDetails/SummaryDetails.component";
+import { SharedSelection } from "@heroui/system";
 
-export default function OrderSummaryMobile() {
-  const [isOpen, setIsOpen] = useState(false);
+export interface OrderSummaryMobileProps {
+  summaryOpen: boolean;
+  handleSummaryOpen: (keys: SharedSelection) => void;
+}
 
-  function handleOpen(keys: SharedSelection) {
-    if (keys instanceof Set) {
-      setIsOpen(keys.size > 0);
-    } else {
-      setIsOpen(false);
-    }
-  }
-
+export default function OrderSummaryMobile({
+  summaryOpen,
+  handleSummaryOpen,
+}: OrderSummaryMobileProps) {
   return (
     <div className="max-w-[660px] w-full mr-auto flex lg:hidden mx-auto">
       <Accordion
         selectionMode="single"
-        onSelectionChange={handleOpen}
+        onSelectionChange={handleSummaryOpen}
         hideIndicator
       >
         <AccordionItem
@@ -34,7 +32,7 @@ export default function OrderSummaryMobile() {
                 Order summary
                 <span
                   className={`transition-transform duration-300 ${
-                    isOpen ? "rotate-180" : ""
+                    summaryOpen ? "rotate-180" : ""
                   }`}
                 >
                   <RiArrowDownSLine size={16} />

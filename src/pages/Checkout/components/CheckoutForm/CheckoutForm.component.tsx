@@ -5,20 +5,12 @@ import ContactSection from "./components/ContactSection.component.tsx/ContactSec
 import DeliverySection from "./components/DeliverySection/DeliverySection.component";
 import PaymentSection from "./components/PaymentSection/PaymentSection.component";
 import ShippingSection from "./components/ShippingSection/ShippingSection.component";
+import { useState } from "react";
 
-interface CheckoutFormProps {
-  hasAddress: boolean;
-  setHasAddress: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedPayment: string;
-  setSelectedPayment: React.Dispatch<React.SetStateAction<string>>;
-}
+export default function CheckoutForm() {
+  const [selectedPayment, setSelectedPayment] = useState("1");
+  const [hasAddress, setHasAddress] = useState(true);
 
-export default function CheckoutForm({
-  hasAddress,
-  setHasAddress,
-  selectedPayment,
-  setSelectedPayment,
-}: CheckoutFormProps) {
   console.log(setHasAddress);
   return (
     <form className="flex flex-col gap-8 mt-8">

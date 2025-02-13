@@ -6,7 +6,7 @@ import { RiQuestionLine } from "react-icons/ri";
 export default function DeliverySection() {
   return (
     <>
-      <div className="px-2">
+      <div>
         <h2 className="text-lg font-sans font-medium mb-3">Delivery</h2>
 
         <div className="flex flex-col gap-3">

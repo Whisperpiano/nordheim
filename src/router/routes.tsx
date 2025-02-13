@@ -16,8 +16,12 @@ const Register = lazy(() => import("../pages/Auth/Register/Register.page.tsx"));
 const Search = lazy(() => import("../pages/Search/Search.page.tsx"));
 const ErrorPage = lazy(() => import("../pages/Error/ErrorPage.page.tsx"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout.page.tsx"));
+const CheckoutForm = lazy(
+  () =>
+    import("../pages/Checkout/components/CheckoutForm/CheckoutForm.component")
+);
 const CheckoutSuccess = lazy(
-  () => import("../pages/Checkout/Success/Success.page.tsx")
+  () => import("../pages/Checkout/components/Success/Success.component.tsx")
 );
 
 export const router = createBrowserRouter([
@@ -60,11 +64,12 @@ export const router = createBrowserRouter([
   {
     path: "checkout",
     element: <Checkout />,
+    children: [
+      { index: true, element: <CheckoutForm /> },
+      { path: "success", element: <CheckoutSuccess /> },
+    ],
   },
-  {
-    path: "checkout/success",
-    element: <CheckoutSuccess />,
-  },
+
   {
     path: "*",
     element: <ErrorPage />,
