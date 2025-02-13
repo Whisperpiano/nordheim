@@ -4,12 +4,12 @@ import buttonVariants from "./Button.styles";
 import { ButtonProps } from "./Button.types";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, font, shape, ...props }, ref) => {
+  ({ className, variant, size, font, shape, fontSize, ...props }, ref) => {
     return (
       <button
         ref={ref}
         className={cn(
-          buttonVariants({ variant, size, font, shape }),
+          buttonVariants({ variant, size, font, shape, fontSize }),
           className
         )}
         {...props}
