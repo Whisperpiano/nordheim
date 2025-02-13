@@ -1,7 +1,7 @@
 import { RiStarFill, RiStarHalfFill } from "react-icons/ri";
-import { RatingProps } from "./Rating.types";
+import { RatingStarsProps } from "./RatingStars.types";
 
-export default function Rating({ size }: RatingProps) {
+export default function RatingStars({ size }: RatingStarsProps) {
   return (
     <>
       <div className="flex  items-center">
@@ -11,9 +11,6 @@ export default function Rating({ size }: RatingProps) {
         <RiStarFill size={size} />
         <RiStarHalfFill size={size} />
       </div>
-      <span className="text-neutral-500 font-sans text-sm font-normal">
-        5 reviews
-      </span>
     </>
   );
 }
