@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 
 export default function ProductCard() {
   return (
-    <Link to="/products/city/hugger-backpack">
+    <Link to="/products/city/hugger-backpack" className="group">
       <article>
-        <motion.img
-          src="/city.jpg"
-          alt="City"
-          className="object-cover aspect-[4/5] w-full"
-        />
+        <div className="overflow-hidden">
+          <motion.img
+            src="/city.jpg"
+            alt="City"
+            className="object-cover aspect-[4/5] w-full group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
 
         <div className="p-4">
           <h2 className="text-neutral-950 text-base font-semibold font-condensed">
