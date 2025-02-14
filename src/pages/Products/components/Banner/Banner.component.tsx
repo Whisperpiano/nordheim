@@ -2,12 +2,9 @@ import { categories } from "../../../../constants";
 import { BannerProps } from "./Banner.types";
 
 export default function Banner({ category }: BannerProps) {
-  console.log(category);
   return (
-    <section
-      className={`bg-center bg-no-repeat bg-cover bg-[url('https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images//${category}-banner-1024.webp')] lg:bg-[url('https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images//${category}-banner-2560.webp')] bg-black/25 bg-blend-multiply h-[400px] lg:h-[650px] flex items-end`}
-    >
-      <div className="px-4 mb-16">
+    <section className={`relative h-[400px] lg:h-[650px] flex items-end`}>
+      <div className="px-4 mb-16 absolute w-full h-ful z-20">
         <h1 className="mb-2 text-6xl font-semibold tracking-tight leading-none text-neutral-50 uppercase font-condensed ">
           {categories[category].title}
         </h1>
@@ -15,6 +12,40 @@ export default function Banner({ category }: BannerProps) {
           {categories[category].description}
         </p>
       </div>
+      <div className="absolute inset-0 z-[5] bg-black/55 backdrop-blur-none"></div>
+
+      <picture className="h-full w-full">
+        {/* AVIF */}
+        <source
+          srcSet={`
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-xl.avif 2560w,
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.avif 1920w,
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-md.avif 1200w,
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-sm.avif 600w,
+            `}
+          sizes="100vw"
+          type="image/avif"
+        />
+        {/* WEBP */}
+        <source
+          srcSet={`
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-xl.webp 2560w,
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.webp 1920w,
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-md.webp 1200w,
+              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-sm.webp 600w,
+            `}
+          sizes="100vw"
+          type="image/webp"
+        />
+
+        {/* Fallback */}
+        <img
+          src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.webp`}
+          alt={`Imagen de ${category}`}
+          className="absolute w-full h-full object-cover z-1"
+          loading="eager"
+        />
+      </picture>
     </section>
   );
 }
