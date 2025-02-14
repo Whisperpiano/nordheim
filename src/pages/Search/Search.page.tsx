@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router";
-import ProductCard from "../../components/ProductCard/ProductCard.component";
+// import ProductCard from "../../components/ProductCard/ProductCard.component";
 import FiltersBar from "../../components/FiltersBar/FiltersBar.component";
 
 export default function Search() {
@@ -21,9 +21,9 @@ export default function Search() {
       <FiltersBar />
 
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {/* {Array.from({ length: 8 }).map((_, i) => (
           <ProductCard key={i} />
-        ))}
+        ))} */}
       </section>
     </>
   );

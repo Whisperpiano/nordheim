@@ -6,14 +6,14 @@ import ProductCard from "../../../components/ProductCard/ProductCard.component";
 
 export default function Mountain() {
   const { data: products } = useMountainProducts();
-  console.log(products);
+  if (!products) return <div>Loading...</div>;
   return (
     <>
       <Banner category="mountain" />
       <FiltersBar />
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <ProductCard key={i} />
+        {products.map((product, i) => (
+          <ProductCard key={i} product={product} />
         ))}
       </section>
     </>

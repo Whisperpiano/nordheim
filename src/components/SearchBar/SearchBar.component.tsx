@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router";
 import { useModalStore } from "../../store/modalStore";
 import { useState } from "react";
 import { topSearch } from "../../constants/topSearch";
-import ProductCard from "../ProductCard/ProductCard.component";
+// import ProductCard from "../ProductCard/ProductCard.component";
 import Button from "../Button/Button.component";
 
 export default function SearchBar() {
@@ -82,9 +82,9 @@ export default function SearchBar() {
                     </span>
                     <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
                     <div className="grid grid-cols-3 gap-1">
-                      {Array.from({ length: 3 }).map((_, i) => (
+                      {/* {Array.from({ length: 3 }).map((_, i) => (
                         <ProductCard key={i} />
-                      ))}
+                      ))} */}
                     </div>
                     <div className="my-10 w-[180px] mx-auto">
                       <Button
