@@ -1,15 +1,16 @@
 import { toast } from "sonner";
 import { supabase } from "../../lib/supabase/client";
 import { z } from "zod";
+import { fullProductsArraySchema } from "../../lib/schemas/productSchema";
 
 const categorySchema = z.enum(["city", "mountain"]);
 
 type Category = z.infer<typeof categorySchema>;
 
 export async function getProductsByCategory(category: Category) {
-  const validation = categorySchema.safeParse(category);
+  const categoryValidation = categorySchema.safeParse(category);
 
-  if (!validation.success) {
+  if (!categoryValidation.success) {
     toast.error(`Invalid category: ${category}`);
     return null;
   }
@@ -29,5 +30,13 @@ export async function getProductsByCategory(category: Category) {
     return [];
   }
 
-  return products;
+  const parsedProducts = fullProductsArraySchema.safeParse(products);
+
+  if (!parsedProducts.success) {
+    toast.error(`Error parsing ${category} products.`);
+    console.log(parsedProducts.error);
+    return null;
+  }
+
+  return parsedProducts.data;
 }
