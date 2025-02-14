@@ -30,7 +30,7 @@ export default function Home() {
           className="absolute w-full h-full md:h-auto flex z-20 justify-center mt-0 md:mt-10"
           {...homeVariants.header}
         >
-          <Logo width={300} />
+          <Logo width={250} />
         </motion.div>
       </header>
 
