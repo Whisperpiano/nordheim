@@ -1,36 +1,67 @@
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
+import { CartItem, useCartStore } from "../../../../store/cartStore";
 
-export default function CartProduct() {
+export default function CartProduct({ item }: { item: CartItem }) {
+  const removeItem = useCartStore((state) => state.removeItem);
+  const incrementItem = useCartStore((state) => state.incrementItem);
+  const decrementItem = useCartStore((state) => state.decrementItem);
+
+  const handleRemove = (id: string) => {
+    removeItem(id);
+  };
+
+  const handleIncrement = (id: string) => {
+    incrementItem(id);
+  };
+
+  const handleDecrement = (id: string) => {
+    decrementItem(id);
+  };
+
   return (
     <article className="flex gap-4 items-center">
       <img
-        src="/city.jpg"
+        src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${item.category}-images//${item.slug}-xs.webp`}
         alt="City"
         className="aspect-square w-[120px] object-cover"
       />
       <section className="w-full">
         <div className="flex justify-between items-center mb-1">
           <span className="text-neutral-950 text-sm font-medium font-condensed">
-            Huger Backpack
+            {item.title}
           </span>
           <span className="text-neutral-500 text-sm font-medium font-condensed">
-            2995 kr
+            {item.price} kr
           </span>
         </div>
         <span className="text-neutral-500 text-xs font-normal font-condensed uppercase">
-          S / Grey
+          {item.variant.volume}L / {item.variant.color}
         </span>
         <div className="flex justify-between items-center mt-3">
           <div className="border border-neutral-300 inline-flex ">
-            <button className="px-2.5 py-2 text-gray-700 cursor-pointer">
+            <button
+              type="button"
+              className="px-2.5 py-2 text-gray-700 cursor-pointer"
+              onClick={() => handleDecrement(item.id)}
+            >
               <RiSubtractLine />
             </button>
-            <span className="px-2.5 py-2 text-sm font-normal">1</span>
-            <button className="px-2.5 py-2 text-gray-700 cursor-pointer ">
+            <span className="px-2.5 py-2 text-sm font-normal">
+              {item.quantity}
+            </span>
+            <button
+              type="button"
+              className="px-2.5 py-2 text-gray-700 cursor-pointer "
+              onClick={() => handleIncrement(item.id)}
+            >
               <RiAddLine />
             </button>
           </div>
-          <button className="text-xs  font-sans font-normal text-neutral-600 underline underline-offset-3 cursor-pointer">
+          <button
+            type="button"
+            className="text-xs  font-sans font-normal text-neutral-600 underline underline-offset-3 cursor-pointer"
+            onClick={() => handleRemove(item.id)}
+          >
             Remove
           </button>
         </div>

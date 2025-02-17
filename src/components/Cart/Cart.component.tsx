@@ -4,10 +4,16 @@ import { useModalStore } from "../../store/modalStore";
 import CartProduct from "./components/CartProduct.tsx/CartProduct.component";
 import CartHeader from "./components/CartHeader/CartHeader.component";
 import CartFooter from "./components/CartFooter/CartFooter.component";
+import { useCartStore } from "../../store/cartStore";
 
 export default function Cart() {
   const isCartOpen = useModalStore((state) => state.isCartOpen);
   const setCartOpen = useModalStore((state) => state.setCartOpen);
+  const cart = useCartStore((state) => state.cart);
+  const count = useCartStore((state) => state.count);
+  console.log(count);
+
+  // console.log(cart);
 
   return (
     <Drawer
@@ -23,21 +29,29 @@ export default function Cart() {
       }}
     >
       <DrawerContent>
-        <CartHeader />
+        <CartHeader cartCount={count} />
         <DrawerBody>
-          <div className="border-y border-neutral-300 py-4">
-            <p className="px-6 text-neutral-500 font-sans text-sm font-normal">
-              Spend 235 kr more and get free shipping!
-            </p>
-          </div>
+          {cart.length > 0 && (
+            <div className="border-t border-neutral-300 py-4">
+              <p className="px-6 text-neutral-500 font-sans text-sm font-normal">
+                Spend 235 kr more and get free shipping!
+              </p>
+            </div>
+          )}
 
-          <div className="flex flex-col gap-6 px-6 py-4">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <CartProduct key={i} />
-            ))}
+          <div className="flex flex-col gap-6 px-6 py-4 border-t border-neutral-300 h-full">
+            {cart.length > 0 ? (
+              cart.map((item) => <CartProduct key={item.id} item={item} />)
+            ) : (
+              <div className="grid place-content-center h-full">
+                <p className="text-neutral-500 font-sans text-sm font-normal">
+                  Your cart is empty
+                </p>
+              </div>
+            )}
           </div>
         </DrawerBody>
-        <CartFooter />
+        {cart.length > 0 && <CartFooter />}
       </DrawerContent>
     </Drawer>
   );
