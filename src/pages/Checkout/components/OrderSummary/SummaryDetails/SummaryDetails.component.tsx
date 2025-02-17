@@ -1,8 +1,11 @@
 import { Input } from "@heroui/input";
 import { useLocation } from "react-router";
+import { useCartStore } from "../../../../../store/cartStore";
+import { formatNumber } from "../../../../../utils/formatNumber";
 
 export default function SummaryDetails() {
   const location = useLocation();
+  const totalPrice = useCartStore((state) => state.totalPrice);
   return (
     <>
       {!location.pathname.includes("success") && (
@@ -29,7 +32,9 @@ export default function SummaryDetails() {
         <div className="text-sm flex flex-col gap-2 pb-5">
           <div className="flex justify-between items-center">
             <span className="text-neutral-950 font-medium">Subtotal</span>
-            <span className="text-neutral-600 font-medium">kr 14,396.00</span>
+            <span className="text-neutral-600 font-medium">
+              kr {formatNumber(totalPrice)}
+            </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-neutral-950 font-medium">Shipping</span>
