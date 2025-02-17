@@ -19,6 +19,7 @@ export type ProductsArray = z.infer<typeof productsArraySchema>;
 export const reviewSchema = z.object({
   id: z.number(),
   product_id: z.string().uuid(),
+  title: z.string(),
   username: z.string(),
   email: z.string().email(),
   rating: z.number().min(1).max(5),

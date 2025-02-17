@@ -1,18 +1,32 @@
 import RatingStars from "../../../../../components/RatingStars/RatingStars.component";
+import { ReviewsArray } from "../../../../../lib/schemas/productSchema";
 
-export default function ProductHeader() {
+export interface ProductHeaderProps {
+  title: string;
+  price: number;
+  reviews: ReviewsArray;
+}
+
+export default function ProductHeader({
+  title,
+  price,
+  reviews,
+}: ProductHeaderProps) {
+  const totalRating = reviews.length
+    ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
+    : 0;
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-neutral-950 text-2xl font-semibold font-condensed uppercase">
-        Huger Backpack
+        {title}
       </h1>
       <span className="text-neutral-500 font-sans text-lg font-normal">
-        2995 kr
+        {price} kr
       </span>
       <div className="flex gap-1 items-center mt-1">
-        <RatingStars size={16} />
+        <RatingStars size={16} rating={totalRating} />
         <span className="text-neutral-500 font-sans text-sm font-normal">
-          5 reviews
+          {reviews.length} reviews
         </span>
       </div>
     </div>

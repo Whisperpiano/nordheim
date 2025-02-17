@@ -26,6 +26,8 @@ import ProductCard from "../../../components/ProductCard/ProductCard.component";
 
 export default function City() {
   const { data: products } = useCityProducts();
+
+  console.log(products);
   if (!products) return <div>Loading...</div>;
   return (
     <>
