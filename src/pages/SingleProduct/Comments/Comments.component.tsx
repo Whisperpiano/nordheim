@@ -8,7 +8,6 @@ export default function Comments({ reviews }: { reviews: ReviewsArray }) {
     ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
     : 0;
 
-  console.log(totalRating);
   return (
     <section className="p-4">
       <div className="flex items-center justify-between border-t border-neutral-300 py-10">
