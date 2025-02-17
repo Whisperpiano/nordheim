@@ -1,7 +1,40 @@
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 import Button from "../../../../../components/Button/Button.component";
+import { useState } from "react";
+import { VariantsArray } from "../../../../../lib/schemas/productSchema";
+import clsx from "clsx";
 
-export default function ProductForm() {
+export default function ProductForm({ variants }: { variants: VariantsArray }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleDecrement = () => {
+    if (quantity <= 1) return;
+    setQuantity(quantity - 1);
+  };
+
+  const handleIncrement = () => {
+    if (quantity === variants[0].stock) return;
+    setQuantity(quantity + 1);
+  };
+
+  const stockClass = clsx(
+    "flex w-2.5 h-2.5 rounded-full me-1.5 shrink-0",
+    variants[0].stock > 10
+      ? "bg-green-500"
+      : variants[0].stock > 0
+      ? "bg-amber-500"
+      : "bg-red-500"
+  );
+
+  const stockText =
+    variants[0].stock > 10
+      ? "In stock"
+      : variants[0].stock > 0
+      ? "Few left"
+      : "Out of stock";
+
+  console.log(variants[0].stock);
+
   return (
     <>
       <div className="mt-4">
@@ -11,11 +44,27 @@ export default function ProductForm() {
           </span>
         </div>
         <div className="border border-neutral-300 inline-flex mt-2">
-          <button className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300">
+          <button
+            type="button"
+            className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+            onClick={handleDecrement}
+            disabled={variants[0].stock <= 0}
+          >
             <RiSubtractLine />
           </button>
-          <span className="px-3.5 py-3 text-sm font-normal">1</span>
-          <button className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300">
+          <span
+            className={`px-3.5 py-3 text-sm font-normal ${
+              variants[0].stock <= 0 ? "text-neutral-300" : "text-neutral-950"
+            }`}
+          >
+            {quantity}
+          </span>
+          <button
+            type="button"
+            className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+            onClick={handleIncrement}
+            disabled={variants[0].stock <= 0}
+          >
             <RiAddLine />
           </button>
         </div>
@@ -29,6 +78,7 @@ export default function ProductForm() {
           shape="square"
           fontSize="sm"
           className="w-full"
+          disabled={variants[0].stock <= 0}
         >
           Add to cart
         </Button>
@@ -38,8 +88,8 @@ export default function ProductForm() {
             Buy now pay later with <strong>Klarna</strong>
           </span>
           <span className="flex items-center text-xs font-medium text-neutral-950 me-1">
-            <span className="flex w-2.5 h-2.5 bg-green-600 rounded-full me-1.5 shrink-0"></span>
-            In stock
+            <span className={stockClass}></span>
+            {stockText}
           </span>
         </div>
       </div>

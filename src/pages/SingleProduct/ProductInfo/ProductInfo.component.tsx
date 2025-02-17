@@ -12,7 +12,7 @@ export default function ProductDetails({ product }: { product: FullProduct }) {
     <section className="col-span-12 lg:col-span-5 px-4">
       <ProductHeader title={title} price={price} reviews={reviews} />
       <ProductVariants variants={variants} />
-      <ProductForm />
+      <ProductForm variants={variants} />
       <ProductAccordion description={description} features={features} />
       <ProductFooter />
     </section>
