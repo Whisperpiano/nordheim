@@ -3,9 +3,25 @@ import Button from "../../../../../components/Button/Button.component";
 import { useState } from "react";
 import { VariantsArray } from "../../../../../lib/schemas/productSchema";
 import clsx from "clsx";
+import { useModalStore } from "../../../../../store/modalStore";
+import { useCartStore } from "../../../../../store/cartStore";
 
-export default function ProductForm({ variants }: { variants: VariantsArray }) {
+export default function ProductForm({
+  variants,
+  title,
+  slug,
+  price,
+}: {
+  variants: VariantsArray;
+  title: string;
+  slug: string;
+  price: number;
+}) {
   const [quantity, setQuantity] = useState(1);
+
+  const setCartOpen = useModalStore((state) => state.setCartOpen);
+
+  const addItemToCart = useCartStore((state) => state.addItem);
 
   const handleDecrement = () => {
     if (quantity <= 1) return;
@@ -33,7 +49,22 @@ export default function ProductForm({ variants }: { variants: VariantsArray }) {
       ? "Few left"
       : "Out of stock";
 
-  console.log(variants[0].stock);
+  const handleAddToCart = () => {
+    setCartOpen(true);
+    addItemToCart({
+      id: variants[0].product_id,
+      title,
+      slug,
+      price,
+      category: "city",
+      quantity,
+      variant: {
+        volume: variants[0].volume,
+        color: variants[0].color,
+      },
+    });
+    setQuantity(1);
+  };
 
   return (
     <>
@@ -79,6 +110,7 @@ export default function ProductForm({ variants }: { variants: VariantsArray }) {
           fontSize="sm"
           className="w-full"
           disabled={variants[0].stock <= 0}
+          onClick={handleAddToCart}
         >
           Add to cart
         </Button>

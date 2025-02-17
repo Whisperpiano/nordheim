@@ -4,10 +4,12 @@ import { useModalStore } from "../../../../store/modalStore";
 import { RiCircleFill } from "react-icons/ri";
 
 import Button from "../../../Button/Button.component";
+import { useCartStore } from "../../../../store/cartStore";
 
 export default function CartFooter() {
   const setCartOpen = useModalStore((state) => state.setCartOpen);
   const navigate = useNavigate();
+  const totalPrice = useCartStore((state) => state.totalPrice);
 
   const handleChekout = () => {
     setCartOpen(false);
@@ -31,7 +33,7 @@ export default function CartFooter() {
         <span className="mx-6">
           <RiCircleFill size={5} />
         </span>
-        2595 kr
+        {totalPrice} kr
       </Button>
     </DrawerFooter>
   );

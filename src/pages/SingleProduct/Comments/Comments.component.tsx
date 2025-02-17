@@ -9,7 +9,7 @@ export default function Comments({ reviews }: { reviews: ReviewsArray }) {
     : 0;
 
   return (
-    <section className="p-4">
+    <>
       <div className="flex items-center justify-between border-t border-neutral-300 py-10">
         <h2 className="text-neutral-950 text-2xl font-semibold font-condensed uppercase">
           Customer reviews
@@ -36,6 +36,6 @@ export default function Comments({ reviews }: { reviews: ReviewsArray }) {
           </button>
         </div>
       )}
-    </section>
+    </>
   );
 }

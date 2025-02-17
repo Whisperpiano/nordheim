@@ -5,12 +5,14 @@ export interface ProductHeaderProps {
   title: string;
   price: number;
   reviews: ReviewsArray;
+  scrollToReviews: () => void;
 }
 
 export default function ProductHeader({
   title,
   price,
   reviews,
+  scrollToReviews,
 }: ProductHeaderProps) {
   const totalRating = reviews.length
     ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
@@ -23,7 +25,10 @@ export default function ProductHeader({
       <span className="text-neutral-500 font-sans text-lg font-normal">
         {price} kr
       </span>
-      <div className="flex gap-1 items-center mt-1">
+      <div
+        className="inline-flex gap-1 items-center mt-1 cursor-pointer"
+        onClick={scrollToReviews}
+      >
         <RatingStars size={16} rating={totalRating} />
         <span className="text-neutral-500 font-sans text-sm font-normal">
           {reviews.length} reviews

@@ -5,14 +5,30 @@ import ProductFooter from "./components/ProductFooter/ProductFooter.component";
 import ProductForm from "./components/ProductForm/ProductForm.component";
 import { FullProduct } from "../../../lib/schemas/productSchema";
 
-export default function ProductDetails({ product }: { product: FullProduct }) {
+export default function ProductDetails({
+  product,
+  scrollToReviews,
+}: {
+  product: FullProduct;
+  scrollToReviews: () => void;
+}) {
   const { title, price, description, features, reviews, variants } = product;
 
   return (
     <section className="col-span-12 lg:col-span-5 px-4">
-      <ProductHeader title={title} price={price} reviews={reviews} />
+      <ProductHeader
+        title={title}
+        price={price}
+        reviews={reviews}
+        scrollToReviews={scrollToReviews}
+      />
       <ProductVariants variants={variants} />
-      <ProductForm variants={variants} />
+      <ProductForm
+        variants={variants}
+        title={title}
+        slug={product.slug}
+        price={price}
+      />
       <ProductAccordion description={description} features={features} />
       <ProductFooter />
     </section>
