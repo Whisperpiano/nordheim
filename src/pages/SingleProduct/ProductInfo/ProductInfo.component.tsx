@@ -6,11 +6,12 @@ import ProductForm from "./components/ProductForm/ProductForm.component";
 import { FullProduct } from "../../../lib/schemas/productSchema";
 
 export default function ProductDetails({ product }: { product: FullProduct }) {
-  const { title, price, description, features, reviews } = product;
+  const { title, price, description, features, reviews, variants } = product;
+
   return (
     <section className="col-span-12 lg:col-span-5 px-4">
       <ProductHeader title={title} price={price} reviews={reviews} />
-      <ProductVariants />
+      <ProductVariants variants={variants} />
       <ProductForm />
       <ProductAccordion description={description} features={features} />
       <ProductFooter />
