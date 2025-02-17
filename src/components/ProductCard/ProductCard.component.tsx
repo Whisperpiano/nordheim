@@ -1,10 +1,15 @@
-import { RiStarFill, RiStarHalfFill } from "react-icons/ri";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 
 import { FullProduct } from "../../lib/schemas/productSchema";
+import RatingStars from "../RatingStars/RatingStars.component";
 
 export default function ProductCard({ product }: { product: FullProduct }) {
+  const totalRating = product.reviews.length
+    ? product.reviews.reduce((acc, review) => acc + review.rating, 0) /
+      product.reviews.length
+    : 0;
+
   return (
     <Link to={`/products/city/${product.slug}`} className="group">
       <article>
@@ -12,12 +17,12 @@ export default function ProductCard({ product }: { product: FullProduct }) {
           <picture>
             <source
               srcSet={`
-                https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xl.webp 1458w,
-                https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-lg.webp 1024w,
-                https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-md.webp 640w,
-                https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-sm.webp 360w,
-                https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xs.webp 180w,
-              `}
+                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xl.webp 1458w,
+                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-lg.webp 1024w,
+                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-md.webp 640w,
+                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-sm.webp 360w,
+                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xs.webp 180w,
+                  `}
               sizes="
                 (max-width: 480px) 180px, 
                 (max-width: 768px) 360px, 
@@ -34,6 +39,7 @@ export default function ProductCard({ product }: { product: FullProduct }) {
               }}
               loading="lazy"
               onLoad={(e) => e.currentTarget.classList.remove("blur-xl")}
+              layoutId={product.slug}
             />
           </picture>
         </div>
@@ -47,14 +53,10 @@ export default function ProductCard({ product }: { product: FullProduct }) {
           </span>
           <div className="flex gap-2 items-center mt-1">
             <div className="flex gap-0.5 items-center">
-              <RiStarFill size={12} />
-              <RiStarFill size={12} />
-              <RiStarFill size={12} />
-              <RiStarFill size={12} />
-              <RiStarHalfFill size={12} />
+              <RatingStars size={12} rating={totalRating} />
             </div>
             <span className="text-neutral-500 font-sans text-xs font-normal">
-              5 reviews
+              {product.reviews.length} reviews
             </span>
           </div>
         </div>

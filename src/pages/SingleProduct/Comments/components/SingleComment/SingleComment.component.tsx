@@ -1,19 +1,8 @@
 import { RiCheckLine, RiStarFill, RiStarHalfFill } from "react-icons/ri";
+import { Review } from "../../../../../lib/schemas/productSchema";
 
-export interface SingleCommentProps {
-  review: {
-    email: string;
-    id: number;
-    product_id: string;
-    rating: number;
-    review: string;
-    title: string;
-    username: string;
-    verified: boolean;
-  };
-}
-
-export default function SingleComment({ review }: SingleCommentProps) {
+export default function SingleComment({ review }: { review: Review }) {
+  console.log(review);
   return (
     <article className="border-t border-neutral-300 py-6">
       <div className="flex items-center justify-between gap-4">

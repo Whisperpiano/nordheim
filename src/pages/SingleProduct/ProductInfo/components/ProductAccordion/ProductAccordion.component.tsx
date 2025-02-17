@@ -1,7 +1,14 @@
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { RiCheckLine } from "react-icons/ri";
 
-export default function ProductAccordion() {
+interface ProductAccordionProps {
+  description: string;
+  features: string[];
+}
+export default function ProductAccordion({
+  description,
+  features,
+}: ProductAccordionProps) {
   return (
     <Accordion
       selectionMode="single"
@@ -18,28 +25,16 @@ export default function ProductAccordion() {
       className="px-0 mt-8"
     >
       <AccordionItem key="1" aria-label="Description" title="Description">
-        Experience the perfect balance between functionality and style with our
-        premium Nordheim backpack. Designed for both urban adventures and
-        outdoor expeditions, this eco-friendly backpack combines modern
-        aesthetics with durable, sustainable materials.
+        {description}
       </AccordionItem>
 
       <AccordionItem key="2" aria-label="Features" title="Features">
         <ul className="flex flex-col gap-2">
-          <li className="flex items-center gap-2">
-            <RiCheckLine size={16} /> Made from recycled and water-resistant
-            nylon.
-          </li>
-          <li className="flex items-center gap-2">
-            <RiCheckLine size={16} /> Padded compartment fits laptops up to 15".
-          </li>
-          <li className="flex items-center gap-2">
-            <RiCheckLine size={16} /> Ergonomic shoulder straps with breathable
-            padding.
-          </li>
-          <li className="flex items-center gap-2">
-            <RiCheckLine size={16} /> Functional design
-          </li>
+          {features.map((feature, i) => (
+            <li key={i} className="flex items-center gap-2">
+              <RiCheckLine size={16} /> {feature}
+            </li>
+          ))}
         </ul>
       </AccordionItem>
 
