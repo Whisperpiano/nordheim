@@ -11,11 +11,13 @@ export default function ProductForm({
   title,
   slug,
   price,
+  category,
 }: {
   variants: VariantsArray;
   title: string;
   slug: string;
   price: number;
+  category: "city" | "mountain";
 }) {
   const [quantity, setQuantity] = useState(1);
 
@@ -56,7 +58,7 @@ export default function ProductForm({
       title,
       slug,
       price,
-      category: "city",
+      category,
       quantity,
       variant: {
         volume: variants[0].volume,
