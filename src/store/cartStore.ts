@@ -98,4 +98,5 @@ export const useCartStore = create<CartStore>((set) => ({
             : state.cart.filter((cartItem) => cartItem.id !== id),
       };
     }),
+  reset: () => set({ cart: [], count: 0, totalPrice: 0 }),
 }));

@@ -1,5 +1,6 @@
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 import { CartItem, useCartStore } from "../../../../store/cartStore";
+import { motion } from "framer-motion";
 
 export default function CartProduct({ item }: { item: CartItem }) {
   const removeItem = useCartStore((state) => state.removeItem);
@@ -19,7 +20,14 @@ export default function CartProduct({ item }: { item: CartItem }) {
   };
 
   return (
-    <article className="flex gap-4 items-center">
+    <motion.article
+      className="flex gap-4 items-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: -100 }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+      layout
+    >
       <img
         src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${item.category}-images//${item.slug}-xs.webp`}
         alt="City"
@@ -66,6 +74,6 @@ export default function CartProduct({ item }: { item: CartItem }) {
           </button>
         </div>
       </section>
-    </article>
+    </motion.article>
   );
 }

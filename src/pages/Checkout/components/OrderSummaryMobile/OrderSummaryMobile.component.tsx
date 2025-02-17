@@ -4,6 +4,7 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import ProductSummary from "../OrderSummary/ProductSummary/ProductSummary.component";
 import SummaryDetails from "../OrderSummary/SummaryDetails/SummaryDetails.component";
 import { SharedSelection } from "@heroui/system";
+import { useCartStore } from "../../../../store/cartStore";
 
 export interface OrderSummaryMobileProps {
   summaryOpen: boolean;
@@ -14,6 +15,7 @@ export default function OrderSummaryMobile({
   summaryOpen,
   handleSummaryOpen,
 }: OrderSummaryMobileProps) {
+  const cart = useCartStore((state) => state.cart);
   return (
     <div className="max-w-[660px] w-full mr-auto flex lg:hidden mx-auto">
       <Accordion
@@ -43,9 +45,8 @@ export default function OrderSummaryMobile({
           }
         >
           <div className="flex flex-col gap-5 mt-4">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <ProductSummary key={i} />
-            ))}
+            {cart.length > 0 &&
+              cart.map((item) => <ProductSummary key={item.id} item={item} />)}
 
             <SummaryDetails />
           </div>
