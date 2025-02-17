@@ -12,7 +12,16 @@ export default function ProductDetails({
   product: FullProduct;
   scrollToReviews: () => void;
 }) {
-  const { title, price, description, features, reviews, variants } = product;
+  const {
+    title,
+    price,
+    description,
+    features,
+    reviews,
+    variants,
+    category,
+    slug,
+  } = product;
 
   return (
     <section className="col-span-12 lg:col-span-5 px-4">
@@ -26,8 +35,9 @@ export default function ProductDetails({
       <ProductForm
         variants={variants}
         title={title}
-        slug={product.slug}
+        slug={slug}
         price={price}
+        category={category}
       />
       <ProductAccordion description={description} features={features} />
       <ProductFooter />

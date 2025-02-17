@@ -11,7 +11,10 @@ export default function ProductCard({ product }: { product: FullProduct }) {
     : 0;
 
   return (
-    <Link to={`/products/city/${product.slug}`} className="group">
+    <Link
+      to={`/products/${product.category}/${product.slug}`}
+      className="group"
+    >
       <article>
         <div className="overflow-hidden">
           <picture>
