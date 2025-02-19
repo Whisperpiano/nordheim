@@ -9,6 +9,7 @@ import { useModalStore } from "../../../../store/modalStore";
 import Button from "../../../../components/Button/Button.component";
 import buttonVariants from "../../../../components/Button/Button.styles";
 import { useCartStore } from "../../../../store/cartStore";
+import { motion } from "framer-motion";
 
 export default function SecondaryNav() {
   const setCartOpen = useModalStore((state) => state.setCartOpen);
@@ -19,7 +20,12 @@ export default function SecondaryNav() {
 
   return (
     <nav className="flex text-neutral-500" aria-label="Secondary navigation">
-      <ul className="flex items-center gap-3 list-none">
+      <motion.ul
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2 }}
+        className="flex items-center gap-0.5 sm:gap-3 list-none"
+      >
         <li className="flex">
           <Button
             variant="default"
@@ -70,7 +76,7 @@ export default function SecondaryNav() {
             <RiMenu3Line size={20} />
           </Button>
         </li>
-      </ul>
+      </motion.ul>
     </nav>
   );
 }
