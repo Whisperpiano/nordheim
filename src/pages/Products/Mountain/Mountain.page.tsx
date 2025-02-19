@@ -23,21 +23,18 @@ export default function Mountain() {
     }
   }, [products, refetch]);
 
-  if (isError) {
-    return <div>Error</div>;
-  }
-  if (!products) {
-    return <div>Loading</div>;
-  }
-
   return (
     <>
       <Banner category="mountain" />
       <FiltersBar />
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
-        {products.map((product, i) => (
-          <ProductCard key={i} product={product} />
-        ))}
+        {isError && <div>Error</div>}
+        {!products && <div>Loading</div>}
+        {products &&
+          !isError &&
+          products.map((product, i) => (
+            <ProductCard key={i} product={product} />
+          ))}
       </section>
     </>
   );

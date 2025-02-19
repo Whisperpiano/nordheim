@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getProductsByCategory } from "../../api/products/products";
 
 import Logo from "../../components/Logo/Logo.component";
 import CategoryCard from "./components/CategoryCard/CategoryCard.component";
 import { homeVariants } from "./Home.variants";
+import { getBannerImage } from "../../api/images/images";
 
 export default function Home() {
   const { isError: isCityError } = useSuspenseQuery({
@@ -16,6 +17,18 @@ export default function Home() {
   const { isError: isMountainError } = useSuspenseQuery({
     queryKey: ["products", "mountain"],
     queryFn: () => getProductsByCategory("mountain"),
+    staleTime: Infinity,
+  });
+
+  useQuery({
+    queryKey: ["banner", "city"],
+    queryFn: () => getBannerImage("city"),
+    staleTime: Infinity,
+  });
+
+  useQuery({
+    queryKey: ["banner", "mountain"],
+    queryFn: () => getBannerImage("mountain"),
     staleTime: Infinity,
   });
 
