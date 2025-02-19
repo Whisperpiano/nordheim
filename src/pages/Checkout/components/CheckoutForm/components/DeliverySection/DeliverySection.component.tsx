@@ -1,9 +1,28 @@
 import { Input } from "@heroui/input";
 import { Select, SelectItem } from "@heroui/select";
 import { Tooltip } from "@heroui/tooltip";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { RiQuestionLine } from "react-icons/ri";
+import { CheckoutFormData } from "../../../../../../lib/schemas/checkoutSchema";
+import { cn } from "../../../../../../utils/cn";
+import { useState } from "react";
 
-export default function DeliverySection() {
+export interface DeliverySectionProps {
+  register: UseFormRegister<CheckoutFormData>;
+  errors: FieldErrors<CheckoutFormData>;
+}
+
+export default function DeliverySection({
+  register,
+  errors,
+}: DeliverySectionProps) {
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setPhoneNumber(value);
+  };
+
   return (
     <>
       <div>
@@ -14,15 +33,21 @@ export default function DeliverySection() {
             label="Country/Region"
             radius="none"
             variant="faded"
-            isInvalid={false}
-            defaultSelectedKeys={["1"]}
+            isInvalid={Boolean(errors.country)}
+            errorMessage={errors.country?.message}
+            defaultSelectedKeys={["norway"]}
+            {...register("country")}
             classNames={{
               popoverContent: "rounded-none bg-neutral-50",
-              trigger: "py-5 bg-neutral-50",
+              trigger: cn(
+                "py-5 bg-neutral-50",
+                errors.country &&
+                  "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500"
+              ),
             }}
           >
             <SelectItem
-              key={"1"}
+              key={"norway"}
               classNames={{
                 base: "rounded-none",
               }}
@@ -38,7 +63,14 @@ export default function DeliverySection() {
               variant="faded"
               radius="none"
               className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-              isInvalid={false}
+              isInvalid={Boolean(errors.firstName)}
+              errorMessage={errors.firstName?.message}
+              {...register("firstName")}
+              classNames={{
+                inputWrapper:
+                  errors.firstName &&
+                  "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+              }}
             />
             <Input
               label="Last name"
@@ -46,16 +78,30 @@ export default function DeliverySection() {
               variant="faded"
               radius="none"
               className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-              isInvalid={false}
+              isInvalid={Boolean(errors.lastName)}
+              errorMessage={errors.lastName?.message}
+              {...register("lastName")}
+              classNames={{
+                inputWrapper:
+                  errors.lastName &&
+                  "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+              }}
             />
           </div>
           <Input
-            label="Company"
+            label="Company (optional)"
             type="text"
             variant="faded"
             radius="none"
             className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-            isInvalid={false}
+            isInvalid={Boolean(errors.company)}
+            errorMessage={errors.company?.message}
+            {...register("company")}
+            classNames={{
+              inputWrapper:
+                errors.company &&
+                "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+            }}
           />
           <Input
             label="Address"
@@ -63,7 +109,14 @@ export default function DeliverySection() {
             variant="faded"
             radius="none"
             className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-            isInvalid={false}
+            isInvalid={Boolean(errors.address)}
+            errorMessage={errors.address?.message}
+            {...register("address")}
+            classNames={{
+              inputWrapper:
+                errors.address &&
+                "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+            }}
           />
           <Input
             label="Apartment, suite, etc. (optional)"
@@ -71,7 +124,14 @@ export default function DeliverySection() {
             variant="faded"
             radius="none"
             className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-            isInvalid={false}
+            isInvalid={Boolean(errors.apartment)}
+            errorMessage={errors.apartment?.message}
+            {...register("apartment")}
+            classNames={{
+              inputWrapper:
+                errors.apartment &&
+                "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+            }}
           />
           <div className="grid grid-cols-2 gap-3">
             <Input
@@ -80,7 +140,14 @@ export default function DeliverySection() {
               variant="faded"
               radius="none"
               className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-              isInvalid={false}
+              isInvalid={Boolean(errors.postalCode)}
+              errorMessage={errors.postalCode?.message}
+              {...register("postalCode")}
+              classNames={{
+                inputWrapper:
+                  errors.postalCode &&
+                  "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+              }}
             />
             <Input
               label="City"
@@ -88,7 +155,14 @@ export default function DeliverySection() {
               variant="faded"
               radius="none"
               className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
-              isInvalid={false}
+              isInvalid={Boolean(errors.city)}
+              errorMessage={errors.city?.message}
+              {...register("city")}
+              classNames={{
+                inputWrapper:
+                  errors.city &&
+                  "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+              }}
             />
           </div>
 
@@ -98,7 +172,17 @@ export default function DeliverySection() {
             variant="faded"
             radius="none"
             className=" [&_[data-slot='input-wrapper']]:bg-neutral-50"
-            isInvalid={false}
+            isInvalid={Boolean(errors.phone)}
+            errorMessage={errors.phone?.message}
+            value={phoneNumber}
+            {...register("phone", {
+              onChange: handlePhoneNumberChange,
+            })}
+            classNames={{
+              inputWrapper:
+                errors.phone &&
+                "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+            }}
             endContent={
               <Tooltip
                 content="In case we need to contact you about your order"
