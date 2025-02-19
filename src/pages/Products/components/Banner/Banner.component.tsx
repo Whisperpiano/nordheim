@@ -15,17 +15,6 @@ export default function Banner({ category }: BannerProps) {
       <div className="absolute inset-0 z-[5] bg-black/55 backdrop-blur-none"></div>
 
       <picture className="h-full w-full">
-        {/* AVIF */}
-        {/* <source
-          srcSet={`
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-xl.avif 2560w,
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.avif 1920w,
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-md.avif 1200w,
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-sm.avif 600w,
-            `}
-          sizes="100vw"
-          type="image/avif"
-        /> */}
         {/* WEBP */}
         <source
           srcSet={`
