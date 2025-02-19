@@ -1,36 +1,55 @@
-import { Link } from "react-router";
 import { RiArrowLeftLine } from "react-icons/ri";
 
 import ContactSection from "./components/ContactSection.component.tsx/ContactSection.component";
 import DeliverySection from "./components/DeliverySection/DeliverySection.component";
-import PaymentSection from "./components/PaymentSection/PaymentSection.component";
+import { useForm } from "react-hook-form";
+import {
+  CheckoutFormData,
+  checkoutSchema,
+} from "../../../../lib/schemas/checkoutSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Button from "../../../../components/Button/Button.component";
+
 import ShippingSection from "./components/ShippingSection/ShippingSection.component";
-import { useState } from "react";
+import PaymentSection from "./components/PaymentSection/PaymentSection.component";
+import { useNavigate } from "react-router";
 
 export default function CheckoutForm() {
-  const [selectedPayment, setSelectedPayment] = useState("1");
-  const [hasAddress, setHasAddress] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<CheckoutFormData>({
+    resolver: zodResolver(checkoutSchema),
+  });
 
-  console.log(setHasAddress);
+  const navigate = useNavigate();
+
+  const onSubmit = (data: CheckoutFormData) => {
+    console.log(data);
+    navigate("/checkout/success");
+  };
+
   return (
-    <form className="flex flex-col gap-8 mt-8">
+    <form
+      className="flex flex-col gap-8 mt-8"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="px-2">
-        <ContactSection />
+        <ContactSection register={register} errors={errors} />
       </div>
 
       <div className="px-2">
-        <DeliverySection />
+        <DeliverySection register={register} errors={errors} />
       </div>
 
       <div className="px-2">
-        <PaymentSection hasAddress={hasAddress} />
+        <ShippingSection errors={errors} control={control} />
       </div>
 
       <div>
-        <ShippingSection
-          selectedPayment={selectedPayment}
-          setSelectedPayment={setSelectedPayment}
-        />
+        <PaymentSection register={register} errors={errors} control={control} />
       </div>
 
       <p className="text-xs font-sans font-medium text-neutral-600 underline underline-offset-4 cursor-pointer flex items-center gap-1 px-2">
@@ -41,12 +60,16 @@ export default function CheckoutForm() {
       </p>
 
       <div className="px-2">
-        <Link
-          to="/checkout/success"
-          className="flex justify-center items-center w-full bg-neutral-950 text-neutral-50 font-condensed tracking-widest uppercase text-sm font-lighter py-3 cursor-pointer  mb-6"
+        <Button
+          type="submit"
+          variant="primary"
+          size="md"
+          font="primary"
+          shape="square"
+          className="w-full"
         >
           Pay now
-        </Link>
+        </Button>
       </div>
     </form>
   );

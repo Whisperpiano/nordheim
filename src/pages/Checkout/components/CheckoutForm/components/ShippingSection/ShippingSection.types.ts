@@ -1,4 +1,7 @@
-export interface PaymentSectionProps {
-  selectedPayment: string;
-  setSelectedPayment: React.Dispatch<React.SetStateAction<string>>;
+import { Control, FieldErrors } from "react-hook-form";
+import { CheckoutFormData } from "../../../../../../lib/schemas/checkoutSchema";
+
+export interface ShippingSectionProps {
+  errors: FieldErrors<CheckoutFormData>;
+  control: Control<CheckoutFormData>;
 }
