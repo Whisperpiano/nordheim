@@ -1,9 +1,14 @@
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 
 export default function MainNav() {
   return (
     <nav aria-label="Main navigation" className="lg:block hidden">
-      <ul className="flex text-sm uppercase font-condensed font-medium gap-2 pl-3 ml-4 border-l border-neutral-300 text-neutral-500">
+      <motion.ul
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="flex text-sm uppercase font-condensed font-medium gap-2 pl-3 ml-4 border-l border-neutral-300 text-neutral-500"
+      >
         <li className="group">
           <Link
             to="/products/city"
@@ -28,7 +33,7 @@ export default function MainNav() {
             Contact
           </Link>
         </li>
-      </ul>
+      </motion.ul>
     </nav>
   );
 }

@@ -3,7 +3,7 @@ interface LogoProps {
   theme?: "dark" | "light";
 }
 
-const Logo = ({ width = 192, theme = "light" }: LogoProps) => {
+const Logo = ({ width = 160, theme = "light" }: LogoProps) => {
   return (
     <svg
       width={width}
