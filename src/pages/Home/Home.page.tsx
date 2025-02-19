@@ -10,11 +10,13 @@ export default function Home() {
   const { isError: isCityError } = useSuspenseQuery({
     queryKey: ["products", "city"],
     queryFn: () => getProductsByCategory("city"),
+    staleTime: Infinity,
   });
 
   const { isError: isMountainError } = useSuspenseQuery({
     queryKey: ["products", "mountain"],
     queryFn: () => getProductsByCategory("mountain"),
+    staleTime: Infinity,
   });
 
   if (isCityError || isMountainError) {
