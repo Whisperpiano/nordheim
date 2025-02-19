@@ -16,7 +16,7 @@ export default function Banner({ category }: BannerProps) {
 
       <picture className="h-full w-full">
         {/* AVIF */}
-        <source
+        {/* <source
           srcSet={`
               https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-xl.avif 2560w,
               https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.avif 1920w,
@@ -25,7 +25,7 @@ export default function Banner({ category }: BannerProps) {
             `}
           sizes="100vw"
           type="image/avif"
-        />
+        /> */}
         {/* WEBP */}
         <source
           srcSet={`

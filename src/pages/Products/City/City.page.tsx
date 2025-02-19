@@ -28,8 +28,8 @@ export default function City() {
       <Banner category="city" />
       <FiltersBar />
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
-        {isError && <div>Error</div>}
-        {!products && <div>Loading</div>}
+        {isError && <div className="min-h-screen">Error</div>}
+        {!products && <div className="min-h-screen">Loading</div>}
         {products &&
           !isError &&
           products.map((product, i) => (
