@@ -5,7 +5,7 @@ const HomeButton = ({ string }: HomeButtonProps) => {
     <h2
       className={`relative h-16 ${
         string === "city" ? "w-28" : "w-52"
-      } px-8 text-neutral-50 font-condensed text-3xl`}
+      } px-8 text-neutral-50 font-condensed text-2xl sm:text-3xl`}
     >
       <span className="absolute inset-0 flex justify-center items-center uppercase font-semibold tracking-tight group-hover:tracking-widest transition-all duration-300 ease-in">
         {string}

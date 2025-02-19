@@ -40,7 +40,7 @@ export default function Home() {
       </main>
 
       <motion.footer
-        className="absolute inset-0 z-10 flex justify-center items-end m-5 text-neutral-50/50 text-sm uppercase font-condensed"
+        className="absolute inset-0 z-10 flex justify-center items-end m-5 text-neutral-50/50 text-xs sm:text-sm uppercase font-condensed"
         {...homeVariants.footer}
       >
         © 2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
