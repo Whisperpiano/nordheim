@@ -1,7 +1,7 @@
 import LogoHeader from "../../layout/components/Header/LogoHeader/LogoHeader.component";
 import OrderSummary from "./components/OrderSummary/OrderSummary.component";
 import OrderSummaryMobile from "./components/OrderSummaryMobile/OrderSummaryMobile.component";
-import AnimatedOutlet from "../../router/components/AnimatedOutlet.tsx/AnimatedOutlet.component";
+import AnimatedOutlet from "../../router/components/AnimatedOutlet/AnimatedOutlet.component";
 import { SharedSelection } from "@heroui/system";
 import { useState } from "react";
 

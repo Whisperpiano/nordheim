@@ -6,6 +6,8 @@ import { getProductsByCategory } from "../../../api/products/products";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import { Spinner } from "@heroui/spinner";
+import Button from "../../../components/Button/Button.component";
 
 export default function City() {
   const [searchParams] = useSearchParams();
@@ -46,12 +48,32 @@ export default function City() {
         <Banner category="city" />
         <FiltersBar />
       </motion.div>
+
+      {!products && (
+        <div className="grid place-content-center py-52">
+          <Spinner size="lg" color="default" />
+        </div>
+      )}
+
+      {isError && (
+        <div className="grid place-content-center py-52">
+          <p>No products found</p>
+          <Button
+            variant={"primary"}
+            size={"sm"}
+            shape={"square"}
+            onClick={() => refetch()}
+            className="mt-4"
+          >
+            Try again
+          </Button>
+        </div>
+      )}
+
       <motion.section
         className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5"
         layout
       >
-        {isError && <div className="min-h-screen">Error</div>}
-        {!products && <div className="min-h-screen">Loading</div>}
         <AnimatePresence>
           {products &&
             !isError &&
