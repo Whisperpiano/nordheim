@@ -24,7 +24,7 @@ export default function ProductDetails({
   } = product;
 
   return (
-    <section className="col-span-12 lg:col-span-5 px-4">
+    <section className="col-span-12 lg:col-span-5 pl-0 pr-0 pt-6 lg:pl-10 lg:pr-6 lg:pt-0">
       <ProductHeader
         title={title}
         price={price}
@@ -32,6 +32,7 @@ export default function ProductDetails({
         scrollToReviews={scrollToReviews}
       />
       <ProductVariants variants={variants} />
+
       <ProductForm
         variants={variants}
         title={title}

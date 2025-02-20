@@ -10,7 +10,7 @@ export default function ProductPicture({
   category,
 }: ProductPictureProps) {
   return (
-    <picture className="object-cover aspect-[4/5] w-full col-span-12 lg:col-span-7 max-h-[calc(100vh-100px)]">
+    <picture className="col-span-12 lg:col-span-7 max-h-[calc(100vh-130px)] overflow-hidden">
       <source
         srcSet={`
                 https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${category}-images//${slug}-xl.webp 1458w,
@@ -29,14 +29,8 @@ export default function ProductPicture({
       <motion.img
         src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${category}-images//${slug}-xs.webp`}
         alt="City"
-        className="object-cover aspect-[4/5] w-full col-span-12 lg:col-span-7 max-h-[calc(100vh-100px)]"
+        className="object-cover object-center w-full h-full"
       />
     </picture>
   );
 }
-
-// <motion.img
-//   src="/city.jpg"
-//   alt="City"
-//   className="object-cover aspect-[4/5] w-full col-span-12 lg:col-span-7 max-h-[calc(100vh-100px)]"
-// />

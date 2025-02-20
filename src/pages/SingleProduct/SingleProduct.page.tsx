@@ -58,12 +58,12 @@ export default function SingleProduct() {
         exit={{ x: "100%", opacity: 0, transition: { duration: 0.1 } }}
         transition={{ transition: "slide-in", duration: 0.25 }}
       >
-        <article className="grid grid-cols-12 gap-10 mt-[100px] border-t border-gray-300 px-4 pb-8 pt-4">
+        <article className="grid grid-cols-12 mt-[100px] border-t border-gray-300 px-4 pb-8 pt-4">
           <ProductPicture slug={slug} category={category} />
           <ProductDetails product={product} scrollToReviews={scrollToReviews} />
         </article>
 
-        <section className="p-4" ref={reviewsRef}>
+        <section className="px-6" ref={reviewsRef}>
           <Comments reviews={product.reviews} />
         </section>
       </motion.section>

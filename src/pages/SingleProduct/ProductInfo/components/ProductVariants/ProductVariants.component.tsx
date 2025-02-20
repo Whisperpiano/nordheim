@@ -7,7 +7,7 @@ export default function ProductVariants({
   variants: VariantsArray;
 }) {
   return (
-    <div className="border-t border-neutral-300/50 mt-4">
+    <div className="border-t border-gray-300 mt-4">
       <div className="mt-6">
         <fieldset>
           <div>
