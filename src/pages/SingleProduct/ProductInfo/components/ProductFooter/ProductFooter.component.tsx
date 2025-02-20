@@ -2,7 +2,7 @@ import { RiFileTextLine, RiLoopLeftLine, RiTruckLine } from "react-icons/ri";
 
 export default function ProductFooter() {
   return (
-    <div className="grid grid-cols-3 gap-4 mt-8">
+    <div className="flex justify-between mt-8 max-w-[650px] mx-auto px-4">
       <div className="flex flex-col gap-3">
         <RiFileTextLine className="mx-auto text-neutral-950/75" size={20} />
         <span className="text-center font-condensed text-neutral-950/50 uppercase text-xs font-medium">
