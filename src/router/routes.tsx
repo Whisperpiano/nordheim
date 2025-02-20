@@ -3,11 +3,12 @@ import { createBrowserRouter } from "react-router";
 
 import Layout from "../layout/Layout.component.tsx";
 import FadingFallback from "./components/FadingFallback/FadingFallback.component.tsx";
+import CategoryHandler from "./components/CategoryHandler/CategoryHandler.component.tsx";
+import City from "../pages/Products/City/City.page";
 
 const Home = lazy(() => import("../pages/Home/Home.page"));
 const Contact = lazy(() => import("../pages/Contact/Contact.page"));
-const City = lazy(() => import("../pages/Products/City/City.page"));
-const Mountain = lazy(() => import("../pages/Products/Mountain/Mountain.page"));
+
 const SingleProduct = lazy(
   () => import("../pages/SingleProduct/SingleProduct.page.tsx")
 );
@@ -37,10 +38,9 @@ export const router = createBrowserRouter([
     path: "products",
     element: <Layout />,
     children: [
-      { path: "city", element: <City /> },
-      { path: "city/:slug", element: <SingleProduct /> },
-      { path: "mountain", element: <Mountain /> },
-      { path: "mountain/:slug", element: <SingleProduct /> },
+      { index: true, element: <City /> },
+      { path: ":category", element: <CategoryHandler /> },
+      { path: ":category/:slug", element: <SingleProduct /> },
     ],
   },
   {

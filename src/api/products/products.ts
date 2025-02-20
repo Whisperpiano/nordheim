@@ -10,6 +10,32 @@ const categorySchema = z.enum(["city", "mountain"]);
 
 type Category = z.infer<typeof categorySchema>;
 
+export async function getProducts() {
+  const { data: products, error } = await supabase
+    .from("products")
+    .select("*, reviews(*), variants(*)");
+
+  if (error) {
+    toast.error("Error getting products.");
+    return null;
+  }
+
+  if (!products || products.length === 0) {
+    toast.error("No products found.");
+    return [];
+  }
+
+  const parsedProducts = fullProductsArraySchema.safeParse(products);
+
+  if (!parsedProducts.success) {
+    toast.error("Error parsing products.");
+    console.log(parsedProducts.error);
+    return null;
+  }
+
+  return parsedProducts.data;
+}
+
 export async function getProductsByCategory(category: Category) {
   const categoryValidation = categorySchema.safeParse(category);
 

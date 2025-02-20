@@ -3,7 +3,7 @@ import { getProductBySlug } from "../../api/products/products";
 
 export const useSingleProduct = (slug: string) => {
   return useQuery({
-    queryKey: ["product"],
+    queryKey: ["products"],
     queryFn: () => getProductBySlug(slug),
   });
 };

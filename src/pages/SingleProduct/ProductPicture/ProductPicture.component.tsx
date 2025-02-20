@@ -30,8 +30,6 @@ export default function ProductPicture({
         src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${category}-images//${slug}-xs.webp`}
         alt="City"
         className="object-cover aspect-[4/5] w-full col-span-12 lg:col-span-7 max-h-[calc(100vh-100px)]"
-        layoutId={slug}
-        transition={{ duration: 0.5 }}
       />
     </picture>
   );

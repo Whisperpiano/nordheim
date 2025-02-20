@@ -1,5 +1,4 @@
 import { RiInformationLine } from "react-icons/ri";
-import Footer from "../../layout/components/Footer/Footer.component";
 import Header from "../../layout/components/Header/Header.component";
 import { Link } from "react-router";
 
@@ -25,7 +24,6 @@ export default function ErrorPage() {
           </Link>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

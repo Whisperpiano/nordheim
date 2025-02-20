@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProductsByCategory } from "../../api/products/products";
 
 import Logo from "../../components/Logo/Logo.component";
@@ -20,13 +20,13 @@ export default function Home() {
     staleTime: Infinity,
   });
 
-  useQuery({
+  useSuspenseQuery({
     queryKey: ["banner", "city"],
     queryFn: () => getBannerImage("city"),
     staleTime: Infinity,
   });
 
-  useQuery({
+  useSuspenseQuery({
     queryKey: ["banner", "mountain"],
     queryFn: () => getBannerImage("mountain"),
     staleTime: Infinity,
