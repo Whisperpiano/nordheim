@@ -32,14 +32,6 @@ export default function Cart() {
       <DrawerContent>
         <CartHeader cartCount={count} />
         <DrawerBody>
-          {cart.length > 0 && (
-            <div className="border-t border-neutral-300 py-4">
-              <p className="px-6 text-neutral-500 font-sans text-sm font-normal">
-                Spend 235 kr more and get free shipping!
-              </p>
-            </div>
-          )}
-
           <div className="flex flex-col gap-6 px-6 py-4 border-t border-neutral-300 h-full">
             <AnimatePresence>
               {cart.length > 0 ? (
