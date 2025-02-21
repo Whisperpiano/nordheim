@@ -25,7 +25,10 @@ export default function Checkout() {
         <div className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
           <div className="max-w-[660px] w-full ">
             <LogoHeader />
-            <CheckoutForm setSelectedShipping={setSelectedShipping} />
+            <CheckoutForm
+              setSelectedShipping={setSelectedShipping}
+              selectedShipping={selectedShipping}
+            />
             <footer className="text-xs text-neutral-500 font-condensed font-normal mt-10 border-t-2 border-neutral-200 pt-6">
               2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
             </footer>

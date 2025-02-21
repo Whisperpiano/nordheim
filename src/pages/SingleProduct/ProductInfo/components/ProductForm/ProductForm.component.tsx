@@ -61,6 +61,7 @@ export default function ProductForm({
       category,
       quantity,
       variant: {
+        id: variants[0].id,
         volume: variants[0].volume,
         color: variants[0].color,
       },
