@@ -30,10 +30,6 @@ export default function ShippingSection({ control }: ShippingSectionProps) {
           );
         }}
       />
-
-      <p className="p-5 border-2 border-neutral-200 text-neutral-700 font-sans text-sm font-light">
-        Enter your shipping address to view available shipping methods.
-      </p>
     </>
   );
 }

@@ -12,23 +12,34 @@ import Button from "../../../../components/Button/Button.component";
 
 import ShippingSection from "./components/ShippingSection/ShippingSection.component";
 import PaymentSection from "./components/PaymentSection/PaymentSection.component";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({
+  setSelectedShipping,
+}: {
+  setSelectedShipping: (shipping: "economy" | "home" | null) => void;
+}) {
   const {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const shipping = watch("shipping");
+
+  useEffect(() => {
+    setSelectedShipping(shipping);
+  }, [shipping, setSelectedShipping]);
 
   const onSubmit = (data: CheckoutFormData) => {
     console.log(data);
-    navigate("/checkout/success");
+    // navigate("/checkout/success");
   };
 
   return (
