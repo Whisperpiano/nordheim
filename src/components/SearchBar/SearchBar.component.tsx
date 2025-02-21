@@ -71,17 +71,24 @@ export default function SearchBar() {
     e.preventDefault();
     setSearchOpen(false);
     navigate(`/search?q=${query}`);
+    setQuery("");
   };
   return (
     <Drawer
       isOpen={isSearchOpen}
-      onOpenChange={() => setSearchOpen(!isSearchOpen)}
+      onOpenChange={() => {
+        if (isSearchOpen || query.length > 0) {
+          setQuery("");
+        }
+
+        setSearchOpen(!isSearchOpen);
+      }}
       placement="top"
       classNames={{
         backdrop: "bg-black/50 translate-y-[56px] z-30",
         base: "bg-neutral-50 max-h-none translate-y-[101px] z-40 rounded-none",
         closeButton:
-          "translate-y-1.5 cursor-pointer text-xl text-neutral-500 mr-3",
+          "translate-y-1.5 cursor-pointer text-lg md:text-xl text-neutral-500 mr-3",
         body: "px-0",
         wrapper: "translate-y-[56px] z-40 ",
       }}
@@ -89,7 +96,7 @@ export default function SearchBar() {
       <DrawerContent>
         {(onClose) => (
           <>
-            <DrawerHeader className="uppercase font-sans font-medium text-lg gap-3 ">
+            <DrawerHeader className="uppercase font-sans font-medium text-base md:text-lg gap-3 ">
               <form
                 className="w-full flex items-center gap-3"
                 onSubmit={(e) => handleSubmit(e)}
@@ -100,16 +107,16 @@ export default function SearchBar() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search for..."
-                  className="flex w-full placeholder:text-neutral-500 placeholder:font-condensed placeholder:uppercase placeholder:font-normal placeholder:text-lg outline-none me-10 bg-neutral-50"
+                  className="flex w-full placeholder:text-neutral-500 placeholder:font-condensed placeholder:uppercase placeholder:font-normal placeholder:text-base md:placeholder:text-lg outline-none me-10 bg-neutral-50"
                 />
               </form>
             </DrawerHeader>
 
             {query.length > 0 && (
-              <DrawerBody className="px-7 mt-6">
-                <section className="grid grid-cols-4 gap-10">
+              <DrawerBody className="px-7 mt-3 md:mt-6">
+                <section className="grid grid-cols-4 gap-3 lg:gap-10">
                   <div className="col-span-4 lg:col-span-1">
-                    <span className="font-condensed font-medium uppercase text-sm mb-3 tracking-widest transition-colors data-[open=true]:text-neutral-950 text-neutral-500">
+                    <span className="font-condensed font-medium uppercase text-xs md:text-sm mb-3 tracking-widest transition-colors data-[open=true]:text-neutral-950 text-neutral-500">
                       Top searches
                     </span>
                     <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
@@ -118,7 +125,7 @@ export default function SearchBar() {
                         <Link
                           key={search.key}
                           to={`/search?q=${search.label}`}
-                          className="font-sans font-medium lowercase text-sm text-neutral-500 hover:text-neutral-800 transition-colors duration-300 ml-2"
+                          className="font-sans font-medium lowercase text-xs md:text-sm text-neutral-500 hover:text-neutral-800 transition-colors duration-300 ml-2"
                           onClick={() => {
                             onClose();
                           }}
@@ -134,13 +141,13 @@ export default function SearchBar() {
                     </span>
                     <div className="w-full mt-3 mb-5 border-t border-neutral-300"></div>
                     {searchedProducts.length === 0 ? (
-                      <p className="text-neutral-500 font-sans font-normal text-sm">
+                      <p className="text-neutral-500 font-sans font-normal text-sm pb-4 lg:pb-0">
                         No results could be found. Please try again with a
                         different query.
                       </p>
                     ) : (
                       <>
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-1">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-1">
                           {searchedProducts.map((product) => (
                             <SearchProductCard
                               key={product.id}
@@ -155,7 +162,7 @@ export default function SearchBar() {
                             size="md"
                             font="primary"
                             shape="square"
-                            fontSize="sm"
+                            fontSize="md"
                             onClick={() => {
                               onClose();
                               navigate(`/search?q=${query}`);

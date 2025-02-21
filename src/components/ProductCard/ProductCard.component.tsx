@@ -47,7 +47,7 @@ export default function ProductCard({ product }: { product: FullProduct }) {
           </picture>
         </div>
 
-        <div className="p-4">
+        <div className="px-4 pb-8 pt-4">
           <h2 className="text-neutral-950 text-base font-semibold font-condensed">
             {product.title}
           </h2>
