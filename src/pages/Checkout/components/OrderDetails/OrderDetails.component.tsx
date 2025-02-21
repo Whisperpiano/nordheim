@@ -1,7 +1,8 @@
 import { RiCheckboxCircleLine } from "react-icons/ri";
 import { Link } from "react-router";
+import { Order } from "../../CheckoutSuccess.page";
 
-export default function OrderDetails() {
+export default function OrderDetails({ order }: { order: Order }) {
   return (
     <>
       <section className="flex flex-col gap-8 mt-8 min-h-[calc(100vh-320px)]">
@@ -10,7 +11,7 @@ export default function OrderDetails() {
             <div className="flex items-center gap-1.5 mb-12 mt-4">
               <RiCheckboxCircleLine size={26} className="text-green-700" />
               <h1 className="text-xl font-semibold text-neutral-800">
-                Thank you John!
+                Thank you {order?.shipping_address.first_name}!
               </h1>
             </div>
             <div className="flex flex-col gap-6">
@@ -39,20 +40,23 @@ export default function OrderDetails() {
                   <div className="flex-1 flex flex-col gap-5">
                     <div className="flex flex-col">
                       <h3 className="font-medium mb-1">Contact information</h3>
-                      <span>darnassusrules@gmail.com</span>
+                      <span>{order?.email}</span>
                     </div>
 
                     <div className="flex flex-col">
                       <h3 className="font-medium mb-1">Shipping address</h3>
-                      <span>John Doe</span>
-                      <span>1601 E 84th Ave #201</span>
-                      <span>Anchorage AL 35242</span>
-                      <span>United States</span>
+                      <span>
+                        {order?.shipping_address.first_name}{" "}
+                        {order?.shipping_address.last_name}
+                      </span>
+                      <span>{order?.shipping_address.address}</span>
+                      <span>{order?.shipping_address.postal_code}</span>
+                      <span>{order?.shipping_address.city}</span>
                     </div>
 
                     <div className="flex flex-col">
                       <h3 className="font-medium mb-1">Shipping method</h3>
-                      <span>DHL Economy Select Home Delivery</span>
+                      <span>{order?.shipping_method}</span>
                     </div>
                   </div>
 
@@ -65,16 +69,22 @@ export default function OrderDetails() {
                           alt="Mastercard"
                           className="w-6 h-6"
                         />
-                        <span>ending with 4444</span>
+                        <span>ending with {order?.payment_method}</span>
                       </div>
                     </div>
 
                     <div className="flex flex-col">
                       <h3 className="font-medium mb-1">Billing address</h3>
-                      <span>John Doe</span>
-                      <span>1601 E 84th Ave #201</span>
-                      <span>Anchorage AL 35242</span>
-                      <span>United States</span>
+                      <span>
+                        {order?.shipping_address.first_name}{" "}
+                        {order?.shipping_address.last_name}
+                      </span>
+                      <span>{order?.shipping_address.address}</span>
+                      <span>
+                        {order?.shipping_address.city},{" "}
+                        {order?.shipping_address.postal_code}
+                      </span>
+                      <span> {order?.shipping_address.country}</span>
                     </div>
                   </div>
                 </div>

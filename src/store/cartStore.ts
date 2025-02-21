@@ -9,6 +9,7 @@ export type CartItem = {
   category: "city" | "mountain";
   quantity: number;
   variant: {
+    id: string;
     volume: number;
     color: string;
   };
