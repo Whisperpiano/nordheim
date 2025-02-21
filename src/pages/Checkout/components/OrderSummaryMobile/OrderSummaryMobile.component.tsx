@@ -9,11 +9,13 @@ import { useCartStore } from "../../../../store/cartStore";
 export interface OrderSummaryMobileProps {
   summaryOpen: boolean;
   handleSummaryOpen: (keys: SharedSelection) => void;
+  selectedShipping: "economy" | "home" | null;
 }
 
 export default function OrderSummaryMobile({
   summaryOpen,
   handleSummaryOpen,
+  selectedShipping,
 }: OrderSummaryMobileProps) {
   const cart = useCartStore((state) => state.cart);
   return (
@@ -48,7 +50,7 @@ export default function OrderSummaryMobile({
             {cart.length > 0 &&
               cart.map((item) => <ProductSummary key={item.id} item={item} />)}
 
-            <SummaryDetails />
+            <SummaryDetails selectedShipping={selectedShipping} />
           </div>
         </AccordionItem>
       </Accordion>

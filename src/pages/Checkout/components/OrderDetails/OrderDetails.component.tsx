@@ -1,7 +1,7 @@
 import { RiCheckboxCircleLine } from "react-icons/ri";
 import { Link } from "react-router";
 
-export default function CheckoutSuccess() {
+export default function OrderDetails() {
   return (
     <>
       <section className="flex flex-col gap-8 mt-8 min-h-[calc(100vh-320px)]">

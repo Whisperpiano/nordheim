@@ -6,6 +6,7 @@ import FadingFallback from "./components/FadingFallback/FadingFallback.component
 import CategoryHandler from "./components/CategoryHandler/CategoryHandler.component.tsx";
 import City from "../pages/Products/City/City.page";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.component.tsx";
+import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess.page.tsx";
 
 const Home = lazy(() => import("../pages/Home/Home.page"));
 const Contact = lazy(() => import("../pages/Contact/Contact.page"));
@@ -18,13 +19,6 @@ const Register = lazy(() => import("../pages/Auth/Register/Register.page.tsx"));
 const Search = lazy(() => import("../pages/Search/Search.page.tsx"));
 const ErrorPage = lazy(() => import("../pages/Error/ErrorPage.page.tsx"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout.page.tsx"));
-const CheckoutForm = lazy(
-  () =>
-    import("../pages/Checkout/components/CheckoutForm/CheckoutForm.component")
-);
-const CheckoutSuccess = lazy(
-  () => import("../pages/Checkout/components/Success/Success.component.tsx")
-);
 
 export const router = createBrowserRouter([
   {
@@ -69,10 +63,15 @@ export const router = createBrowserRouter([
         <Checkout />
       </ProtectedRoute>
     ),
-    children: [
-      { index: true, element: <CheckoutForm /> },
-      { path: "success", element: <CheckoutSuccess /> },
-    ],
+  },
+
+  {
+    path: "checkout/success",
+    element: (
+      <ProtectedRoute>
+        <CheckoutSuccess />
+      </ProtectedRoute>
+    ),
   },
 
   {
