@@ -2,7 +2,7 @@ import { brandValues } from "../../../constants";
 
 export default function BrandValues() {
   return (
-    <section className="border-y border-neutral-300 py-10 mt-3">
+    <section className="border-y border-neutral-300 py-10 ">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 text-center max-w-[1440px] mx-auto">
         {brandValues.map(({ value, descripton, icon: Icon }, i) => (
           <div className="p-8" key={i}>

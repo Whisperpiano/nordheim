@@ -12,7 +12,7 @@ export default function ProductFooter() {
       <div className="flex flex-col gap-3">
         <RiTruckLine className="mx-auto text-neutral-950/75" size={20} />
         <span className="text-center font-condensed text-neutral-950/50 uppercase text-xs font-medium">
-          Free shipoping
+          Free shipping
         </span>
       </div>
       <div className="flex flex-col gap-3">

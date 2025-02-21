@@ -11,7 +11,7 @@ export default function Layout() {
     <>
       <HeroUIWrapper>
         <ScrollRestoration />
-        <div className="min-h-screen">
+        <div className="min-h-[calc(100vh-120px)] ">
           <Header />
           <main>
             <AnimatedOutlet />

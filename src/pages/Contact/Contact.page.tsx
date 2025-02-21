@@ -5,10 +5,10 @@ export default function Contact() {
   return (
     <>
       <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="border-t border-gray-300 mt-[100px] "
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className=" pt-[100px] "
       >
         <div className="max-w-[650px] mx-auto pt-26 px-4">
           <div className="text-center py-10">
