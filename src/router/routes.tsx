@@ -5,6 +5,7 @@ import Layout from "../layout/Layout.component.tsx";
 import FadingFallback from "./components/FadingFallback/FadingFallback.component.tsx";
 import CategoryHandler from "./components/CategoryHandler/CategoryHandler.component.tsx";
 import City from "../pages/Products/City/City.page";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.component.tsx";
 
 const Home = lazy(() => import("../pages/Home/Home.page"));
 const Contact = lazy(() => import("../pages/Contact/Contact.page"));
@@ -63,7 +64,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "checkout",
-    element: <Checkout />,
+    element: (
+      <ProtectedRoute>
+        <Checkout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <CheckoutForm /> },
       { path: "success", element: <CheckoutSuccess /> },
