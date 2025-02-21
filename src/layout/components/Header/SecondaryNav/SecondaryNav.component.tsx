@@ -24,7 +24,7 @@ export default function SecondaryNav() {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
-        className="flex items-center gap-0.5 sm:gap-3 list-none"
+        className="flex items-center gap-0.5  md:gap-3 list-none"
       >
         <li className="flex">
           <Button

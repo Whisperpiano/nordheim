@@ -18,7 +18,7 @@ export default function SearchProductCard({
   return (
     <Link
       to={`/products/${product.category}/${product.slug}`}
-      className="group"
+      className="group hover:bg-neutral-200/50 lg:hover:bg-transparent p-2 lg:p-0 rounded-md lg:rounded-none transition-colors duration-300"
       onClick={onClose}
     >
       <article className="flex lg:block">
