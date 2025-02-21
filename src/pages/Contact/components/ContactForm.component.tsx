@@ -30,6 +30,8 @@ export default function ContactForm() {
     console.log("Form Validation Success:", result.data);
 
     reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     toast.success("Message sent successfully!");
   };
 
@@ -118,8 +120,8 @@ export default function ContactForm() {
         errorMessage={errors.message?.message}
         {...register("message")}
         classNames={{
-          innerWrapper: "min-h-[500px]",
-          input: "min-h-[500px]",
+          innerWrapper: "min-h-[250px]  md:min-h-[450px]",
+          input: "min-h-[250px] md:min-h-[450px]",
           inputWrapper: "bg-neutral-50",
         }}
       />
