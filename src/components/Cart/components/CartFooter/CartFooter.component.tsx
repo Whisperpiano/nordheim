@@ -1,18 +1,21 @@
 import { DrawerFooter } from "@heroui/drawer";
 import { useNavigate } from "react-router";
-import { useModalStore } from "../../../../store/modalStore";
+
 import { RiCircleFill } from "react-icons/ri";
 
 import Button from "../../../Button/Button.component";
 import { useCartStore } from "../../../../store/cartStore";
+import { useState } from "react";
+
+import { Spinner } from "@heroui/spinner";
 
 export default function CartFooter() {
-  const setCartOpen = useModalStore((state) => state.setCartOpen);
+  const [isNavigating, setIsNavigating] = useState(false);
   const navigate = useNavigate();
   const totalPrice = useCartStore((state) => state.totalPrice);
 
   const handleChekout = () => {
-    setCartOpen(false);
+    setIsNavigating(true);
     navigate("/checkout");
   };
 
@@ -28,12 +31,19 @@ export default function CartFooter() {
         shape="square"
         fontSize="sm"
         onClick={handleChekout}
+        disabled={isNavigating}
       >
-        Checkout
-        <span className="mx-6">
-          <RiCircleFill size={5} />
-        </span>
-        {totalPrice} kr
+        {isNavigating && <Spinner size="sm" color="default" />}
+
+        {!isNavigating && (
+          <>
+            Checkout
+            <span className="mx-6">
+              <RiCircleFill size={5} />
+            </span>
+            {totalPrice} kr
+          </>
+        )}
       </Button>
     </DrawerFooter>
   );

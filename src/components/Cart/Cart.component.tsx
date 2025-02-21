@@ -12,9 +12,6 @@ export default function Cart() {
   const setCartOpen = useModalStore((state) => state.setCartOpen);
   const cart = useCartStore((state) => state.cart);
   const count = useCartStore((state) => state.count);
-  console.log(count);
-
-  // console.log(cart);
 
   return (
     <Drawer
