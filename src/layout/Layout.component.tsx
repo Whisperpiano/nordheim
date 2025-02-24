@@ -11,10 +11,11 @@ import { useAuthStore } from "../store/authStore";
 
 export default function Layout() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, [checkAuth, isLoggedIn]);
 
   return (
     <>
