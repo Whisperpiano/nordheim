@@ -7,6 +7,7 @@ import CategoryHandler from "./components/CategoryHandler/CategoryHandler.compon
 import City from "../pages/Products/City/City.page";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.component.tsx";
 import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess.page.tsx";
+import AuthGuard from "./components/AuthGuard/AuthGuard.component.tsx";
 
 const Home = lazy(() => import("../pages/Home/Home.page"));
 const Contact = lazy(() => import("../pages/Contact/Contact.page"));
@@ -19,6 +20,9 @@ const Register = lazy(() => import("../pages/Auth/Register/Register.page.tsx"));
 const Search = lazy(() => import("../pages/Search/Search.page.tsx"));
 const ErrorPage = lazy(() => import("../pages/Error/ErrorPage.page.tsx"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout.page.tsx"));
+const Profile = lazy(
+  () => import("../pages/Auth/Profile/Profile.component.tsx")
+);
 
 export const router = createBrowserRouter([
   {
@@ -47,8 +51,27 @@ export const router = createBrowserRouter([
     path: "account",
     element: <Layout />,
     children: [
-      { index: true, path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
+      {
+        index: true,
+        path: "login",
+        element: (
+          <AuthGuard>
+            <Login />
+          </AuthGuard>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <AuthGuard>
+            <Register />
+          </AuthGuard>
+        ),
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
     ],
   },
   {

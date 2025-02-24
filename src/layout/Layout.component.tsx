@@ -5,8 +5,17 @@ import AnimatedOutlet from "../router/components/AnimatedOutlet/AnimatedOutlet.c
 import Modals from "./components/Modals/Modals.component";
 import BrandValues from "./components/BrandValues/BrandValues.component";
 import { ScrollRestoration } from "react-router";
+import { useEffect } from "react";
+
+import { useAuthStore } from "../store/authStore";
 
 export default function Layout() {
+  const checkAuth = useAuthStore((state) => state.checkAuth);
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <>
       <HeroUIWrapper>
