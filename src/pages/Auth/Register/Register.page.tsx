@@ -36,10 +36,11 @@ export default function Register() {
 
   const { mutate: registerUserMutation } = useMutation({
     mutationFn: (data: RegisterFormData) => registerUser(data),
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsLoggedIn(true);
       navigate("/account/profile");
       toast.success("User created successfully! Please log in.");
+      console.log(data);
     },
     onError: (error) => {
       if (error.message.includes("rate limit")) {

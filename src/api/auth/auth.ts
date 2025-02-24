@@ -85,6 +85,7 @@ export async function loginUser(data: LoginFormData) {
     throw new Error(error.message);
   }
   const user = userData.user;
+  console.log(user);
 
   if (user) {
     const { data: userProfile, error: profileError } = await supabase
@@ -98,9 +99,17 @@ export async function loginUser(data: LoginFormData) {
       throw new Error(profileError.message);
     }
 
-    console.log(userProfile);
+    const { data: userOrders, error: ordersError } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("email", user.email);
 
-    return userProfile;
+    if (ordersError) {
+      toast.error("Error creating user profile.");
+      throw new Error(ordersError.message);
+    }
+
+    return { userProfile, userOrders };
   }
 }
 
