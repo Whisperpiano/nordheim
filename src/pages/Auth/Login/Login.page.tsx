@@ -35,8 +35,8 @@ export default function Login() {
   const { mutate: loginUserMutation } = useMutation({
     mutationFn: (data: LoginFormData) => loginUser(data),
     onSuccess: () => {
-      toast.success("Logged in successfully!");
       setIsLoggedIn(true);
+      toast.success("Logged in successfully!");
       navigate("/account/profile");
     },
     onError: (error) => {
