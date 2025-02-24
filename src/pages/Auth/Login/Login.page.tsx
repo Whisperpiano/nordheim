@@ -1,10 +1,93 @@
 import { Input } from "@heroui/input";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import Button from "../../../components/Button/Button.component";
 import buttonVariants from "../../../components/Button/Button.styles";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser, logoutUser } from "../../../api/auth/auth";
+import { toast } from "sonner";
+import { useAuthStore } from "../../../store/authStore";
+
+const loginFormSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters long")
+    .nonempty("Password is required"),
+});
+
+export type LoginFormData = z.infer<typeof loginFormSchema>;
 
 export default function Login() {
+  const navigate = useNavigate();
+  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<LoginFormData>({ resolver: zodResolver(loginFormSchema) });
+
+  const { mutate: loginUserMutation } = useMutation({
+    mutationFn: (data: LoginFormData) => loginUser(data),
+    onSuccess: () => {
+      toast.success("Logged in successfully!");
+      setIsLoggedIn(true);
+      navigate("/account/profile");
+    },
+    onError: (error) => {
+      if (error.message.includes("Invalid login credentials")) {
+        toast.error("Invalid email or password.");
+      } else {
+        toast.error("Error logging in.");
+      }
+    },
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    loginUserMutation(data);
+    reset();
+  };
+
+  const { mutate: logoutUserMutation } = useMutation({
+    mutationFn: () => logoutUser(),
+    onSuccess: () => {
+      toast.success("Logged out successfully!");
+    },
+    onError: () => {
+      toast.error("Error logging out.");
+    },
+  });
+
+  // const { mutate: getUserProfileMutation } = useMutation({
+  //   mutationFn: () => getUserProfile(),
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //   },
+  //   onError: () => {
+  //     toast.error("Error getting user profile.");
+  //   },
+  // });
+
+  // const { mutate: getSession } = useMutation({
+  //   mutationFn: () => getUserSession(),
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //   },
+  //   onError: () => {
+  //     toast.error("Error getting user profile.");
+  //   },
+  // });
+
+  const handleLogout = () => {
+    logoutUserMutation();
+    setIsLoggedIn(false);
+  };
+
   return (
     <section className="mt-[100px] grid grid-cols-1 md:grid-cols-12 items-center">
       <img
@@ -17,7 +100,16 @@ export default function Login() {
         animate={{ x: 0 }}
         className="max-w-[600px] w-full mx-auto md:max-w-full col-span-1 md:col-span-6 flex flex-col gap-6 px-4 md:px-10 xl:px-12 2xl:px-16 md:mt-0 mt-10 lg:order-2 order-1"
       >
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* <button type="button" onClick={getSession}>
+            get session
+          </button> */}
+          {/* <button type="button" onClick={getUserProfileMutation}>
+            reset
+          </button>  */}
+          <button type="button" onClick={handleLogout}>
+            logoutkurwa
+          </button>
           <h1 className="font-sans text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tighter mb-6">
             Log in
           </h1>
@@ -27,12 +119,18 @@ export default function Login() {
               type="email"
               size="md"
               variant="underlined"
+              isInvalid={Boolean(errors.email)}
+              errorMessage={errors.email?.message}
+              {...register("email")}
             />
             <Input
               label="Password"
               type="password"
               size="md"
               variant="underlined"
+              isInvalid={Boolean(errors.password)}
+              errorMessage={errors.password?.message}
+              {...register("password")}
             />
           </div>
           <div className="mt-8">
