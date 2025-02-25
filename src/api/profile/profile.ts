@@ -31,5 +31,5 @@ export async function getUserProfile() {
     throw new Error(ordersError.message);
   }
 
-  return { userProfile, userOrders };
+  return { userProfile, userOrders, userEmail };
 }
