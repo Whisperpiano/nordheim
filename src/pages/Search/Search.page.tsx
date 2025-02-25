@@ -47,14 +47,17 @@ export default function Search() {
   });
 
   const searchedProducts = useMemo(() => {
-    const allProducts = [...(cityProducts ?? []), ...(mountainProducts ?? [])];
-
     if (!query) return [];
 
-    if (!query.trim()) return allProducts;
+    const lowerQuery = query.toLowerCase().trim();
+
+    if (lowerQuery === "city") return cityProducts ?? [];
+    if (lowerQuery === "mountain") return mountainProducts ?? [];
+
+    const allProducts = [...(cityProducts ?? []), ...(mountainProducts ?? [])];
 
     return allProducts.filter((product) =>
-      product.title.toLowerCase().includes(query.toLowerCase())
+      product.title.toLowerCase().includes(lowerQuery)
     );
   }, [cityProducts, mountainProducts, query]);
 

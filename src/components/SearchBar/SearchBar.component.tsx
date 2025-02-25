@@ -56,14 +56,18 @@ export default function SearchBar() {
   });
 
   const searchedProducts = useMemo(() => {
+    if (!query) return [];
+
+    const lowerQuery = query.toLowerCase().trim();
+
+    if (lowerQuery.includes("city")) return cityProducts?.slice(0, 3) ?? [];
+    if (lowerQuery.includes("mountain"))
+      return mountainProducts?.slice(0, 3) ?? [];
+
     const allProducts = [...(cityProducts ?? []), ...(mountainProducts ?? [])];
 
-    if (!query.trim()) return allProducts;
-
     return allProducts
-      .filter((product) =>
-        product.title.toLowerCase().includes(query.toLowerCase())
-      )
+      .filter((product) => product.title.toLowerCase().includes(lowerQuery))
       .slice(0, 3);
   }, [cityProducts, mountainProducts, query]);
 
