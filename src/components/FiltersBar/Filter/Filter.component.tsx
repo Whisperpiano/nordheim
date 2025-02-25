@@ -10,11 +10,44 @@ import { Slider } from "@heroui/slider";
 import { useModalStore } from "../../../store/modalStore";
 import { useState } from "react";
 import { RiCircleFill } from "react-icons/ri";
+import { useQueryClient } from "@tanstack/react-query";
+import { FullProductsArray } from "../../../lib/schemas/productSchema";
+import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router";
 
 export default function Filter() {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const isFiltersOpen = useModalStore((state) => state.isFiltersOpen);
   const setFiltersOpen = useModalStore((state) => state.setFiltersOpen);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const newParams = new URLSearchParams(searchParams);
+
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    newParams.set("color", data.color);
+    setSearchParams(newParams);
+    reset();
+  };
+
+  const queryClient = useQueryClient();
+  const cachedProducts = queryClient.getQueryData([
+    "products",
+    "city",
+  ]) as FullProductsArray;
+
+  if (!cachedProducts) return null;
+
+  const uniqueColors = Array.from(
+    new Map(
+      cachedProducts?.flatMap((product) =>
+        product.variants.map((variant) => [variant.color, variant])
+      )
+    ).values()
+  );
 
   return (
     <Drawer
@@ -31,7 +64,7 @@ export default function Filter() {
     >
       <DrawerContent>
         {(onClose) => (
-          <>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <DrawerHeader className="uppercase font-sans font-medium flex items-center text-xl gap-3 border-b border-neutral-300">
               Filters
             </DrawerHeader>
@@ -51,46 +84,28 @@ export default function Filter() {
               >
                 <AccordionItem key="1" aria-label="Color" title="Color">
                   <div className="flex gap-2.5 items-center">
-                    <div>
-                      <input
-                        type="radio"
-                        name="color"
-                        value="grey"
-                        id="grey"
-                        className="hidden peer"
-                        defaultChecked
-                      />
-                      <label
-                        htmlFor="grey"
-                        className="p-3.5 border border-neutral-300 inline-flex rounded-full peer-checked:outline peer-checked:outline-neutral-800 peer-checked:outline-offset-2 outline-1 cursor-pointer bg-white"
-                      ></label>
-                    </div>
-                    <div>
-                      <input
-                        type="radio"
-                        name="color"
-                        value="orange"
-                        id="orange"
-                        className="hidden peer"
-                      />
-                      <label
-                        htmlFor="orange"
-                        className="p-3.5 border border-neutral-300 inline-flex rounded-full peer-checked:outline peer-checked:outline-neutral-800 peer-checked:outline-offset-2 outline-1 cursor-pointer bg-blue-900"
-                      ></label>
-                    </div>
-                    <div>
-                      <input
-                        type="radio"
-                        name="color"
-                        value="blue"
-                        id="blue"
-                        className="hidden peer"
-                      />
-                      <label
-                        htmlFor="blue"
-                        className="p-3.5 border border-neutral-300 inline-flex rounded-full peer-checked:outline peer-checked:outline-neutral-800 peer-checked:outline-offset-2 outline-1 cursor-pointer bg-yellow-950"
-                      ></label>
-                    </div>
+                    {uniqueColors?.map((color) => {
+                      return (
+                        <div key={color.id}>
+                          <input
+                            type="radio"
+                            value={color.color}
+                            id={color.color}
+                            className="hidden peer"
+                            {...register("color")}
+                          />
+                          <label
+                            htmlFor={color.color}
+                            className={
+                              "p-3.5 border border-neutral-300 inline-flex rounded-full peer-checked:outline peer-checked:outline-neutral-800 peer-checked:outline-offset-2 outline-1 cursor-pointer "
+                            }
+                            style={{
+                              backgroundColor: color.hex,
+                            }}
+                          ></label>
+                        </div>
+                      );
+                    })}
                   </div>
                 </AccordionItem>
 
@@ -189,7 +204,7 @@ export default function Filter() {
                 View results
               </button>
             </DrawerFooter>
-          </>
+          </form>
         )}
       </DrawerContent>
     </Drawer>

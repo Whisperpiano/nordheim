@@ -10,8 +10,9 @@ import { Spinner } from "@heroui/spinner";
 import Button from "../../../components/Button/Button.component";
 
 export default function City() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const sort = searchParams.get("sort");
+  const color = searchParams.get("color");
 
   const {
     data: products,
@@ -33,14 +34,26 @@ export default function City() {
   const sortedProducts = useMemo(() => {
     if (!products) return [];
 
-    return [...products].sort((a, b) => {
+    let filtered = [...products];
+
+    if (color) {
+      filtered = filtered.filter(
+        (product) => product.variants[0].color === color
+      );
+    }
+
+    return filtered.sort((a, b) => {
       if (sort === "title-asc") return a.title.localeCompare(b.title);
       if (sort === "title-desc") return b.title.localeCompare(a.title);
       if (sort === "price-asc") return a.price - b.price;
       if (sort === "price-desc") return b.price - a.price;
       return 0;
     });
-  }, [products, sort]);
+  }, [products, sort, color]);
+
+  const clearFilters = () => {
+    setSearchParams({});
+  };
 
   return (
     <>
@@ -54,6 +67,8 @@ export default function City() {
           <Spinner size="lg" color="default" />
         </div>
       )}
+
+      <button onClick={clearFilters}>Clear filters</button>
 
       {isError && (
         <div className="grid place-content-center py-52">
