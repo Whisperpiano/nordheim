@@ -1,23 +1,24 @@
 import {
-  RiArrowRightLine,
   RiFacebookCircleFill,
   RiInstagramLine,
   RiTiktokFill,
   RiTwitterXFill,
 } from "react-icons/ri";
 import Logo from "../../../components/Logo/Logo.component";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
     <>
       <footer className="bg-neutral-950 text-neutral-50 ">
-        <section className="px-4 max-w-7xl mx-auto">
-          <div className="py-20 grid grid-cols-2">
+        <section className="px-4 max-w-[1440px] mx-auto">
+          <div className="py-12 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
             <div>
-              <h2 className="font-semibold font-condensed text-base uppercase">
+              <p className="font-semibold font-condensed text-base uppercase">
                 Designed to explore, built to last
-              </h2>
-              <div className="flex flex-col gap-4 pr-28 mt-6">
+              </p>
+
+              <div className="flex flex-col gap-4 mt-5">
                 <p className="text-neutral-50/70 text-sm font-normal font-sans ">
                   At Nordheim, we blend timeless Scandinavian design with
                   unmatched functionality. Each backpack is a testament to our
@@ -43,64 +44,107 @@ export default function Footer() {
             </div>
             <div>
               <div>
-                <h2 className="font-semibold font-condensed text-base uppercase">
+                <p className="font-semibold font-condensed text-base uppercase">
                   Sign up for 15% off
-                </h2>
-                <p className="text-neutral-50/70 text-sm font-normal font-sans mt-4 ">
+                </p>
+                <p className="text-neutral-50/70 text-sm font-normal font-sans mt-5 ">
                   Get exclusive access to the latest drops, offers an styling
                   tips direct to your inbox.
                 </p>
-                <button className="font-medium font-condensed text-sm uppercase flex gap-1 mt-4">
-                  Sign up
-                  <RiArrowRightLine size={16} />
-                </button>
               </div>
-              <div className="mt-6">
-                <h2 className="font-semibold font-condensed text-base uppercase">
-                  Support
-                </h2>
-                <div className="grid grid-cols-3 mt-4">
-                  <div className="text-neutral-50/70 text-sm font-medium font-sans flex flex-col gap-2">
-                    <span>Help Center</span>
-                    <span>FAQs</span>
-                    <span>Track your Order</span>
-                  </div>
-                  <div className="text-neutral-50/70 text-sm font-medium font-sans flex flex-col gap-2 ">
-                    <span>Contact Us</span>
-                    <span>Returns</span>
-                    <span>Warranty</span>
-                  </div>
-                  <div className="text-neutral-50/70 text-sm font-medium font-sans flex flex-col gap-2 ">
-                    <span>Terms</span>
-                    <span>Privacy</span>
-                    <span>Cookies</span>
-                  </div>
-                </div>
+              <div className="mt-10 md:mt-6">
+                <p className="font-semibold font-condensed text-base uppercase">
+                  Quick links
+                </p>
+                <ul className="grid grid-cols-1 gap-2 md:grid-cols-3 mt-5 text-neutral-50/70 text-sm font-light font-sans">
+                  <li>
+                    <ul className="flex flex-col gap-2">
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Help Center
+                      </li>
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        FAQs
+                      </li>
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Track your Order
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <ul className="flex flex-col gap-2">
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Contact Us
+                      </li>
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Returns
+                      </li>
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Warranty
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <ul className="flex flex-col gap-2">
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Terms
+                      </li>
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Privacy
+                      </li>
+                      <li className="cursor-pointer hover:underline underline-offset-4 hover:text-neutral-50 transition-all duration-300">
+                        Cookies
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center relative pb-5">
+          <div className="flex flex-col md:flex-row items-center relative pb-5 border-t border-gray-500/50 pt-5">
             <Logo />
 
-            <span className="text-neutral-50/70 text-xs font-condensed font-normal uppercase absolute flex justify-center items-end inset-0 pb-5">
+            <span className="text-neutral-50/70 text-xs font-condensed font-normal uppercase absolute flex justify-center items-end inset-0 pb-5 pointer-events-none">
               &copy; 2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
             </span>
 
-            <div className="ml-auto flex gap-4">
-              <button>
+            <nav
+              aria-label="Social media links"
+              className="mb-10 md:mb-0 mt-6 md:mt-0 md:ml-auto flex gap-4"
+            >
+              <Link
+                to="https://www.facebook.com/nordheim/"
+                target="_blank"
+                className="hover:text-neutral-50/65 transition-colors duration-300"
+              >
+                <span className="sr-only">Facebook page</span>
                 <RiFacebookCircleFill size={22} />
-              </button>
-              <button>
+              </Link>
+              <Link
+                to="https://www.instagram.com/nordheim/"
+                target="_blank"
+                className="hover:text-neutral-50/65 transition-colors duration-300"
+              >
+                <span className="sr-only">Instagram page</span>
                 <RiInstagramLine size={22} />
-              </button>
-              <button>
+              </Link>
+              <Link
+                to="https://www.twitter.com/@nordheim"
+                target="_blank"
+                className="hover:text-neutral-50/65 transition-colors duration-300"
+              >
+                <span className="sr-only">Twitter page</span>
                 <RiTwitterXFill size={22} />
-              </button>
-              <button>
+              </Link>
+              <Link
+                to="https://www.tiktok.com/@nordheim"
+                target="_blank"
+                className="hover:text-neutral-50/65 transition-colors duration-300"
+              >
+                <span className="sr-only">TikTok page</span>
                 <RiTiktokFill size={22} />
-              </button>
-            </div>
+              </Link>
+            </nav>
           </div>
         </section>
       </footer>
