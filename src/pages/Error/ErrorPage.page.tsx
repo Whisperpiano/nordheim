@@ -1,12 +1,10 @@
 import { RiInformationLine } from "react-icons/ri";
-import Header from "../../layout/components/Header/Header.component";
 import { Link } from "react-router";
 
 export default function ErrorPage() {
   return (
     <>
-      <Header />
-      <section className="h-[calc(100vh-56px)] flex flex-col items-center justify-center">
+      <section className="h-[calc(100vh-56px)] flex flex-col items-center justify-center mt-[100px] px-4 text-center">
         <RiInformationLine size={64} className="text-neutral-600" />
         <h1 className="text-neutral-600 text-2xl font-medium uppercase font-condensed mt-6">
           404 - Page not found
