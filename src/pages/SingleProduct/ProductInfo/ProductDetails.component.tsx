@@ -1,9 +1,10 @@
+import { FullProduct } from "../../../lib/schemas/productSchema";
+
 import ProductAccordion from "./components/ProductAccordion/ProductAccordion.component";
 import ProductVariants from "./components/ProductVariants/ProductVariants.component";
 import ProductHeader from "./components/ProductHeader/ProductHeader.component";
 import ProductFooter from "./components/ProductFooter/ProductFooter.component";
 import ProductForm from "./components/ProductForm/ProductForm.component";
-import { FullProduct } from "../../../lib/schemas/productSchema";
 
 export default function ProductDetails({
   product,
