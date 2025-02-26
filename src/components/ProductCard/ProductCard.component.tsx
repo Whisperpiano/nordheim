@@ -3,13 +3,9 @@ import { Link } from "react-router";
 import { FullProduct } from "../../lib/schemas/productSchema";
 import RatingStars from "../RatingStars/RatingStars.component";
 import ImageProduct from "./components/ImageProduct/ImageProduct.component";
+import { getAverageRating } from "../../utils/averageRating";
 
 export default function ProductCard({ product }: { product: FullProduct }) {
-  const totalRating = product.reviews.length
-    ? product.reviews.reduce((acc, review) => acc + review.rating, 0) /
-      product.reviews.length
-    : 0;
-
   return (
     <Link
       to={`/products/${product.category}/${product.slug}`}
@@ -34,7 +30,10 @@ export default function ProductCard({ product }: { product: FullProduct }) {
           </span>
           <div className="flex gap-2 items-center mt-1">
             <div className="flex gap-0.5 items-center">
-              <RatingStars size={12} rating={totalRating} />
+              <RatingStars
+                size={12}
+                rating={getAverageRating(product.reviews)}
+              />
             </div>
             <span className="text-neutral-500 font-sans text-xs font-normal">
               {product.reviews.length} reviews

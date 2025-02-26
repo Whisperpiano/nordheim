@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { FullProduct } from "../../lib/schemas/productSchema";
 import RatingStars from "../RatingStars/RatingStars.component";
 
+//todo: tal vez esto va fuera de esta carpeta
+
 export default function SearchProductCard({
   product,
   onClose,
