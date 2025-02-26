@@ -1,7 +1,7 @@
 import { Input, Textarea } from "@heroui/input";
-import { contactFormCategories } from "../../../../../config/config";
 import { Select, SelectItem } from "@heroui/select";
 import { ContactFormFieldProps } from "./ContactFormField.types";
+import { contactFormCategories } from "../../../../../../config/config";
 
 export default function ContactFormField({
   as,
@@ -45,11 +45,12 @@ export default function ContactFormField({
         errorMessage={errors[registerName]?.message}
         {...register(registerName)}
         classNames={{
-          innerWrapper: "min-h-[250px]  md:min-h-[450px]",
+          innerWrapper: "min-h-[250px] md:min-h-[450px]",
           input: "min-h-[250px] md:min-h-[450px]",
-          inputWrapper:
+          inputWrapper: `bg-neutral-50 ${
             errors[registerName] &&
-            "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+            "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500"
+          }`,
         }}
       />
     );
