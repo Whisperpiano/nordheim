@@ -41,7 +41,7 @@ const ImageProduct = forwardRef<HTMLImageElement, ImageProductProps>(
         {/* Fallback JPG */}
         <img
           ref={ref}
-          src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${category}-images/${slug}-sm.jpg`}
+          src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${category}-images/${slug}.jpg`}
           alt={`Home image of ${slug}`}
           sizes="(min-width: 1024px) 640px, 360px"
           className={cn(className)}
