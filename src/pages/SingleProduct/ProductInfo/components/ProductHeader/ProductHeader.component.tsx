@@ -1,4 +1,5 @@
 import RatingStars from "../../../../../components/RatingStars/RatingStars.component";
+
 import { ReviewsArray } from "../../../../../lib/schemas/productSchema";
 
 export interface ProductHeaderProps {
