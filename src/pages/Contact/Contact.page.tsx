@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
-import ContactForm from "./components/ContactForm.component";
+import { contactVariants } from "./Contact.variants";
+import ContactForm from "./components/ContactForm/ContactForm.component";
 
 export default function Contact() {
   return (
     <>
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className=" pt-[100px] "
-      >
+      <motion.section className="pt-[100px]" {...contactVariants.contact}>
         <div className="max-w-[650px] mx-auto pt-26 px-4">
           <div className="text-center py-10">
             <h1 className="text-neutral-950 font-condensed text-2xl font-semibold uppercase ">
