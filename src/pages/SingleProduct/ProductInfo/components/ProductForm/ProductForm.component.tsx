@@ -1,10 +1,11 @@
-import { RiAddLine, RiSubtractLine } from "react-icons/ri";
 import Button from "../../../../../components/Button/Button.component";
 import { useState } from "react";
-import { VariantsArray } from "../../../../../lib/schemas/productSchema";
 import clsx from "clsx";
 import { useModalStore } from "../../../../../store/modalStore";
 import { useCartStore } from "../../../../../store/cartStore";
+import { ProductFormProps } from "./ProductForm.types";
+import { getStockClass, getStockText } from "./ProductForm.utils";
+import QuantityCounter from "./components/QuantityCounter.component";
 
 export default function ProductForm({
   variants,
@@ -12,17 +13,10 @@ export default function ProductForm({
   slug,
   price,
   category,
-}: {
-  variants: VariantsArray;
-  title: string;
-  slug: string;
-  price: number;
-  category: "city" | "mountain";
-}) {
+}: ProductFormProps) {
   const [quantity, setQuantity] = useState(1);
 
   const setCartOpen = useModalStore((state) => state.setCartOpen);
-
   const addItemToCart = useCartStore((state) => state.addItem);
 
   const handleDecrement = () => {
@@ -31,25 +25,8 @@ export default function ProductForm({
   };
 
   const handleIncrement = () => {
-    if (quantity === variants[0].stock) return;
     setQuantity(quantity + 1);
   };
-
-  const stockClass = clsx(
-    "flex w-2.5 h-2.5 rounded-full me-1.5 shrink-0",
-    variants[0].stock > 10
-      ? "bg-green-500"
-      : variants[0].stock > 0
-      ? "bg-amber-500"
-      : "bg-red-500"
-  );
-
-  const stockText =
-    variants[0].stock > 10
-      ? "In stock"
-      : variants[0].stock > 0
-      ? "Few left"
-      : "Out of stock";
 
   const handleAddToCart = () => {
     setCartOpen(true);
@@ -71,38 +48,12 @@ export default function ProductForm({
 
   return (
     <>
-      <div className="mt-4">
-        <div>
-          <span className="text-xs font-sans">
-            <strong>Quantity:</strong>
-          </span>
-        </div>
-        <div className="border border-neutral-300 inline-flex mt-2">
-          <button
-            type="button"
-            className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
-            onClick={handleDecrement}
-            disabled={variants[0].stock <= 0}
-          >
-            <RiSubtractLine />
-          </button>
-          <span
-            className={`px-3.5 py-3 text-sm font-normal ${
-              variants[0].stock <= 0 ? "text-neutral-300" : "text-neutral-950"
-            }`}
-          >
-            {quantity}
-          </span>
-          <button
-            type="button"
-            className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
-            onClick={handleIncrement}
-            disabled={variants[0].stock <= 0}
-          >
-            <RiAddLine />
-          </button>
-        </div>
-      </div>
+      <QuantityCounter
+        quantity={quantity}
+        stock={variants[0].stock}
+        handleDecrement={handleDecrement}
+        handleIncrement={handleIncrement}
+      />
 
       <div className="mt-8 pb-2">
         <Button
@@ -123,8 +74,13 @@ export default function ProductForm({
             Buy now pay later with <strong>Klarna</strong>
           </span>
           <span className="flex items-center text-xs font-medium text-neutral-950 me-1">
-            <span className={stockClass}></span>
-            {stockText}
+            <span
+              className={clsx(
+                "flex w-2.5 h-2.5 rounded-full me-1.5 shrink-0",
+                getStockClass(variants[0].stock)
+              )}
+            ></span>
+            {getStockText(variants[0].stock)}
           </span>
         </div>
       </div>

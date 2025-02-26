@@ -1,27 +1,21 @@
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { RiCheckLine } from "react-icons/ri";
+import { ProductAccordionProps } from "./ProductAccordion.types";
+import { accordionStyles } from "./ProductAccordion.styles";
+import { formatWeight } from "./ProductAccordion.utils";
 
-interface ProductAccordionProps {
-  description: string;
-  features: string[];
-}
 export default function ProductAccordion({
   description,
   features,
+  variants,
 }: ProductAccordionProps) {
+  const { volume, weight, dimensions } = variants[0];
+
   return (
     <Accordion
       selectionMode="single"
       defaultSelectedKeys={["1"]}
-      itemClasses={{
-        base: "first:border-t border-gray-300 last:border-b",
-        title:
-          "font-condensed font-medium uppercase text-sm mb-3 tracking-widest transition-colors data-[open=true]:text-neutral-950 text-neutral-500",
-        indicator:
-          "transition-colors data-[open=true]:text-neutral-950 text-neutral-500",
-        content: "text-neutral-950 font-sans text-sm font-light pt-0 pb-6",
-        trigger: "cursor-pointer",
-      }}
+      itemClasses={accordionStyles}
       className="px-0 mt-8"
     >
       <AccordionItem key="1" aria-label="Description" title="Description">
@@ -42,15 +36,15 @@ export default function ProductAccordion({
         <ul className="flex flex-col gap-2">
           <li>
             <strong className="font-medium">Volume: </strong>
-            <span>20 L</span>
+            <span>{volume}L</span>
           </li>
           <li>
             <strong className="font-medium">Dimensions: </strong>
-            <span>45 x 29 x 14.5 CM (H x W x D)</span>
+            <span>{dimensions} (H x W x D)</span>
           </li>
           <li>
             <strong className="font-medium">Weight: </strong>
-            <span>0.891 KG</span>
+            <span>{formatWeight(weight)} KG</span>
           </li>
         </ul>
       </AccordionItem>
