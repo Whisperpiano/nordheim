@@ -1,40 +1,13 @@
 import { motion } from "framer-motion";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getProductsByCategory } from "../../api/products/products";
+import { usePrefetchGlobalData } from "../../hooks/data/usePrefetchGlobalData";
 
 import Logo from "../../components/Logo/Logo.component";
 import CategoryCard from "./components/CategoryCard/CategoryCard.component";
+
 import { homeVariants } from "./Home.variants";
-import { getBannerImage } from "../../api/images/images";
 
 export default function Home() {
-  const { isError: isCityError } = useSuspenseQuery({
-    queryKey: ["products", "city"],
-    queryFn: () => getProductsByCategory("city"),
-    staleTime: Infinity,
-  });
-
-  const { isError: isMountainError } = useSuspenseQuery({
-    queryKey: ["products", "mountain"],
-    queryFn: () => getProductsByCategory("mountain"),
-    staleTime: Infinity,
-  });
-
-  useSuspenseQuery({
-    queryKey: ["banner", "city"],
-    queryFn: () => getBannerImage("city"),
-    staleTime: Infinity,
-  });
-
-  useSuspenseQuery({
-    queryKey: ["banner", "mountain"],
-    queryFn: () => getBannerImage("mountain"),
-    staleTime: Infinity,
-  });
-
-  if (isCityError || isMountainError) {
-    return <div>Error</div>;
-  }
+  usePrefetchGlobalData();
 
   return (
     <>
@@ -58,7 +31,7 @@ export default function Home() {
         className="absolute inset-0 z-10 flex justify-center items-end m-5 text-neutral-50/50 text-xs sm:text-sm uppercase font-condensed"
         {...homeVariants.footer}
       >
-        © 2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
+        © {new Date().getFullYear()} - NORDHEIM TEAM. ALL RIGHTS RESERVED
       </motion.footer>
     </>
   );

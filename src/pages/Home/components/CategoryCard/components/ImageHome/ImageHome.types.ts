@@ -1,6 +1,5 @@
 export interface ImageHomeProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {
-  name: string;
+  name: "city" | "mountain";
   format: "avif" | "webp" | "both";
-  folder: string;
 }

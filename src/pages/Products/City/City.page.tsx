@@ -50,7 +50,7 @@ export default function City() {
       </motion.div>
 
       {!products && (
-        <div className="grid place-content-center py-52">
+        <div className="flex justify-center min-h-[calc(100dvh-454px)] lg:min-h-[calc(100dvh-704px)]">
           <Spinner size="lg" color="default" />
         </div>
       )}
