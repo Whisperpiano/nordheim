@@ -1,7 +1,7 @@
 import { useContactForm } from "../../../../hooks/form/useContactForm";
 
 import Button from "../../../../components/Button/Button.component";
-import ContactFormField from "./ContactFormField/ContactFormField.component";
+import ContactFormField from "./components/ContactFormField/ContactFormField.component";
 
 export default function ContactForm() {
   const { register, handleSubmit, errors } = useContactForm();

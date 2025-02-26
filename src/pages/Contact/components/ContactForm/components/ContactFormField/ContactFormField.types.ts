@@ -1,5 +1,5 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { ContactFormData } from "../../../../../lib/schemas/contactSchema";
+import { ContactFormData } from "../../../../../../lib/schemas/contactSchema";
 
 export interface ContactFormFieldProps {
   as: "input" | "textarea" | "select";
