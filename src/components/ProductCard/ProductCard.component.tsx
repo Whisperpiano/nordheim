@@ -1,8 +1,8 @@
 import { Link } from "react-router";
-import { motion } from "framer-motion";
 
 import { FullProduct } from "../../lib/schemas/productSchema";
 import RatingStars from "../RatingStars/RatingStars.component";
+import ImageProduct from "./components/ImageProduct/ImageProduct.component";
 
 export default function ProductCard({ product }: { product: FullProduct }) {
   const totalRating = product.reviews.length
@@ -17,33 +17,12 @@ export default function ProductCard({ product }: { product: FullProduct }) {
     >
       <article>
         <div className="overflow-hidden">
-          <picture>
-            <source
-              srcSet={`
-                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xl.webp 1458w,
-                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-lg.webp 1024w,
-                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-md.webp 640w,
-                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-sm.webp 360w,
-                  https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xs.webp 180w,
-                  `}
-              sizes="
-                (max-width: 480px) 180px, 
-                (max-width: 768px) 360px, 
-                (max-width: 1024px) 640px, 
-                1458px"
-              type="image/webp"
-            />
-            <motion.img
-              src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}.jpg`}
-              alt="City"
-              className="object-cover aspect-[4/5] w-full group-hover:scale-105 transition-transform duration-700"
-              style={{
-                backgroundImage: `https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xs.webp`,
-              }}
-              loading="lazy"
-              layoutId={product.slug}
-            />
-          </picture>
+          <ImageProduct
+            category={product.category}
+            slug={product.slug}
+            format="both"
+            className="object-cover aspect-[4/5] w-full group-hover:scale-105 transition-transform duration-700"
+          />
         </div>
 
         <div className="px-4 pb-8 pt-4">
