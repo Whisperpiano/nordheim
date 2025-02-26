@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { useSingleProduct } from "../../hooks/data/useSingleProduct";
 import { useScrollToReviews } from "../../hooks/scroll/useScrollToReviews";
+import { singleProductVariants } from "./SingleProduct.variants";
 
 import Comments from "./Comments/Comments.component";
 import ProductDetails from "./ProductInfo/ProductDetails.component";
 import ErrorPage from "../Error/ErrorPage.page";
 import ProductPicture from "./ProductPicture/ProductPicture.component";
 import Loader from "../../components/Loader/Loader.component";
-import { singleProductVariants } from "./SingleProduct.variants";
 
 export default function SingleProduct() {
   const { reviewsRef, scrollToReviews } = useScrollToReviews();

@@ -1,11 +1,14 @@
-import clsx from "clsx";
 import { VariantsArray } from "../../../../../lib/schemas/productSchema";
+
+import clsx from "clsx";
 
 export default function ProductVariants({
   variants,
 }: {
   variants: VariantsArray;
 }) {
+  const { volume, color } = variants[0];
+
   return (
     <div className="border-t border-gray-300 mt-4">
       <div className="mt-6">
@@ -13,7 +16,7 @@ export default function ProductVariants({
           <div>
             <legend className="text-xs font-sans">
               <strong>Size: </strong>
-              {variants[0].volume}L
+              {volume}L
             </legend>
           </div>
           <div className="flex gap-2 items-center mt-2">
@@ -44,7 +47,7 @@ export default function ProductVariants({
           <div>
             <legend className="text-xs font-sans">
               <strong>Color: </strong>
-              {variants[0].color}
+              {color}
             </legend>
           </div>
           <div className="flex gap-2.5 items-center mt-2">

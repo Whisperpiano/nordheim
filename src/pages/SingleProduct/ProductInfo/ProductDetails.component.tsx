@@ -1,4 +1,4 @@
-import { FullProduct } from "../../../lib/schemas/productSchema";
+import { ProductDetailsProps } from "./ProductDetails.types";
 
 import ProductAccordion from "./components/ProductAccordion/ProductAccordion.component";
 import ProductVariants from "./components/ProductVariants/ProductVariants.component";
@@ -9,10 +9,7 @@ import ProductForm from "./components/ProductForm/ProductForm.component";
 export default function ProductDetails({
   product,
   scrollToReviews,
-}: {
-  product: FullProduct;
-  scrollToReviews: () => void;
-}) {
+}: ProductDetailsProps) {
   const {
     title,
     price,
@@ -41,7 +38,13 @@ export default function ProductDetails({
         price={price}
         category={category}
       />
-      <ProductAccordion description={description} features={features} />
+
+      <ProductAccordion
+        description={description}
+        features={features}
+        variants={variants}
+      />
+
       <ProductFooter />
     </section>
   );
