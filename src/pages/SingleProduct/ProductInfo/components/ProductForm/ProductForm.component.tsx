@@ -1,11 +1,11 @@
-import Button from "../../../../../components/Button/Button.component";
-import { useState } from "react";
-import clsx from "clsx";
-import { useModalStore } from "../../../../../store/modalStore";
-import { useCartStore } from "../../../../../store/cartStore";
-import { ProductFormProps } from "./ProductForm.types";
+import { useProductForm } from "../../../../../hooks/form/useProductForm";
 import { getStockClass, getStockText } from "./ProductForm.utils";
+import { ProductFormProps } from "./ProductForm.types";
+
+import Button from "../../../../../components/Button/Button.component";
 import QuantityCounter from "./components/QuantityCounter.component";
+
+import clsx from "clsx";
 
 export default function ProductForm({
   variants,
@@ -14,43 +14,16 @@ export default function ProductForm({
   price,
   category,
 }: ProductFormProps) {
-  const [quantity, setQuantity] = useState(1);
+  const { quantity, handleDecrement, handleIncrement, handleAddToCart } =
+    useProductForm({ variants, title, slug, price, category });
 
-  const setCartOpen = useModalStore((state) => state.setCartOpen);
-  const addItemToCart = useCartStore((state) => state.addItem);
-
-  const handleDecrement = () => {
-    if (quantity <= 1) return;
-    setQuantity(quantity - 1);
-  };
-
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const handleAddToCart = () => {
-    setCartOpen(true);
-    addItemToCart({
-      id: variants[0].product_id,
-      title,
-      slug,
-      price,
-      category,
-      quantity,
-      variant: {
-        id: variants[0].id,
-        volume: variants[0].volume,
-        color: variants[0].color,
-      },
-    });
-    setQuantity(1);
-  };
+  const stock = variants[0].stock;
 
   return (
     <>
       <QuantityCounter
         quantity={quantity}
-        stock={variants[0].stock}
+        stock={stock}
         handleDecrement={handleDecrement}
         handleIncrement={handleIncrement}
       />
@@ -63,7 +36,7 @@ export default function ProductForm({
           shape="square"
           fontSize="sm"
           className="w-full"
-          disabled={variants[0].stock <= 0}
+          disabled={stock <= 0}
           onClick={handleAddToCart}
         >
           Add to cart
@@ -77,10 +50,10 @@ export default function ProductForm({
             <span
               className={clsx(
                 "flex w-2.5 h-2.5 rounded-full me-1.5 shrink-0",
-                getStockClass(variants[0].stock)
+                getStockClass(stock)
               )}
             ></span>
-            {getStockText(variants[0].stock)}
+            {getStockText(stock)}
           </span>
         </div>
       </div>
