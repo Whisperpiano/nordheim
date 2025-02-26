@@ -1,5 +1,6 @@
-import { categories } from "../../../../constants";
+import { categories } from "../../../../config/config";
 import { BannerProps } from "./Banner.types";
+import ImageBanner from "./components/ImageBanner/ImageBanner.component";
 
 export default function Banner({ category }: BannerProps) {
   return (
@@ -12,29 +13,13 @@ export default function Banner({ category }: BannerProps) {
           {categories[category].description}
         </p>
       </div>
+
       <div className="absolute inset-0 z-[5] bg-black/55 backdrop-blur-none"></div>
 
-      <picture className="h-full w-full">
-        {/* WEBP */}
-        <source
-          srcSet={`
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-xl.webp 2560w,
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.webp 1920w,
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-md.webp 1200w,
-              https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-sm.webp 600w,
-            `}
-          sizes="100vw"
-          type="image/webp"
-        />
-
-        {/* Fallback */}
-        <img
-          src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/banner-images/${category}-banner-lg.webp`}
-          alt={`Imagen de ${category}`}
-          className="absolute w-full h-full object-cover z-1"
-          loading="eager"
-        />
-      </picture>
+      <ImageBanner
+        category={category}
+        className="absolute w-full h-full object-cover z-1"
+      />
     </section>
   );
 }

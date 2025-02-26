@@ -1,4 +1,4 @@
-export const getBannerImage = async (category: string) => {
+export const getBannerImage = async (category: "city" | "mountain") => {
   const screenWidth = window.innerWidth;
   let imageUrl = "";
   if (screenWidth >= 2560) {
