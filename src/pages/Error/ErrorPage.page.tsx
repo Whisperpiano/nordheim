@@ -1,5 +1,5 @@
-import { RiInformationLine } from "react-icons/ri";
 import { Link } from "react-router";
+import { RiInformationLine } from "react-icons/ri";
 
 export default function ErrorPage() {
   return (
