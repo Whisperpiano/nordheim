@@ -1,13 +1,14 @@
 import { useParams } from "react-router";
 import Comments from "./Comments/Comments.component";
 import ProductDetails from "./ProductInfo/ProductDetails.component";
-import ProductPicture from "./ProductPicture/ProductPicture.component";
+
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getProductBySlug } from "../../api/products/products";
 import ErrorPage from "../Error/ErrorPage.page";
 import { FullProduct } from "../../lib/schemas/productSchema";
+import ProductPicture from "./ProductPicture/ProductPicture.component";
 
 export default function SingleProduct() {
   const { slug, category = "city" } = useParams<{
