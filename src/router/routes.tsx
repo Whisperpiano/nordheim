@@ -3,15 +3,25 @@ import { createBrowserRouter } from "react-router";
 
 import Layout from "../layout/Layout.component.tsx";
 import FadingFallback from "./components/FadingFallback/FadingFallback.component.tsx";
-import CategoryHandler from "./components/CategoryHandler/CategoryHandler.component.tsx";
-import City from "../pages/Products/City/City.page";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.component.tsx";
-import CheckoutSuccess from "../pages/Checkout/CheckoutSuccess.page.tsx";
-import AuthGuard from "./components/AuthGuard/AuthGuard.component.tsx";
 
+// Lazy loading for pages
 const Home = lazy(() => import("../pages/Home/Home.page"));
-const Contact = lazy(() => import("../pages/Contact/Contact.page"));
+const City = lazy(() => import("../pages/Products/City/City.page"));
+const CategoryHandler = lazy(
+  () => import("./components/CategoryHandler/CategoryHandler.component.tsx")
+);
+const CheckoutSuccess = lazy(
+  () => import("../pages/Checkout/CheckoutSuccess.page.tsx")
+);
 
+const ProtectedRoute = lazy(
+  () => import("./components/ProtectedRoute/ProtectedRoute.component.tsx")
+);
+const AuthGuard = lazy(
+  () => import("./components/AuthGuard/AuthGuard.component.tsx")
+);
+
+const Contact = lazy(() => import("../pages/Contact/Contact.page"));
 const SingleProduct = lazy(
   () => import("../pages/SingleProduct/SingleProduct.page.tsx")
 );
@@ -24,6 +34,7 @@ const Profile = lazy(
   () => import("../pages/Auth/Profile/Profile.component.tsx")
 );
 
+// Routes
 export const router = createBrowserRouter([
   {
     path: "/",
