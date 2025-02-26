@@ -1,12 +1,6 @@
 import { forwardRef, useEffect } from "react";
 import { cn } from "../../../../utils/cn";
-
-export interface ImageProductProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {
-  category: "city" | "mountain";
-  format?: "avif" | "webp" | "both";
-  slug: string;
-}
+import { ImageProductProps } from "./ImageProduct.types";
 
 const ImageProduct = forwardRef<HTMLImageElement, ImageProductProps>(
   ({ category, slug, className, format = "both", ...props }, ref) => {

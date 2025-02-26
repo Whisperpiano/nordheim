@@ -1,12 +1,5 @@
-import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import Button from "../../../../components/Button/Button.component";
-import { FullProductsArray } from "../../../../lib/schemas/productSchema";
-
-interface ProductsErrorProps {
-  refetch: (
-    options?: RefetchOptions
-  ) => Promise<QueryObserverResult<FullProductsArray | null, Error>>;
-}
+import { ProductsErrorProps } from "./ProductError.types";
 
 export default function ProductsError({ refetch }: ProductsErrorProps) {
   return (
