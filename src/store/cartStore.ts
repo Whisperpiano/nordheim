@@ -31,6 +31,7 @@ export const useCartStore = create<CartStore>()(
       cart: [],
       count: 0,
       totalPrice: 0,
+
       addItem: (item: CartItem) =>
         set((state) => {
           const existingItem = state.cart.find(
@@ -53,6 +54,7 @@ export const useCartStore = create<CartStore>()(
             cart: [...state.cart, item],
           };
         }),
+
       removeItem: (id: string) =>
         set((state) => {
           const existingItem = state.cart.find(
@@ -68,6 +70,7 @@ export const useCartStore = create<CartStore>()(
           }
           return state;
         }),
+
       incrementItem: (id: string) =>
         set((state) => {
           const existingItem = state.cart.find(
@@ -86,6 +89,7 @@ export const useCartStore = create<CartStore>()(
           }
           return state;
         }),
+
       decrementItem: (id: string) =>
         set((state) => {
           const existingItem = state.cart.find(
@@ -108,6 +112,7 @@ export const useCartStore = create<CartStore>()(
                 : state.cart.filter((cartItem) => cartItem.id !== id),
           };
         }),
+        
       reset: () => set({ cart: [], count: 0, totalPrice: 0 }),
     }),
     {

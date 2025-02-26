@@ -36,12 +36,11 @@ export default function ProductCard({ product }: { product: FullProduct }) {
             <motion.img
               src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}.jpg`}
               alt="City"
-              className="object-cover aspect-[4/5] w-full group-hover:scale-105 transition-transform duration-700 blur-xl"
+              className="object-cover aspect-[4/5] w-full group-hover:scale-105 transition-transform duration-700"
               style={{
                 backgroundImage: `https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${product.category}-images//${product.slug}-xs.webp`,
               }}
               loading="lazy"
-              onLoad={(e) => e.currentTarget.classList.remove("blur-xl")}
               layoutId={product.slug}
             />
           </picture>

@@ -4,7 +4,7 @@ import { CategoryCardProps } from "./CategoryCard.types";
 import { categoryCardVariants } from "./CategoryCard.variants";
 
 import HomeButton from "../HomeButton/HomeButton.component";
-import ImageHome from "../../../../components/Image/ImageHome/ImageHome.component";
+import ImageHome from "./components/ImageHome/ImageHome.component";
 
 export default function CategoryCard({ category }: CategoryCardProps) {
   return (
@@ -25,7 +25,6 @@ export default function CategoryCard({ category }: CategoryCardProps) {
         <ImageHome
           name={category}
           format="both"
-          folder="home-images"
           className="h-full w-full object-cover brightness-75 saturate-[.40] contrast-[1.1] group-hover:saturate-[1.1] group-hover:brightness-[.8] transition-all duration-300 ease-in"
         />
       </Link>
