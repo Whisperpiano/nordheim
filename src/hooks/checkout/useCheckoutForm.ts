@@ -46,6 +46,8 @@ export function useCheckoutForm({
       variant_id: product.variant.id,
     }));
 
+    console.log(data);
+
     createOrder({ data: orderData, products: orderProducts });
   };
 

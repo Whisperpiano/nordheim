@@ -26,10 +26,7 @@ export default function OrderFooter({
         </div>
         <div className="text-base font-medium flex justify-between items-center border-t-1 border-neutral-300 pt-4">
           <span>Total</span>
-          <span className="font-semibold">
-            {" "}
-            kr {formatNumber(shippingMethodPrice[shippingMethod] + totalPrice)}
-          </span>
+          <span className="font-semibold"> kr {formatNumber(totalPrice)}</span>
         </div>
       </div>
     </div>

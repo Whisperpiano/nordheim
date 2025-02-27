@@ -4,9 +4,9 @@ import { z } from "zod";
 import {
   OrderData,
   orderDataSchema,
+  orderItemSchema,
   OrderItem,
 } from "../../lib/schemas/ordersSchema";
-import { orderItemSchema } from "../../lib/schemas/profileSchema";
 
 export async function createOrder({
   data,
