@@ -25,8 +25,8 @@ export default function CheckoutForm({
   setSelectedShipping,
   selectedShipping,
 }: {
-  setSelectedShipping: (shipping: "economy" | "home" | null) => void;
-  selectedShipping: "economy" | "home" | null;
+  setSelectedShipping: (shipping: "economy" | "home") => void;
+  selectedShipping: "economy" | "home";
 }) {
   const {
     register,
