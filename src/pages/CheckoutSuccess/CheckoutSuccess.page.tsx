@@ -1,84 +1,22 @@
-import LogoHeader from "../../layout/components/Header/LogoHeader/LogoHeader.component";
-
-// import { SharedSelection } from "@heroui/system";
-// import { useState } from "react";
-
 import OrderDetails from "./components/OrderDetails/OrderDetails.component";
-import { useNavigate, useSearchParams } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getOrderById } from "../../api/orders/orders";
 
 import { formatNumber } from "../../utils/formatNumber";
 import { useEffect } from "react";
 import { useCartStore } from "../../store/cartStore";
+import Logo from "../../components/Logo/Logo.component";
+import { UserOrder } from "../../lib/schemas/profileSchema";
 
-export type Order = {
-  id: string;
-  created_at: string;
-  updated_at: string | null;
-  email: string;
-  status: "pending" | "accepted" | "shipped" | "delivered" | "canceled";
-  total_items: number;
-  total_price: number;
-  payment_method: "klarna" | "googlepay" | "card";
-  shipping_method: "home" | "economy";
-  shipping_address: ShippingAddress;
-  order_items: OrderItem[];
-};
-
-export type OrderItem = {
-  id: string;
-  order_id: string;
-  product_id: string;
-  products: Product;
-  variant_id: string;
-  variants: Variant;
-  quantity: number;
-};
-
-export type Product = {
-  id: string;
-  slug: string;
-  price: number;
-  category: "city" | "mountain";
-  title: string;
-};
-
-export type Variant = {
-  id: string;
-  hex: string;
-  color: string;
-  volume: number;
-  stock: number;
-};
-
-export type ShippingAddress = {
-  first_name: string;
-  last_name: string;
-  phone: string;
-  address: string;
-  city: string;
-  postal_code: string;
-  country: string;
-  company?: string;
-};
+// http://localhost:5174/checkout/success?orderId=5ec37020-4b5e-4cd4-af51-ad7cd1afbd83
 
 export default function CheckoutSuccess() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const orderId = searchParams.get("orderId");
 
-  // const [summaryOpen, setSummaryOpen] = useState(false);
-
-  // function handleSummaryOpen(keys: SharedSelection) {
-  //   if (keys instanceof Set) {
-  //     setSummaryOpen(keys.size > 0);
-  //   } else {
-  //     setSummaryOpen(false);
-  //   }
-  // }
-
-  const { data: order } = useQuery<Order>({
+  const { data: order } = useQuery<UserOrder>({
     queryKey: ["orders", orderId],
     queryFn: () => getOrderById(orderId),
     enabled: !!orderId,
@@ -89,6 +27,7 @@ export default function CheckoutSuccess() {
     if (!orderId) {
       navigate("/");
     } else {
+      window.scrollTo(0, 0);
       resetCart();
     }
   }, [resetCart, navigate, orderId]);
@@ -97,18 +36,29 @@ export default function CheckoutSuccess() {
 
   return (
     <>
-      <section className="grid lg:grid-cols-[55%_45%] lg:min-h-screen">
-        <div className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
+      <section className="grid lg:grid-cols-[55%_45%] min-h-screen">
+        {/* Details section */}
+        <article className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
           <div className="max-w-[660px] w-full ">
-            <LogoHeader />
+            {/* Header */}
+            <h1>
+              <Link to="/">
+                <span className="sr-only">Nordheim</span>
+                <Logo theme="dark" />
+              </Link>
+            </h1>
+
+            {/* Details*/}
             <OrderDetails order={order} />
+
+            {/* Footer */}
             <footer className="text-xs text-neutral-500 font-condensed font-normal mt-10 border-t-2 border-neutral-200 pt-6">
               2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
             </footer>
           </div>
-        </div>
+        </article>
 
-        <div className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
+        <article className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
           <div className="max-w-[520px] w-full mr-auto flex-col gap-5 hidden lg:flex">
             {order.order_items.map((item) => {
               return (
@@ -175,7 +125,7 @@ export default function CheckoutSuccess() {
             summaryOpen={summaryOpen}
             handleSummaryOpen={handleSummaryOpen}
           /> */}
-        </div>
+        </article>
       </section>
     </>
   );
