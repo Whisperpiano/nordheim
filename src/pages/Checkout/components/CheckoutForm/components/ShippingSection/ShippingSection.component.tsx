@@ -17,7 +17,8 @@ export default function ShippingSection({ control }: ShippingSectionProps) {
             <RadioGroup {...field}>
               <CustomRadio description="4 business days" value="economy">
                 <p className="flex justify-between items-center gap-2">
-                  DHL Economy Select Home Delivery<span>kr 69.00</span>
+                  DHL Economy Select Home Delivery
+                  <span className="min-w-fit">kr 69.00</span>
                 </p>
               </CustomRadio>
               <CustomRadio description="2 business days" value="home">
