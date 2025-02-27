@@ -1,32 +1,18 @@
 import { RiAddLine, RiSubtractLine } from "react-icons/ri";
-import { CartItem, useCartStore } from "../../../../store/cartStore";
+import { CartItem } from "../../../../store/cartStore";
 import { motion } from "framer-motion";
+import { useCartControllers } from "../../../../hooks/cart/useCartControllers";
+import { cartVariants } from "../../Cart.variants";
 
 export default function CartProduct({ item }: { item: CartItem }) {
-  const removeItem = useCartStore((state) => state.removeItem);
-  const incrementItem = useCartStore((state) => state.incrementItem);
-  const decrementItem = useCartStore((state) => state.decrementItem);
-
-  const handleRemove = (id: string) => {
-    removeItem(id);
-  };
-
-  const handleIncrement = (id: string) => {
-    incrementItem(id);
-  };
-
-  const handleDecrement = (id: string) => {
-    decrementItem(id);
-  };
+  const { handleRemove, handleIncrement, handleDecrement } =
+    useCartControllers();
 
   return (
     <motion.article
       className="flex gap-4 items-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
       layout
+      {...cartVariants.cartProduct}
     >
       <img
         src={`https://ppufwgcofnfrgdeqxesf.supabase.co/storage/v1/object/public/${item.category}-images//${item.slug}-xs.webp`}

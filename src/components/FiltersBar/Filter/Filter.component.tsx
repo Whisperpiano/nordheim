@@ -11,6 +11,8 @@ import { useModalStore } from "../../../store/modalStore";
 import { useState } from "react";
 import { RiCircleFill } from "react-icons/ri";
 
+// Filter not implemented yet
+
 export default function Filter() {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const isFiltersOpen = useModalStore((state) => state.isFiltersOpen);

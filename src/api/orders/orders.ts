@@ -1,35 +1,12 @@
 import { toast } from "sonner";
 import { supabase } from "../../lib/supabase/client";
 import { z } from "zod";
-
-const orderDataSchema = z.object({
-  email: z.string(),
-  status: z.string(),
-  total_items: z.number(),
-  total_price: z.number(),
-  payment_method: z.enum(["card", "klarna", "googlepay"]),
-  shipping_method: z.enum(["economy", "home"]).nullable(),
-  shipping_address: z.object({
-    country: z.string(),
-    first_name: z.string(),
-    last_name: z.string(),
-    company: z.string().optional(),
-    address: z.string(),
-    postal_code: z.string(),
-    city: z.string(),
-    phone: z.string(),
-    card_number: z.string().optional(),
-  }),
-});
-
-const orderItemSchema = z.object({
-  quantity: z.number(),
-  product_id: z.string(),
-  variant_id: z.string(),
-});
-
-type OrderData = z.infer<typeof orderDataSchema>;
-type OrderItem = z.infer<typeof orderItemSchema>;
+import {
+  OrderData,
+  orderDataSchema,
+  OrderItem,
+} from "../../lib/schemas/ordersSchema";
+import { orderItemSchema } from "../../lib/schemas/profileSchema";
 
 export async function createOrder({
   data,

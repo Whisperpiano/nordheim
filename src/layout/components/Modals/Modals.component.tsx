@@ -1,7 +1,8 @@
 import Cart from "../../../components/Cart/Cart.component";
-import Filter from "../../../components/FiltersBar/Filter/Filter.component";
 import MobileMenu from "../../../components/MobileMenu/MobileMenu.component";
 import SearchBar from "../../../components/SearchBar/SearchBar.component";
+
+// Filter not implemented yet
 
 export default function Modals() {
   return (
@@ -9,7 +10,7 @@ export default function Modals() {
       <Cart />
       <SearchBar />
       <MobileMenu />
-      <Filter />
+      {/* <Filter /> */}
     </>
   );
 }

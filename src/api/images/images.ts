@@ -1,3 +1,5 @@
+// This is used to load the banner images before entering the product page
+
 export const getBannerImage = async (category: "city" | "mountain") => {
   const screenWidth = window.innerWidth;
   let imageUrl = "";

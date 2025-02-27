@@ -1,11 +1,13 @@
 import { Drawer, DrawerBody, DrawerContent } from "@heroui/drawer";
 import { useModalStore } from "../../store/modalStore";
+import { useCartStore } from "../../store/cartStore";
+import { AnimatePresence, motion } from "framer-motion";
+import { cartVariants } from "./Cart.variants";
+import { cartDrawerStyles } from "./Cart.styles";
 
 import CartProduct from "./components/CartProduct.tsx/CartProduct.component";
 import CartHeader from "./components/CartHeader/CartHeader.component";
 import CartFooter from "./components/CartFooter/CartFooter.component";
-import { useCartStore } from "../../store/cartStore";
-import { AnimatePresence, motion } from "framer-motion";
 
 export default function Cart() {
   const isCartOpen = useModalStore((state) => state.isCartOpen);
@@ -19,12 +21,7 @@ export default function Cart() {
       onOpenChange={() => setCartOpen(!isCartOpen)}
       size="lg"
       placement="right"
-      classNames={{
-        backdrop: "bg-black/50",
-        base: "bg-neutral-50 rounded-none",
-        closeButton: "translate-y-2.5 cursor-pointer",
-        body: "px-0",
-      }}
+      classNames={cartDrawerStyles}
     >
       <DrawerContent>
         <CartHeader cartCount={count} />
@@ -36,10 +33,7 @@ export default function Cart() {
               ) : (
                 <motion.div
                   className="grid place-content-center h-full"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2, delay: 0.2 }}
+                  {...cartVariants.cart}
                 >
                   <p className="text-neutral-500 font-sans text-sm font-normal">
                     Your cart is empty
