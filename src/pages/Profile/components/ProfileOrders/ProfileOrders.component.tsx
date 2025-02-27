@@ -1,6 +1,5 @@
 import { Accordion, AccordionItem } from "@heroui/accordion";
-import { UserOrders } from "../../../../lib/schemas/profileSchema";
-import { OrderItem } from "../../../Checkout/CheckoutSuccess.page";
+import { OrderItem, UserOrders } from "../../../../lib/schemas/profileSchema";
 import { profileOrdersAccordionStyles } from "./ProfileOrders.styles";
 
 import OrderTitle from "./components/OrderTitle/OrderTitle.component";

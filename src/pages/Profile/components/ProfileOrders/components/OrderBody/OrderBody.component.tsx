@@ -1,5 +1,5 @@
+import { OrderItem } from "../../../../../../lib/schemas/profileSchema";
 import { formatNumber } from "../../../../../../utils/formatNumber";
-import { OrderItem } from "../../../../../Checkout/CheckoutSuccess.page";
 
 export default function OrderBody({ item }: { item: OrderItem }) {
   return (

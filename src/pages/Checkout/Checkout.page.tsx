@@ -28,7 +28,7 @@ export default function Checkout() {
     <>
       <section className="grid lg:grid-cols-[55%_45%] lg:min-h-screen">
         {/* Form section */}
-        <div className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
+        <article className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
           <div className="max-w-[660px] w-full ">
             {/* Header */}
             <h1>
@@ -49,17 +49,17 @@ export default function Checkout() {
               2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
             </footer>
           </div>
-        </div>
+        </article>
 
         {/* Summary section*/}
-        <div className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
+        <article className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
           <OrderSummary selectedShipping={selectedShipping} />
           <OrderSummaryMobile
             selectedShipping={selectedShipping}
             summaryOpen={summaryOpen}
             handleSummaryOpen={handleSummaryOpen}
           />
-        </div>
+        </article>
       </section>
     </>
   );

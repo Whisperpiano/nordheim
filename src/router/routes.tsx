@@ -11,7 +11,7 @@ const CategoryHandler = lazy(
   () => import("./components/CategoryHandler/CategoryHandler.component.tsx")
 );
 const CheckoutSuccess = lazy(
-  () => import("../pages/Checkout/CheckoutSuccess.page.tsx")
+  () => import("../pages/CheckoutSuccess/CheckoutSuccess.page.tsx")
 );
 
 const ProtectedRoute = lazy(
