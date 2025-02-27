@@ -1,8 +1,7 @@
 import { toast } from "sonner";
 import { supabase } from "../../lib/supabase/client";
-import { RegisterFormData } from "../../pages/Auth/Register/Register.page";
 import { z } from "zod";
-import { LoginFormData } from "../../pages/Auth/Login/Login.page";
+import { LoginFormData, RegisterFormData } from "../../lib/schemas/authSchema";
 
 const registerFormSchema = z.object({
   firstName: z.string().nonempty("Please enter your first name"),
