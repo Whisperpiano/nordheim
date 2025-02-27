@@ -8,7 +8,7 @@ import CustomerInformation from "./components/CustomerInformation/CustomerInform
 export default function OrderDetails({ order }: { order: UserOrder }) {
   return (
     <>
-      <section className="flex flex-col gap-8 mt-8 min-h-[calc(100vh-320px)]">
+      <section className="flex flex-col gap-8 mt-8">
         <div className="max-w-[660px] flex flex-col justify-between">
           <div>
             <SuccessMessage name={order?.shipping_address.first_name} />
