@@ -1,7 +1,7 @@
-import { Drawer, DrawerBody, DrawerContent } from "@heroui/drawer";
-import { useModalStore } from "../../store/modalStore";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
+import { Drawer, DrawerBody, DrawerContent } from "@heroui/drawer";
+import { useModalStore } from "../../store/modalStore";
 
 export default function MobileMenu() {
   const isMobileMenuOpen = useModalStore((state) => state.isMobileMenuOpen);

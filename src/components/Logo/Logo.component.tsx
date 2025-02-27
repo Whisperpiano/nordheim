@@ -1,7 +1,4 @@
-interface LogoProps {
-  width?: number;
-  theme?: "dark" | "light";
-}
+import { LogoProps } from "./Logo.types";
 
 const Logo = ({ width = 160, theme = "light" }: LogoProps) => {
   return (

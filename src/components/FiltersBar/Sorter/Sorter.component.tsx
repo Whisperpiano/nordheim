@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router";
-import { SharedSelection } from "@heroui/system";
 import {
   Dropdown,
   DropdownItem,
@@ -10,28 +7,10 @@ import {
 
 import { RiArrowDownSLine } from "react-icons/ri";
 import { sortOptions } from "../../../constants";
+import { useSortHandler } from "../../../hooks/filtersbar/useSortHandler";
 
 export default function Sorter() {
-  const [selectedSort, setSelectedSort] = useState<Set<string>>(
-    new Set(["featured"])
-  );
-  const [, setSearchParams] = useSearchParams();
-
-  const handleSelectionChange = (keys: SharedSelection) => {
-    const stringKeys = new Set<string>(
-      Array.from(keys).map((key) => String(key))
-    );
-
-    setSelectedSort(stringKeys);
-
-    const [selectedKey] = stringKeys;
-
-    setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev);
-      newParams.set("sort", selectedKey);
-      return newParams;
-    });
-  };
+  const { selectedSort, handleSelectionChange } = useSortHandler();
 
   return (
     <Dropdown

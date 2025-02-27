@@ -1,23 +1,15 @@
 import { DrawerFooter } from "@heroui/drawer";
-import { useNavigate } from "react-router";
-
 import { RiCircleFill } from "react-icons/ri";
+import { useCartStore } from "../../../../store/cartStore";
+import { Spinner } from "@heroui/spinner";
+import { useHandleCheckout } from "../../../../hooks/cart/useHandleCheckout";
 
 import Button from "../../../Button/Button.component";
-import { useCartStore } from "../../../../store/cartStore";
-import { useState } from "react";
-
-import { Spinner } from "@heroui/spinner";
 
 export default function CartFooter() {
-  const [isNavigating, setIsNavigating] = useState(false);
-  const navigate = useNavigate();
-  const totalPrice = useCartStore((state) => state.totalPrice);
+  const { isNavigating, handleChekout } = useHandleCheckout();
 
-  const handleChekout = () => {
-    setIsNavigating(true);
-    navigate("/checkout");
-  };
+  const totalPrice = useCartStore((state) => state.totalPrice);
 
   return (
     <DrawerFooter className="flex flex-col gap-4 border-t border-neutral-300 py-8">
