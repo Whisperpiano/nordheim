@@ -4,11 +4,13 @@ import LogoHeader from "../../layout/components/Header/LogoHeader/LogoHeader.com
 // import { useState } from "react";
 
 import OrderDetails from "./components/OrderDetails/OrderDetails.component";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getOrderById } from "../../api/orders/orders";
 
 import { formatNumber } from "../../utils/formatNumber";
+import { useEffect } from "react";
+import { useCartStore } from "../../store/cartStore";
 
 export type Order = {
   id: string;
@@ -63,8 +65,9 @@ export type ShippingAddress = {
 
 export default function CheckoutSuccess() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const orderId = searchParams.get("orderId");
-  console.log(orderId);
+
   // const [summaryOpen, setSummaryOpen] = useState(false);
 
   // function handleSummaryOpen(keys: SharedSelection) {
@@ -80,8 +83,16 @@ export default function CheckoutSuccess() {
     queryFn: () => getOrderById(orderId),
     enabled: !!orderId,
   });
+  const resetCart = useCartStore((state) => state.reset);
 
-  console.log(order);
+  useEffect(() => {
+    if (!orderId) {
+      navigate("/");
+    } else {
+      resetCart();
+    }
+  }, [resetCart, navigate, orderId]);
+
   if (!order) return null;
 
   return (

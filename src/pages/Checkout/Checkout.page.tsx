@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useOpenSummary } from "../../hooks/checkout/useOpenSummary";
+import { useModalStore } from "../../store/modalStore";
 
 import OrderSummary from "./components/OrderSummary/OrderSummary.component";
 import OrderSummaryMobile from "./components/OrderSummaryMobile/OrderSummaryMobile.component";
@@ -14,6 +15,14 @@ export default function Checkout() {
     useState<SelectedShipping>("economy");
 
   const { summaryOpen, handleSummaryOpen } = useOpenSummary();
+
+  const setCartOpen = useModalStore((state) => state.setCartOpen);
+
+  // Close cart because of route change, and scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setCartOpen(false);
+  }, [setCartOpen]);
 
   return (
     <>

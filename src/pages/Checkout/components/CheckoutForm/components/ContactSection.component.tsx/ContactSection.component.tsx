@@ -1,11 +1,6 @@
 import { Input } from "@heroui/input";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { CheckoutFormData } from "../../../../../../lib/schemas/checkoutSchema";
-
-export interface ContactSectionProps {
-  register: UseFormRegister<CheckoutFormData>;
-  errors: FieldErrors<CheckoutFormData>;
-}
+import { errorInputStyles, inputStyle } from "../../CheckoutForm.styles";
+import { ContactSectionProps } from "./ContactSection.types";
 
 export default function ContactSection({
   register,
@@ -19,14 +14,12 @@ export default function ContactSection({
         type="email"
         variant="faded"
         radius="none"
-        className={" [&_[data-slot='input-wrapper']]:bg-neutral-50"}
+        className={inputStyle}
         isInvalid={Boolean(errors.email)}
         errorMessage={errors.email?.message}
         {...register("email")}
         classNames={{
-          inputWrapper:
-            errors.email &&
-            "border-red-500 focus-within:border-red-500 hover:focus-within:border-red-500",
+          inputWrapper: errors.email && errorInputStyles,
         }}
       />
     </>

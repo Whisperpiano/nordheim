@@ -23,6 +23,7 @@ interface CartStore {
   removeItem: (id: string) => void;
   incrementItem: (id: string) => void;
   decrementItem: (id: string) => void;
+  reset: () => void;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -112,7 +113,7 @@ export const useCartStore = create<CartStore>()(
                 : state.cart.filter((cartItem) => cartItem.id !== id),
           };
         }),
-        
+
       reset: () => set({ cart: [], count: 0, totalPrice: 0 }),
     }),
     {

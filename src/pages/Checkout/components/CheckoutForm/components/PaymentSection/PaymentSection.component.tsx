@@ -1,47 +1,22 @@
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { Radio, RadioGroup } from "@heroui/radio";
 import { Input } from "@heroui/input";
-
 import { Controller } from "react-hook-form";
 import { cn } from "../../../../../../utils/cn";
 import { PaymentSectionProps } from "./PaymentSection.types";
-import { useState } from "react";
+import { useHandleCardNumber } from "../../../../../../hooks/checkout/inputHandlers/useHandleCardNumber";
+import { useHandleCardExpiration } from "../../../../../../hooks/checkout/inputHandlers/useHandleCardExpiration";
+import { useHandleCardSecurityCode } from "../../../../../../hooks/checkout/inputHandlers/useHandleCardSecurityCode";
 
 export default function PaymentSection({
   register,
   control,
   errors,
 }: PaymentSectionProps) {
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpiration, setCardExpiration] = useState("");
-  const [cardSecurityCode, setCardSecurityCode] = useState("");
-
-  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    value = value.slice(0, 16);
-    value = value.replace(/(\d{4})/g, "$1 ").trim();
-    setCardNumber(value);
-  };
-
-  const handleCardExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-
-    if (value.length > 6) value = value.slice(0, 6);
-
-    if (value.length > 2) {
-      value = `${value.slice(0, 2)} / ${value.slice(2)}`;
-    } else if (value.length === 2) {
-      value = `${value} / `;
-    }
-
-    setCardExpiration(value);
-  };
-
-  const handleCardSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    value = value.slice(0, 3);
-    setCardSecurityCode(value);
-  };
+  const { cardNumber, handleCardNumber } = useHandleCardNumber();
+  const { cardExpiration, handleCardExpiration } = useHandleCardExpiration();
+  const { cardSecurityCode, handleCardSecurityCode } =
+    useHandleCardSecurityCode();
 
   return (
     <>
@@ -67,6 +42,7 @@ export default function PaymentSection({
                   }
                 }}
               >
+                {/* Klarna */}
                 <AccordionItem
                   key="klarna"
                   aria-label="Klarna - Flexible payments"
@@ -122,6 +98,7 @@ export default function PaymentSection({
                   </p>
                 </AccordionItem>
 
+                {/* GooglePay */}
                 <AccordionItem
                   key="googlepay"
                   aria-label="GooglePay/ApplePay"
@@ -177,6 +154,7 @@ export default function PaymentSection({
                   </p>
                 </AccordionItem>
 
+                {/* Card */}
                 <AccordionItem
                   key="card"
                   aria-label="Credit card"

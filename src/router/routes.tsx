@@ -99,11 +99,7 @@ export const router = createBrowserRouter([
 
   {
     path: "checkout/success",
-    element: (
-      <ProtectedRoute>
-        <CheckoutSuccess />
-      </ProtectedRoute>
-    ),
+    element: <CheckoutSuccess />,
   },
 
   {
