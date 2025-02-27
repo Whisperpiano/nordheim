@@ -16,3 +16,8 @@ export const contactFormCategories = [
   { key: "questions", label: "Product questions" },
   { key: "other", label: "Other" },
 ];
+
+export const shippingMethodPrice = {
+  economy: 69,
+  home: 159,
+};

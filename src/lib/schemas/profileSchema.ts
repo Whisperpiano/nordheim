@@ -52,6 +52,7 @@ export const userOrderSchema = z.object({
   total_items: z.number(),
   total_price: z.number(),
   payment_method: z.enum(["klarna", "googlepay", "card"]),
+  shipping_method: z.enum(["home", "economy"]),
   shipping_address: shippingAddressSchema,
   order_items: orderItemsArraySchema,
 });
