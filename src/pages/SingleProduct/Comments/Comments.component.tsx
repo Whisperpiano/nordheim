@@ -1,7 +1,6 @@
 import RatingStars from "../../../components/RatingStars/RatingStars.component";
 import SingleComment from "./components/SingleComment/SingleComment.component";
 import { ReviewsArray } from "../../../lib/schemas/productSchema";
-import { formatRating } from "./Comments.utils";
 import Button from "../../../components/Button/Button.component";
 import { getAverageRating } from "../../../utils/averageRating";
 import NoComments from "./components/NoComments/NoComments.component";
@@ -20,7 +19,8 @@ export default function Comments({ reviews }: { reviews: ReviewsArray }) {
               <RatingStars size={24} rating={getAverageRating(reviews)} />
             </div>
             <span className="text-neutral-500 font-sans text-sm font-normal">
-              {reviews.length > 0 ? formatRating(reviews) : 0} out of 5
+              {reviews.length > 0 ? getAverageRating(reviews).toFixed(2) : 0}{" "}
+              out of 5
             </span>
           </div>
         </div>

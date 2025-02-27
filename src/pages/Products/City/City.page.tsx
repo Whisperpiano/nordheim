@@ -37,7 +37,7 @@ export default function City() {
             !isError &&
             sortedProducts.map((product) => (
               <motion.div
-                key={product.id + product.slug}
+                key={product.id + product.category}
                 layout
                 {...cityVariants.product}
               >
