@@ -1,3 +1,7 @@
+import {
+  userOrdersSchema,
+  userProfileSchema,
+} from "../../lib/schemas/profileSchema";
 import { supabase } from "../../lib/supabase/client";
 
 export async function getUserProfile() {
@@ -19,6 +23,13 @@ export async function getUserProfile() {
     throw new Error(profileError.message);
   }
 
+  const parsedUserProfile = userProfileSchema.safeParse(userProfile);
+
+  if (!parsedUserProfile.success) {
+    console.log("userProfile", parsedUserProfile.error);
+    return null;
+  }
+
   const userEmail = user.user.email;
 
   const { data: userOrders, error: ordersError } = await supabase
@@ -31,5 +42,15 @@ export async function getUserProfile() {
     throw new Error(ordersError.message);
   }
 
-  return { userProfile, userOrders, userEmail };
+  const parsedUserOrders = userOrdersSchema.safeParse(userOrders);
+  if (!parsedUserOrders.success) {
+    console.log("userOrders", parsedUserOrders.error);
+    return null;
+  }
+
+  return {
+    userProfile: parsedUserProfile.data,
+    userOrders: parsedUserOrders.data,
+    userEmail,
+  };
 }

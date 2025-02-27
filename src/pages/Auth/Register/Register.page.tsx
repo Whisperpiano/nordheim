@@ -1,32 +1,22 @@
-import { Input } from "@heroui/input";
-import { Link, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import { useRegister } from "../../../hooks/auth/useRegister";
 import { motion } from "framer-motion";
+
+import { Input } from "@heroui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  RegisterFormData,
+  registerFormSchema,
+} from "../../../lib/schemas/authSchema";
+
 import Button from "../../../components/Button/Button.component";
 import buttonVariants from "../../../components/Button/Button.styles";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import registerUser, { logoutUser } from "../../../api/auth/auth";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { useAuthStore } from "../../../store/authStore";
-
-const registerFormSchema = z.object({
-  firstName: z.string().nonempty("Please enter your first name"),
-  lastName: z.string().optional(),
-  email: z.string().email("Please enter a valid email address"),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters long")
-    .nonempty("Password is required"),
-  phone: z.string().optional(),
-});
-
-export type RegisterFormData = z.infer<typeof registerFormSchema>;
+import ImageAuth from "../components/ImageAuth/ImageAuth.component";
 
 export default function Register() {
-  const navigate = useNavigate();
-  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+  const { mutate: registerUserMutation } = useRegister();
+
   const {
     register,
     handleSubmit,
@@ -34,52 +24,19 @@ export default function Register() {
     formState: { errors },
   } = useForm<RegisterFormData>({ resolver: zodResolver(registerFormSchema) });
 
-  const { mutate: registerUserMutation } = useMutation({
-    mutationFn: (data: RegisterFormData) => registerUser(data),
-    onSuccess: (data) => {
-      setIsLoggedIn(true);
-      navigate("/account/profile");
-      toast.success("User created successfully! Please log in.");
-      console.log(data);
-    },
-    onError: (error) => {
-      if (error.message.includes("rate limit")) {
-        toast.error("Too many requests. Please try again later.");
-      } else if (error.message.includes("already registered")) {
-        toast.error("Email already exists. Please log in.");
-      } else {
-        toast.error("Error creating user from database.");
-      }
-    },
-  });
-
   const onSubmit = (data: RegisterFormData) => {
     registerUserMutation(data);
     reset();
   };
 
-  const { mutate: logoutUserMutation } = useMutation({
-    mutationFn: () => logoutUser(),
-    onSuccess: () => {
-      toast.success("Logged out successfully!");
-    },
-    onError: () => {
-      toast.error("Error logging out.");
-    },
-  });
-
-  const handleLogout = () => {
-    logoutUserMutation();
-  };
-
   return (
     <>
       <section className="mt-[100px] grid grid-cols-1 md:grid-cols-12 items-center">
-        <img
-          src="/login.jpg"
-          alt="Login"
+        <ImageAuth
+          format="both"
           className="w-full col-span-6 max-h-[calc(100vh-100px)] min-h-[calc(100vh-100px)] object-cover md:block hidden"
         />
+
         <motion.article
           initial={{ x: 100 }}
           animate={{ x: 0 }}
@@ -89,9 +46,7 @@ export default function Register() {
             <h1 className="font-sans text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tighter mb-6">
               Create account
             </h1>
-            <button type="button" onClick={handleLogout}>
-              logout
-            </button>
+
             <div className="flex flex-col gap-6 md:pt-0 pt-2">
               <Input
                 label="First name *"

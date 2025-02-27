@@ -30,9 +30,7 @@ const Register = lazy(() => import("../pages/Auth/Register/Register.page.tsx"));
 const Search = lazy(() => import("../pages/Search/Search.page.tsx"));
 const ErrorPage = lazy(() => import("../pages/Error/ErrorPage.page.tsx"));
 const Checkout = lazy(() => import("../pages/Checkout/Checkout.page.tsx"));
-const Profile = lazy(
-  () => import("../pages/Auth/Profile/Profile.component.tsx")
-);
+const Profile = lazy(() => import("../pages/Profile/Profile.component.tsx"));
 
 // Routes
 export const router = createBrowserRouter([

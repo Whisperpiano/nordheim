@@ -1,16 +1,17 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { logoutUser } from "../../../api/auth/auth";
 import { useNavigate } from "react-router";
-import { useAuthStore } from "../../../store/authStore";
+import { useAuthStore } from "../../store/authStore";
 import { useEffect } from "react";
-import { getUserProfile } from "../../../api/profile/profile";
-import Button from "../../../components/Button/Button.component";
+import { logoutUser } from "../../api/auth/auth";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getUserProfile } from "../../api/profile/profile";
 import { motion } from "framer-motion";
-import { OrderItem } from "../../Checkout/CheckoutSuccess.page";
-import { Accordion, AccordionItem } from "@heroui/accordion";
-import { formatNumber } from "../../../utils/formatNumber";
+import Button from "../../components/Button/Button.component";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { toast } from "sonner";
+import { Accordion, AccordionItem } from "@heroui/accordion";
+import { OrderItem } from "../Checkout/CheckoutSuccess.page";
+import { formatNumber } from "../../utils/formatNumber";
+import { profileVariants } from "./Profile.variants";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -46,13 +47,12 @@ export default function Profile() {
   }
 
   console.log(userProfile);
+
   return (
     <>
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
         className="pt-[100px] max-w-[1440px] mx-auto px-4"
+        {...profileVariants.profile}
       >
         <div className="flex flex-col md:flex-row items-center justify-between w-full px-6 py-6 md:py-20 mb-10 border border-gray-300 mt-6 text-center md:text-left">
           <div className=" font-condensed uppercase flex flex-col gap-3 md:gap-1.5">
@@ -94,7 +94,6 @@ export default function Profile() {
               className="px-0 mt-6 flex flex-col gap-3 "
             >
               {userProfile.userOrders.map((order, i) => {
-                console.log(order);
                 return (
                   <AccordionItem
                     key={i}
@@ -246,34 +245,3 @@ export default function Profile() {
     </>
   );
 }
-
-// {userProfile.userOrders.length > 0 ? (
-//   userProfile.userOrders.map((order) => {
-//     return (
-//       <div key={order.id}>
-//         <h3 className="text-neutral-950 font-sans text-xl font-semibold mb-3 pt-10">
-//           Order: #{order.id.split("-").pop()}
-//         </h3>
-//         <p className="text-neutral-700 font-sans text-sm font-light">
-//           {order.total_price} NORD
-//         </p>
-//         <p className="text-neutral-700 font-sans text-sm font-light">
-//           {order.status}
-//         </p>
-//         <div>
-//           {order.order_items.map((item: OrderItem) => {
-//             return (
-//               <div key={item.id}>
-//                 <p className="text-neutral-700 font-sans text-sm font-light">
-//                   {item.quantity} x {item.products.title}
-//                 </p>
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     );
-//   })
-// ) : (
-//   <div>No orders yet</div>
-// )}
