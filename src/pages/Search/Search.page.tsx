@@ -1,65 +1,17 @@
-import { useSearchParams } from "react-router";
-// import ProductCard from "../../components/ProductCard/ProductCard.component";
-import FiltersBar from "../../components/FiltersBar/FiltersBar.component";
-import { useMemo } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getProductsByCategory } from "../../api/products/products";
-import { FullProduct } from "../../lib/schemas/productSchema";
+import { useSearchProducts } from "../../hooks/data/useSearchProducts";
+import { useSorter } from "../../hooks/data/useSorter";
+import { AnimatePresence, motion } from "framer-motion";
 
-import SearchProductCard from "../../components/ProductCard/SearchProductCard.component";
+import FiltersBar from "../../components/FiltersBar/FiltersBar.component";
+import ProductCard from "../../components/ProductCard/ProductCard.component";
 
 export default function Search() {
-  const [searchParams] = useSearchParams();
+  // First try to use products from cache
+  // If no products cached, makes a refetch
+  const { searchedProducts, query } = useSearchProducts();
 
-  const query = searchParams.get("q");
-
-  const queryClient = useQueryClient();
-  const cachedMountainProducts = queryClient.getQueryData<FullProduct[]>([
-    "products",
-    "mountain",
-  ]);
-
-  const cachedCityProducts = queryClient.getQueryData<FullProduct[]>([
-    "products",
-    "city",
-  ]);
-
-  const { data: mountainProducts } = useQuery({
-    queryKey: ["products", "mountain"],
-    queryFn: () => {
-      console.log("LOCO FETCHING");
-      return getProductsByCategory("mountain");
-    },
-    staleTime: Infinity,
-    enabled: cachedMountainProducts === undefined,
-    placeholderData: cachedMountainProducts,
-  });
-
-  const { data: cityProducts } = useQuery({
-    queryKey: ["products", "city"],
-    queryFn: () => {
-      console.log("LOCO FETCHING");
-      return getProductsByCategory("city");
-    },
-    staleTime: Infinity,
-    enabled: cachedCityProducts === undefined,
-    placeholderData: cachedCityProducts,
-  });
-
-  const searchedProducts = useMemo(() => {
-    if (!query) return [];
-
-    const lowerQuery = query.toLowerCase().trim();
-
-    if (lowerQuery === "city") return cityProducts ?? [];
-    if (lowerQuery === "mountain") return mountainProducts ?? [];
-
-    const allProducts = [...(cityProducts ?? []), ...(mountainProducts ?? [])];
-
-    return allProducts.filter((product) =>
-      product.title.toLowerCase().includes(lowerQuery)
-    );
-  }, [cityProducts, mountainProducts, query]);
+  // Sort products
+  const { sortedProducts } = useSorter(searchedProducts);
 
   return (
     <>
@@ -71,17 +23,21 @@ export default function Search() {
           {searchedProducts.length} results for "{query}"
         </p>
       </section>
+
       <FiltersBar />
-      //TODO Hacer bien esto, no puede ser searchProductCard ni ProductCard
-      <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
-        {searchedProducts.map((product) => (
-          <SearchProductCard
-            key={product.id}
-            product={product}
-            onClose={() => console.log("close")}
-          />
-        ))}
-      </section>
+
+      <motion.section
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5"
+        layout
+      >
+        <AnimatePresence>
+          {sortedProducts.map((product) => (
+            <motion.div key={product.id + product.category + "search"} layout>
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.section>
     </>
   );
 }
