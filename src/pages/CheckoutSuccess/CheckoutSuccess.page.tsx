@@ -9,6 +9,7 @@ import Logo from "../../components/Logo/Logo.component";
 import { UserOrder } from "../../lib/schemas/profileSchema";
 import SuccessSumary from "./components/SuccessSumary/SuccessSumary.component";
 import SuccessSumaryMobile from "./components/SuccessSumaryMobile/SuccessSumaryMobile.component";
+import { useOpenSummary } from "../../hooks/checkout/useOpenSummary";
 
 export default function CheckoutSuccess() {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,8 @@ export default function CheckoutSuccess() {
     enabled: !!orderId,
   });
   const resetCart = useCartStore((state) => state.reset);
+
+  const { summaryOpen, handleSummaryOpen } = useOpenSummary();
 
   useEffect(() => {
     if (!orderId) {
@@ -37,7 +40,7 @@ export default function CheckoutSuccess() {
     <>
       <section className="grid lg:grid-cols-[55%_45%] min-h-screen">
         {/* Details section */}
-        <article className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
+        <article className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end min-h-[calc(100dvh-117px)]">
           <div className="max-w-[660px] w-full ">
             {/* Header */}
             <h1>
@@ -60,7 +63,11 @@ export default function CheckoutSuccess() {
         {/* Summary section*/}
         <article className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
           <SuccessSumary order={order} />
-          <SuccessSumaryMobile order={order} />
+          <SuccessSumaryMobile
+            order={order}
+            summaryOpen={summaryOpen}
+            handleSummaryOpen={handleSummaryOpen}
+          />
         </article>
       </section>
     </>

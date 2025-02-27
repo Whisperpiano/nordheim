@@ -27,7 +27,7 @@ export default function CustomerInformation({ order }: { order: UserOrder }) {
       <h2 className="text-base font-medium text-neutral-600 mb-6">
         Customer information
       </h2>
-      <div className="flex gap-6 text-sm font-light text-neutral-700 font-sans">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm font-light text-neutral-700 font-sans">
         <div className="flex-1 flex flex-col gap-5">
           <div className="flex flex-col">
             <h3 className="font-medium mb-1">Contact information</h3>
