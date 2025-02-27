@@ -5,17 +5,32 @@ import { formatNumber } from "../../../../utils/formatNumber";
 
 import SuccessProduct from "../SuccessSumary/SuccessProduct/SuccessProduct.component";
 import SummaryMobileTitle from "../../../Checkout/components/OrderSummaryMobile/SummaryMobileTitle/SummaryMobileTitle.component";
+import { SharedSelection } from "@heroui/system";
 
-export default function SuccessSumaryMobile({ order }: { order: UserOrder }) {
+interface SuccessSumaryMobileProps {
+  order: UserOrder;
+  summaryOpen: boolean;
+  handleSummaryOpen: (keys: SharedSelection) => void;
+}
+
+export default function SuccessSumaryMobile({
+  order,
+  handleSummaryOpen,
+  summaryOpen,
+}: SuccessSumaryMobileProps) {
   return (
     <div className="max-w-[660px] w-full mr-auto flex lg:hidden mx-auto">
-      <Accordion selectionMode="single" hideIndicator>
+      <Accordion
+        selectionMode="single"
+        onSelectionChange={handleSummaryOpen}
+        hideIndicator
+      >
         <AccordionItem
           key="1"
           aria-label="Order summary"
           title={
             <SummaryMobileTitle
-              summaryOpen={false}
+              summaryOpen={summaryOpen}
               selectedShipping={order.shipping_method}
               totalPrice={
                 order.total_price - shippingMethodPrice[order.shipping_method]
