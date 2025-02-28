@@ -26,10 +26,7 @@ export function useSearchProducts() {
     isError: isMountainError,
   } = useQuery({
     queryKey: ["products", "mountain"],
-    queryFn: () => {
-      console.log("LOCO FETCHING");
-      return getProductsByCategory("mountain");
-    },
+    queryFn: () => getProductsByCategory("mountain"),
     staleTime: Infinity,
     enabled: cachedMountainProducts === undefined,
     placeholderData: cachedMountainProducts,
@@ -41,10 +38,7 @@ export function useSearchProducts() {
     isError: isCityError,
   } = useQuery({
     queryKey: ["products", "city"],
-    queryFn: () => {
-      console.log("LOCO FETCHING");
-      return getProductsByCategory("city");
-    },
+    queryFn: () => getProductsByCategory("city"),
     staleTime: Infinity,
     enabled: cachedCityProducts === undefined,
     placeholderData: cachedCityProducts,

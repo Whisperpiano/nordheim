@@ -84,7 +84,6 @@ export async function loginUser(data: LoginFormData) {
     throw new Error(error.message);
   }
   const user = userData.user;
-  console.log(user);
 
   if (user) {
     const { data: userProfile, error: profileError } = await supabase
