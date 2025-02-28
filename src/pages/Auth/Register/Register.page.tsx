@@ -117,7 +117,7 @@ export default function Register() {
             </p>
           </form>
 
-          <div>
+          <div className="mb-10">
             <h2 className="text-neutral-950 font-sans text-xl font-semibold mb-3 border-t border-neutral-300/50 pt-10">
               Already have an account?
             </h2>

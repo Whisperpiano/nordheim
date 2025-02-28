@@ -16,6 +16,8 @@ export const categories = {
   },
 };
 
+export const announcementBarText = "New Collection Just Dropped, Check it out!";
+
 export const contactFormCategories = [
   { key: "order", label: "Order" },
   { key: "shipping", label: "Shipping" },

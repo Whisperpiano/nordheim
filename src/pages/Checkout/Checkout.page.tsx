@@ -25,42 +25,40 @@ export default function Checkout() {
   }, [setCartOpen]);
 
   return (
-    <>
-      <section className="grid lg:grid-cols-[55%_45%] lg:min-h-screen">
-        {/* Form section */}
-        <article className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
-          <div className="max-w-[660px] w-full ">
-            {/* Header */}
-            <h1>
-              <Link to="/">
-                <span className="sr-only">Nordheim</span>
-                <Logo theme="dark" />
-              </Link>
-            </h1>
+    <section className="grid lg:grid-cols-[55%_45%] lg:min-h-screen">
+      {/* Form section */}
+      <article className=" p-8 order-2 lg:order-1 flex justify-center lg:justify-end">
+        <div className="max-w-[660px] w-full ">
+          {/* Header */}
+          <h1>
+            <Link to="/">
+              <span className="sr-only">Nordheim</span>
+              <Logo theme="dark" />
+            </Link>
+          </h1>
 
-            {/* Form */}
-            <CheckoutForm
-              setSelectedShipping={setSelectedShipping}
-              selectedShipping={selectedShipping}
-            />
-
-            {/* Footer */}
-            <footer className="text-xs text-neutral-500 font-condensed font-normal mt-10 border-t-2 border-neutral-200 pt-6">
-              2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
-            </footer>
-          </div>
-        </article>
-
-        {/* Summary section*/}
-        <article className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
-          <OrderSummary selectedShipping={selectedShipping} />
-          <OrderSummaryMobile
+          {/* Form */}
+          <CheckoutForm
+            setSelectedShipping={setSelectedShipping}
             selectedShipping={selectedShipping}
-            summaryOpen={summaryOpen}
-            handleSummaryOpen={handleSummaryOpen}
           />
-        </article>
-      </section>
-    </>
+
+          {/* Footer */}
+          <footer className="text-xs text-neutral-500 font-condensed font-normal mt-10 border-t-2 border-neutral-200 pt-6">
+            2025 - NORDHEIM TEAM. ALL RIGHTS RESERVED
+          </footer>
+        </div>
+      </article>
+
+      {/* Summary section*/}
+      <article className=" bg-gray-200/50 p-8 max-h-screen flex lg:sticky top-0 z-50 order-1 lg:order-2 lg:border-none border-b border-neutral-300">
+        <OrderSummary selectedShipping={selectedShipping} />
+        <OrderSummaryMobile
+          selectedShipping={selectedShipping}
+          summaryOpen={summaryOpen}
+          handleSummaryOpen={handleSummaryOpen}
+        />
+      </article>
+    </section>
   );
 }
