@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nordheim.netlify.app/sitemap.xml
