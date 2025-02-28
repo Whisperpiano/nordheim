@@ -8,6 +8,7 @@ import { profileVariants } from "./Profile.variants";
 import ProfileBanner from "./components/ProfileBanner/ProfileBanner.component";
 import ProfileOrders from "./components/ProfileOrders/ProfileOrders.component";
 import ProfileMenu from "./components/ProfileMenu/ProfileMenu.components";
+import Loader from "../../components/Loader/Loader.component";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -27,25 +28,23 @@ export default function Profile() {
   }, [isLoggedIn, navigate]);
 
   if (isLoading || !userProfile) {
-    return <div className="h-screen grid place-content-center">Loading...</div>;
+    return <Loader />;
   }
 
   return (
-    <>
-      <motion.section
-        className="pt-[100px] max-w-[1440px] mx-auto px-4"
-        {...profileVariants.profile}
-      >
-        <ProfileBanner userName={userProfile.first_name} />
+    <motion.section
+      className="pt-[100px] max-w-[1440px] mx-auto px-4"
+      {...profileVariants.profile}
+    >
+      <ProfileBanner userName={userProfile.first_name} />
 
-        <ProfileOrders userOrders={userOrders} />
+      <ProfileOrders userOrders={userOrders} />
 
-        <ProfileMenu
-          userProfile={userProfile}
-          userOrders={userOrders}
-          userEmail={userEmail}
-        />
-      </motion.section>
-    </>
+      <ProfileMenu
+        userProfile={userProfile}
+        userOrders={userOrders}
+        userEmail={userEmail}
+      />
+    </motion.section>
   );
 }

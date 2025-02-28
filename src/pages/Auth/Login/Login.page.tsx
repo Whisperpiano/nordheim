@@ -90,7 +90,7 @@ export default function Login() {
           <p className="mt-4 text-neutral-700 font-sans text-sm font-light">
             Create an account to keep track of your orders and more.
           </p>
-          <div className="mt-6 w-[120px]">
+          <div className="mt-6 mb-10 w-[120px]">
             <Link
               to="/account/register"
               className={buttonVariants({

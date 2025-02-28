@@ -15,6 +15,7 @@ import ContactSection from "./components/ContactSection.component.tsx/ContactSec
 import Button from "../../../../components/Button/Button.component";
 import ShippingSection from "./components/ShippingSection/ShippingSection.component";
 import PaymentSection from "./components/PaymentSection/PaymentSection.component";
+import { Spinner } from "@heroui/spinner";
 
 export default function CheckoutForm({
   setSelectedShipping,
@@ -25,7 +26,7 @@ export default function CheckoutForm({
     handleSubmit,
     control,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting, isLoading },
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
   });
@@ -84,7 +85,11 @@ export default function CheckoutForm({
           shape="square"
           className="w-full"
         >
-          Pay now
+          {isLoading || isSubmitting ? (
+            <Spinner size="sm" color="default" />
+          ) : (
+            "Pay now"
+          )}
         </Button>
       </div>
     </form>

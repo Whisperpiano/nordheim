@@ -1,5 +1,6 @@
-import Button from "../../../../components/Button/Button.component";
 import { ProfileMenuProps } from "./ProfileMenu.types";
+
+// Has buttons disabled because the feature is not available yet
 
 export default function ProfileMenu({
   userProfile,
@@ -22,10 +23,13 @@ export default function ProfileMenu({
           <p>{userEmail}</p>
           <p>+47{userProfile.phone}</p>
         </div>
-
-        <Button variant={"secondary"} className="mt-auto bg-neutral-200/50">
+        {/* <Button
+          variant={"secondary"}
+          className="bg-neutral-200 mt-auto disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled
+        >
           Edit
-        </Button>
+        </Button> */}
       </article>
 
       {/* Addresses */}
@@ -49,9 +53,13 @@ export default function ProfileMenu({
             <p>No address added yet</p>
           )}
         </div>
-        <Button variant={"secondary"} className="mt-auto bg-neutral-200/50">
+        {/* <Button
+          variant={"secondary"}
+          className="bg-neutral-200 mt-auto disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled
+        >
           Edit
-        </Button>
+        </Button> */}
       </article>
 
       {/* Notifications */}
@@ -64,13 +72,13 @@ export default function ProfileMenu({
         <div className="text-neutral-950 font-sans text-sm font-light flex flex-col gap-1.5 ">
           <p>This feature is not available yet.</p>
         </div>
-        <Button
+        {/* <Button
           variant={"secondary"}
           className="bg-neutral-200 mt-auto disabled:opacity-30 disabled:cursor-not-allowed"
           disabled
         >
           Edit
-        </Button>
+        </Button> */}
       </article>
     </section>
   );

@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<FadingFallback />}>
+      <Suspense fallback={<FadingFallback withLogo={true} />}>
         <Home />
       </Suspense>
     ),
@@ -91,15 +91,21 @@ export const router = createBrowserRouter([
   {
     path: "checkout",
     element: (
-      <ProtectedRoute>
-        <Checkout />
-      </ProtectedRoute>
+      <Suspense fallback={<FadingFallback withLogo={false} />}>
+        <ProtectedRoute>
+          <Checkout />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
 
   {
     path: "checkout/success",
-    element: <CheckoutSuccess />,
+    element: (
+      <Suspense fallback={<FadingFallback withLogo={false} />}>
+        <CheckoutSuccess />
+      </Suspense>
+    ),
   },
 
   {

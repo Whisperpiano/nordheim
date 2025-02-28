@@ -5,10 +5,11 @@ import AnimatedOutlet from "../router/components/AnimatedOutlet/AnimatedOutlet.c
 import Modals from "./components/Modals/Modals.component";
 import BrandValues from "./components/BrandValues/BrandValues.component";
 import { ScrollRestoration } from "react-router";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 import { useAuthStore } from "../store/authStore";
 import Footer from "./components/Footer/Footer.component";
+import Loader from "../components/Loader/Loader.component";
 
 export default function Layout() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -23,10 +24,12 @@ export default function Layout() {
       <HeroUIWrapper>
         <ScrollRestoration />
         <Header />
-        <main>
-          <AnimatedOutlet />
-          <Modals />
-        </main>
+        <Suspense fallback={<Loader />}>
+          <main className="min-h-[calc(100dvh-100px)]">
+            <AnimatedOutlet />
+            <Modals />
+          </main>
+        </Suspense>
         <BrandValues />
         <Footer />
       </HeroUIWrapper>
