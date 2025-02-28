@@ -21,7 +21,10 @@ export default function ProductVariants({
           </div>
           <div className="flex gap-2 items-center mt-2">
             {variants.map((variant) => (
-              <div key={variant.id}>
+              <div
+                key={variant.id}
+                className="hover:opacity-65 transition-opacity duration-300"
+              >
                 <input
                   type="radio"
                   name="size"
@@ -32,7 +35,7 @@ export default function ProductVariants({
                 />
                 <label
                   htmlFor={`size-${variant.volume}`}
-                  className="cursor-pointer border border-neutral-300 peer-checked:border-neutral-800 peer-checked:bg-gray-100 font-sans text-sm font-normal inline-flex px-3 py-2"
+                  className="cursor-pointer border border-neutral-300 peer-checked:border-neutral-800 peer-checked:bg-gray-100 font-sans text-sm font-normal inline-flex px-3 py-2 "
                 >
                   {variant.volume}L
                 </label>
@@ -52,7 +55,10 @@ export default function ProductVariants({
           </div>
           <div className="flex gap-2.5 items-center mt-2">
             {variants.map((variant) => (
-              <div key={variant.id + variant.color}>
+              <div
+                key={variant.id + variant.color}
+                className="hover:opacity-80 transition-opacity duration-300"
+              >
                 <input
                   type="radio"
                   name="color"

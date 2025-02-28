@@ -17,7 +17,7 @@ export default function QuantityCounter({
       <div className="border border-neutral-300 inline-flex mt-2">
         <button
           type="button"
-          className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+          className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-950 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
           onClick={handleDecrement}
           disabled={stock <= 0}
         >
@@ -32,7 +32,7 @@ export default function QuantityCounter({
         </span>
         <button
           type="button"
-          className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-700 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+          className="px-3.5 py-3 text-gray-500 cursor-pointer hover:text-gray-950 transition-colors duration-300 disabled:text-gray-300 disabled:cursor-not-allowed"
           onClick={handleIncrement}
           disabled={stock <= 0}
         >
