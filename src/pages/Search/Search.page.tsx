@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import FiltersBar from "../../components/FiltersBar/FiltersBar.component";
 import ProductCard from "../../components/ProductCard/ProductCard.component";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function Search() {
   // First try to use products from cache
@@ -12,6 +13,8 @@ export default function Search() {
 
   // Sort products
   const { sortedProducts } = useSorter(searchedProducts);
+
+  usePageTitle(`Nordheim | ${query}`);
 
   return (
     <>

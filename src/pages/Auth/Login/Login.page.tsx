@@ -13,6 +13,7 @@ import {
 import Button from "../../../components/Button/Button.component";
 import buttonVariants from "../../../components/Button/Button.styles";
 import ImageAuth from "../components/ImageAuth/ImageAuth.component";
+import usePageTitle from "../../../hooks/title/usePageTitle";
 
 export default function Login() {
   const { mutate: loginUserMutation } = useLogin();
@@ -28,6 +29,8 @@ export default function Login() {
     loginUserMutation(data);
     reset();
   };
+
+  usePageTitle("Nordheim | Login");
 
   return (
     <section className="mt-[100px] grid grid-cols-1 md:grid-cols-12 items-center">

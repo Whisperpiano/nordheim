@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import { RiInformationLine } from "react-icons/ri";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function ErrorPage() {
+  usePageTitle("Nordheim | Error");
   return (
     <>
       <section className="h-[calc(100vh-56px)] flex flex-col items-center justify-center mt-[100px] px-4 text-center">

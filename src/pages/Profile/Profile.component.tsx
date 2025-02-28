@@ -9,10 +9,13 @@ import ProfileBanner from "./components/ProfileBanner/ProfileBanner.component";
 import ProfileOrders from "./components/ProfileOrders/ProfileOrders.component";
 import ProfileMenu from "./components/ProfileMenu/ProfileMenu.components";
 import Loader from "../../components/Loader/Loader.component";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function Profile() {
   const navigate = useNavigate();
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+
+  usePageTitle("Nordheim | Profile");
 
   const {
     userEmail = "",

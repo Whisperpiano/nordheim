@@ -8,6 +8,7 @@ import ProductCard from "../../../components/ProductCard/ProductCard.component";
 import ProductsError from "../components/ProductsError/ProductsError.component";
 import ProductsLoader from "../components/ProductsLoader/ProductsLoader.component";
 import { cityVariants } from "./City.variants";
+import usePageTitle from "../../../hooks/title/usePageTitle";
 
 export default function City() {
   // First try to use products from cache
@@ -16,6 +17,8 @@ export default function City() {
 
   // Sort products
   const { sortedProducts } = useSorter(products ?? []);
+
+  usePageTitle("Nordheim | City");
 
   return (
     <>

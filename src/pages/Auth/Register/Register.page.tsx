@@ -13,6 +13,7 @@ import {
 import Button from "../../../components/Button/Button.component";
 import buttonVariants from "../../../components/Button/Button.styles";
 import ImageAuth from "../components/ImageAuth/ImageAuth.component";
+import usePageTitle from "../../../hooks/title/usePageTitle";
 
 export default function Register() {
   const { mutate: registerUserMutation } = useRegister();
@@ -28,6 +29,8 @@ export default function Register() {
     registerUserMutation(data);
     reset();
   };
+
+  usePageTitle("Nordheim | Register");
 
   return (
     <>

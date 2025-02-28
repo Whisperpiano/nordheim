@@ -8,10 +8,12 @@ import ProductDetails from "./ProductInfo/ProductDetails.component";
 import ErrorPage from "../Error/ErrorPage.page";
 import ProductPicture from "./ProductPicture/ProductPicture.component";
 import Loader from "../../components/Loader/Loader.component";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function SingleProduct() {
   const { reviewsRef, scrollToReviews } = useScrollToReviews();
   const { product, isLoading, slug, category } = useSingleProduct();
+  usePageTitle(`Nordheim | ${product?.title}`);
 
   if (isLoading) return <Loader />;
 

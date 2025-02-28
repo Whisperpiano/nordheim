@@ -10,6 +10,7 @@ import { UserOrder } from "../../lib/schemas/profileSchema";
 import SuccessSumary from "./components/SuccessSumary/SuccessSumary.component";
 import SuccessSumaryMobile from "./components/SuccessSumaryMobile/SuccessSumaryMobile.component";
 import { useOpenSummary } from "../../hooks/checkout/useOpenSummary";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function CheckoutSuccess() {
   const [searchParams] = useSearchParams();
@@ -33,6 +34,8 @@ export default function CheckoutSuccess() {
       resetCart();
     }
   }, [resetCart, navigate, orderId]);
+
+  usePageTitle("Nordheim | Thank you!");
 
   if (!order) return null;
 
