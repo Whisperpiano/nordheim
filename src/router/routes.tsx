@@ -1,10 +1,11 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 
-import Layout from "../layout/Layout.component.tsx";
-import FadingFallback from "./components/FadingFallback/FadingFallback.component.tsx";
-
 // Lazy loading for pages
+const Layout = lazy(() => import("../layout/Layout.component.tsx"));
+const FadingFallback = lazy(
+  () => import("./components/FadingFallback/FadingFallback.component.tsx")
+);
 const Home = lazy(() => import("../pages/Home/Home.page"));
 const City = lazy(() => import("../pages/Products/City/City.page"));
 const CategoryHandler = lazy(
