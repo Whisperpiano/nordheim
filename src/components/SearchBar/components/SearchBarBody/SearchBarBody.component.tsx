@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { topSearch } from "../../../../constants";
+import { topSearch } from "../../../../config/config";
 import { SearchBarBodyProps } from "./SearchBarBody.types";
 
 import SearchProductCard from "../SearchProductCard/SearchProductCard.component";
