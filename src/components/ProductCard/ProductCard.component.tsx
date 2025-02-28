@@ -21,8 +21,8 @@ export default function ProductCard({ product }: { product: FullProduct }) {
           />
         </div>
 
-        <div className="px-4 pb-8 pt-4">
-          <h2 className="text-neutral-950 text-base font-semibold font-condensed">
+        <div className="px-4 pb-8 pt-4 ">
+          <h2 className=" text-neutral-950 text-base font-semibold font-condensed relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[1px] after:bg-neutral-950/50 after:transition-all after:duration-300 hover:after:w-full max-w-fit">
             {product.title}
           </h2>
           <span className="text-neutral-500 font-sans text-sm font-normal">

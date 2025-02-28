@@ -16,10 +16,10 @@ export default function Sorter() {
     <Dropdown
       classNames={{
         content:
-          "rounded-none translate-x-3 -translate-y-1 bg-neutral-50 text-neutral-900 min-w-fit",
+          "rounded-none translate-x-3 -translate-y-1 bg-neutral-50 text-neutral-900 min-w-fit ",
       }}
     >
-      <DropdownTrigger className="font-condensed uppercase text-sm flex gap-1 items-center border-l border-neutral-300 px-10 py-4">
+      <DropdownTrigger className="font-condensed uppercase text-sm flex gap-1 items-center border-l border-neutral-300 px-10 py-4 hover:bg-neutral-200/50 transition-colors duration-300">
         <button className="min-w-[170px] flex justify-center">
           Sort by <RiArrowDownSLine />
         </button>
