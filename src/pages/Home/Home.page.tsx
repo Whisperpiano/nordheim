@@ -5,9 +5,11 @@ import Logo from "../../components/Logo/Logo.component";
 import CategoryCard from "./components/CategoryCard/CategoryCard.component";
 
 import { homeVariants } from "./Home.variants";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function Home() {
   usePrefetchGlobalData();
+  usePageTitle("Nordheim | Home");
 
   return (
     <>

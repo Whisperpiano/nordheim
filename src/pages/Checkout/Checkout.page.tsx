@@ -7,6 +7,7 @@ import OrderSummary from "./components/OrderSummary/OrderSummary.component";
 import OrderSummaryMobile from "./components/OrderSummaryMobile/OrderSummaryMobile.component";
 import CheckoutForm from "./components/CheckoutForm/CheckoutForm.component";
 import Logo from "../../components/Logo/Logo.component";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export type SelectedShipping = "economy" | "home";
 
@@ -23,6 +24,8 @@ export default function Checkout() {
     window.scrollTo(0, 0);
     setCartOpen(false);
   }, [setCartOpen]);
+
+  usePageTitle("Nordheim | Checkout");
 
   return (
     <section className="grid lg:grid-cols-[55%_45%] lg:min-h-screen">

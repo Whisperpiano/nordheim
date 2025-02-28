@@ -8,6 +8,7 @@ import FiltersBar from "../../../components/FiltersBar/FiltersBar.component";
 import ProductCard from "../../../components/ProductCard/ProductCard.component";
 import ProductsLoader from "../components/ProductsLoader/ProductsLoader.component";
 import ProductsError from "../components/ProductsError/ProductsError.component";
+import usePageTitle from "../../../hooks/title/usePageTitle";
 
 export default function Mountain() {
   // First try to use products from cache
@@ -16,6 +17,8 @@ export default function Mountain() {
 
   // Sort products
   const { sortedProducts } = useSorter(products ?? []);
+
+  usePageTitle("Nordheim | Mountain");
 
   return (
     <>

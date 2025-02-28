@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { contactVariants } from "./Contact.variants";
 import ContactForm from "./components/ContactForm/ContactForm.component";
+import usePageTitle from "../../hooks/title/usePageTitle";
 
 export default function Contact() {
+  usePageTitle("Nordheim | Contact us");
   return (
     <motion.section className="pt-[100px]" {...contactVariants.contact}>
       <div className="max-w-[650px] mx-auto pt-26 px-4">
