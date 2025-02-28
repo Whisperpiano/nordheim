@@ -26,6 +26,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
           name={category}
           format="both"
           className="h-full w-full object-cover brightness-75 saturate-[.40] contrast-[1.1] group-hover:saturate-[1.1] group-hover:brightness-[.8] transition-all duration-300 ease-in"
+          fetchPriority="high"
         />
       </Link>
     </motion.div>
