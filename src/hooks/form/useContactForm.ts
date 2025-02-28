@@ -23,7 +23,6 @@ export function useContactForm() {
       console.error("Form Validation Error:", validatedData.error);
       return;
     }
-    console.log("Form Validation Success:", validatedData.data);
 
     reset();
 

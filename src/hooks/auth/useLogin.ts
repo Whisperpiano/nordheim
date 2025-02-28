@@ -11,11 +11,10 @@ export function useLogin() {
 
   return useMutation({
     mutationFn: (data: LoginFormData) => loginUser(data),
-    onSuccess: (data) => {
+    onSuccess: () => {
       setIsLoggedIn(true);
       toast.success("Logged in successfully!");
       navigate("/account/profile");
-      console.log("useLogin", data);
     },
     onError: (error) => {
       if (error.message.includes("Invalid login credentials")) {
