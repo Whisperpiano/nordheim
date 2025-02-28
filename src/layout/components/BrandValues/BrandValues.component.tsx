@@ -1,4 +1,4 @@
-import { brandValues } from "../../../constants";
+import { brandValues } from "../../../config/config";
 
 export default function BrandValues() {
   return (

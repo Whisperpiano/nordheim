@@ -6,7 +6,7 @@ import {
 } from "@heroui/dropdown";
 
 import { RiArrowDownSLine } from "react-icons/ri";
-import { sortOptions } from "../../../constants";
+import { sortOptions } from "../../../config/config";
 import { useSortHandler } from "../../../hooks/filtersbar/useSortHandler";
 
 export default function Sorter() {
