@@ -1,29 +1,28 @@
 // Create mocks that match the expected structure for ProductCard
 export const mockProduct = {
-  id: "12345678-1234-1234-1234-123456789012", // Fixed ID instead of random
+  id: "12345678-1234-1234-1234-123456789012",
   title: "Test Product",
   slug: "test-product",
   price: 99.99,
   description: "This is a test product description",
   image: "/path/to/image.jpg",
-  category: "city" as "city" | "mountain", // Type assertion to match the union literal
-  // Properties that were missing according to the TypeScript error
+  category: "city" as "city" | "mountain",
   discount: null,
   features: ["Feature 1", "Feature 2"],
-  // Reviews with the correct structure
+
   reviews: [
     {
       id: 1,
       title: "Great review",
       rating: 5,
-      product_id: "12345678-1234-1234-1234-123456789012", // Added product_id
+      product_id: "12345678-1234-1234-1234-123456789012",
       username: "test-user",
-      email: "test@example.com", // Added email
+      email: "test@example.com",
       review: "Great product!",
       verified: true,
     },
   ],
-  // Variants with the necessary structure
+
   variants: [
     {
       id: "23456789-2345-2345-2345-234567890123",

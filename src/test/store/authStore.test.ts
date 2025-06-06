@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { useAuthStore } from "../../store/authStore";
 import { User } from "@supabase/supabase-js";
+import { supabase } from "../../lib/supabase/client";
 
 // Supabase mock
 vi.mock("../../lib/supabase/client", () => ({
@@ -11,11 +12,7 @@ vi.mock("../../lib/supabase/client", () => ({
   },
 }));
 
-// Import the mock after defining it
-import { supabase } from "../../lib/supabase/client";
-
 describe("useAuthStore", () => {
-  // Clean up the store state between each test
   beforeEach(() => {
     useAuthStore.setState({
       isLoggedIn: false,
@@ -35,10 +32,8 @@ describe("useAuthStore", () => {
   it("should update isLoggedIn state when setIsLoggedIn is called", () => {
     const { setIsLoggedIn } = useAuthStore.getState();
 
-    // Call the action
     setIsLoggedIn(true);
 
-    // Verify that the state was updated
     expect(useAuthStore.getState().isLoggedIn).toBe(true);
   });
 
@@ -59,10 +54,8 @@ describe("useAuthStore", () => {
 
     const { checkAuth } = useAuthStore.getState();
 
-    // Call checkAuth
     await checkAuth();
 
-    // Verify that isLoggedIn was updated correctly
     expect(useAuthStore.getState().isLoggedIn).toBe(true);
     expect(supabase.auth.getUser).toHaveBeenCalledTimes(1);
   });
@@ -75,15 +68,12 @@ describe("useAuthStore", () => {
       error: null,
     });
 
-    // Set isLoggedIn to true first
     useAuthStore.setState({ isLoggedIn: true });
 
     const { checkAuth } = useAuthStore.getState();
 
-    // Call checkAuth
     await checkAuth();
 
-    // Verify that isLoggedIn was updated correctly
     expect(useAuthStore.getState().isLoggedIn).toBe(false);
     expect(supabase.auth.getUser).toHaveBeenCalledTimes(1);
   });

@@ -27,18 +27,12 @@ describe("ProductCard Component", () => {
   it("renders product information correctly", () => {
     render(<ProductCard product={mockProduct} />);
 
-    // Verify that the product title is displayed
     expect(screen.getByText(mockProduct.title)).toBeInTheDocument();
-
-    // Verify that the formatted price is displayed
     expect(screen.getByText(`${mockProduct.price} kr`)).toBeInTheDocument();
-
-    // Verify that the number of reviews is displayed
     expect(
       screen.getByText(`${mockProduct.reviews.length} reviews`)
     ).toBeInTheDocument();
 
-    // Verify that the link has the correct URL
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute(
       "href",
